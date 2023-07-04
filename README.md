@@ -20,27 +20,21 @@ jagql
   </a>
 </p>
 
-- - - - - - 
+- - - - - -
 
 
-A resource driven framework to set up a {json:api} + GraphQL endpoint in record time. 
+A resource driven framework to set up a {json:api} in record time.
 
 ## Motivation
 
-Let us look at these great articles written by some very experiences developers - 
+Let us look at these great articles written by some very experiences developers -
 
- 1. [Phil Sturgeon says if you use json:api you do not need GraphQL](https://blog.runscope.com/posts/you-might-not-need-graphql)
- 2. [Bill Doerrfeld writes about the benefits of json:api](https://nordicapis.com/the-benefits-of-using-json-api/)
- 3. [Jorge says json:api is a simple alternative to GraphQL](https://react-etc.net/entry/json-api-is-a-simple-alternative-to-graphql-and-rest)
- 4. [Jeremy Sherman says he is not impressed by json:api and GraphQL is better](https://jeremywsherman.com/blog/2016/07/23/why-im-meh-about-json-api/)
- 5. [Brandur says GraphQL is the next frontier in Web Developement](https://brandur.org/api-paradigms)
+ 1. [Bill Doerrfeld writes about the benefits of json:api](https://nordicapis.com/the-benefits-of-using-json-api/)
 
-If you ask me, I'd say -  
+If you ask me, I'd say -
 ![](https://thumbs.gfycat.com/AmazingDamagedAmericanquarterhorse-max-1mb.gif)
 
-And in fact, some of the most used public APIs like Github have both REST and GraphQL.
-
-**jagql** lets you build a backend with both `{json:api}` and _GraphQL_ support really really fast. 
+**jagql** lets you build a backend with `{json:api}` support really really fast.
 
 
 ## About this Fork
@@ -64,9 +58,9 @@ When creating a field, you can state how to relate it
 
 ```javascript
 jsonApi.define({
-  ... 
+  ...
   attributes: {
-    ... 
+    ...
     author: jsonApi.Joi.one('people').uidType('uuid')
     ...
   }

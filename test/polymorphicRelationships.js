@@ -98,55 +98,6 @@ describe('Testing jsonapi-server', () => {
         })
       })
     })
-
-    it('works with GraphQL', () => client.query(`
-      {
-        tuples {
-          preferred {
-            ... on articles {
-              author {
-                firstname
-              }
-            }
-            ... on photos {
-              photographer {
-                firstname
-              }
-            }
-          }
-        }
-      }
-    `).then(result => {
-      /**
-       * FIXME This is a pragmatic fix to guarantee order. Tuples in GraphQL
-       * Need to be thoroughly looked at.
-       */
-      const orderedResult = {
-        tuples: [
-          result.tuples.filter((result) => result.preferred.author)[0],
-          result.tuples.filter((result) => result.preferred.photographer)[0]
-        ]
-      }
-
-      assert.deepEqual(orderedResult, {
-        'tuples': [
-          {
-            'preferred': {
-              'author': {
-                'firstname': 'Rahul'
-              }
-            }
-          },
-          {
-            'preferred': {
-              'photographer': {
-                'firstname': 'Mark'
-              }
-            }
-          }
-        ]
-      })
-    }))
   })
 
   before(() => {

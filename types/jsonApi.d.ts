@@ -42,7 +42,7 @@ export const Joi: typeof OurJoi.Joi
  * Configure things like -
  *  - http/https
  *  - host, port
- *  - enable/disable graphql and swagger
+ *  - enable/disable swagger
  *
  * For detailed info please check https://jagql.github.io/docs/pages/configuration.html
  * @param {ApiConfig} apiConfig
