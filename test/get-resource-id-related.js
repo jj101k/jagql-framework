@@ -85,23 +85,21 @@ describe('Testing jsonapi-server', () => {
       })
     })
 
-    it('Lookup by id for 1:m paginated', done => {
+    it('Lookup by id for 1:m paginated', async () => {
       const url = 'http://localhost:16999/rest/articles/1be0913c-3c25-4261-98f1-e41174025ed5/photos?page[limit]=1'
-      helpers.request({
+
+      let {err, res, json} = await helpers.requestAsync({
         method: 'GET',
         url
-      }, (err, res, json) => {
-        assert.strictEqual(err, null)
-        json = helpers.validateJson(json)
-
-        assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
-        json.data.forEach(resource => helpers.validateResource(resource))
-        assert.strictEqual(json.meta.page && json.meta.page.total, 2, 'should include pagination')
-        assert.strictEqual(json.data.length, 1, 'only one record should be returned')
-        helpers.validatePagination(json)
-
-        done()
       })
+      assert.strictEqual(err, null)
+      json = helpers.validateJson(json)
+
+      assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
+      json.data.forEach(resource => helpers.validateResource(resource))
+      assert.strictEqual(json.meta.page && json.meta.page.total, 2, 'should include pagination')
+      assert.strictEqual(json.data.length, 1, 'only one record should be returned')
+      helpers.validatePagination(json)
     })
 
     it('with null data', done => {

@@ -1,7 +1,7 @@
 'use strict'
 
 const assert = require('assert')
-const request = require('request')
+const request = require('./request')
 const jsonApiTestServer = require('../example/server')
 
 describe('Testing jsonapi-server', () => {

@@ -1,6 +1,6 @@
 'use strict'
 
-const request = require('request')
+const request = require('./request')
 const assert = require('assert')
 const helpers = require('./helpers.js')
 const jsonApiTestServer = require('../example/server.js')

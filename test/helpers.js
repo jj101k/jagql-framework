@@ -3,7 +3,7 @@
 const testHelpers = module.exports = { }
 
 const assert = require('assert')
-const request = require('request')
+const request = require('./request')
 const swaggerValidator = require('./swaggerValidator.js')
 const fs = require('fs')
 const path = require('path')
@@ -131,5 +131,24 @@ testHelpers.request = (params, callback) => {
   request(params, (err, res, json) => {
     swaggerValidator.assert(params, res.statusCode, json)
     return callback(err, res, json)
+  })
+}
+
+/**
+ *
+ * @param {*} params
+ * @returns {{err: any, res: any, json: any}}
+ */
+testHelpers.requestAsync = (params) => {
+  return new Promise((resolve, reject) => {
+    request(params, (err, res, json) => {
+      try {
+        swaggerValidator.assert(params, res.statusCode, json)
+      } catch (e) {
+        reject(e)
+        return
+      }
+      resolve({err, res, json})
+    })
   })
 }

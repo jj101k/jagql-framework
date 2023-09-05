@@ -2,7 +2,7 @@
 
 const assert = require('assert')
 const helpers = require('./helpers.js')
-const request = require('request')
+const request = require('./request')
 const jsonApiTestServer = require('../example/server.js')
 
 describe('Testing jsonapi-server', () => {
@@ -20,23 +20,20 @@ describe('Testing jsonapi-server', () => {
       })
     })
 
-    it('empty search should return all objects', done => {
+    it('empty search should return all objects', async () => {
       const url = 'http://localhost:16999/rest/articles'
-      helpers.request({
+      let {err, res, json} = await helpers.requestAsync({
         method: 'GET',
         url
-      }, (err, res, json) => {
-        assert.strictEqual(err, null)
-        json = helpers.validateJson(json)
+      })
+      assert.strictEqual(err, null)
+      json = helpers.validateJson(json)
 
-        assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
-        assert.deepEqual(json.included, [ ], 'Response should have no included resources')
-        assert.strictEqual(json.data.length, 4, 'Response should contain exactly 4 resources')
-        json.data.forEach(resource => {
-          helpers.validateArticle(resource)
-        })
-
-        done()
+      assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
+      assert.deepEqual(json.included, [ ], 'Response should have no included resources')
+      assert.strictEqual(json.data.length, 4, 'Response should contain exactly 4 resources')
+      json.data.forEach(resource => {
+        helpers.validateArticle(resource)
       })
     })
 
@@ -176,21 +173,18 @@ describe('Testing jsonapi-server', () => {
       })
 
       describe('equality for booleans', () => {
-        it('matches false', done => {
+        it('matches false', async () => {
           const url = 'http://localhost:16999/rest/photos?filter[raw]=false'
-          helpers.request({
+          let {err, res, json} = await helpers.requestAsync({
             method: 'GET',
             url
-          }, (err, res, json) => {
-            assert.strictEqual(err, null)
-            json = helpers.validateJson(json)
-
-            assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
-            const photoTypes = json.data.map(i => i.attributes.raw)
-            assert.deepEqual(photoTypes, [ false, false ], 'expected matching resources')
-
-            done()
           })
+          assert.strictEqual(err, null)
+          json = helpers.validateJson(json)
+
+          assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
+          const photoTypes = json.data.map(i => i.attributes.raw)
+          assert.deepEqual(photoTypes, [ false, false ], 'expected matching resources')
         })
 
         it('matches true', done => {

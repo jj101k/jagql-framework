@@ -2,7 +2,7 @@
 
 const assert = require('assert')
 const helpers = require('./helpers.js')
-const request = require('request')
+const request = require('./request')
 const jsonApiTestServer = require('../example/server.js')
 
 describe('Testing jsonapi-server', () => {
@@ -20,21 +20,19 @@ describe('Testing jsonapi-server', () => {
       })
     })
 
-    it('broken response should error', done => {
+    it('broken response should error', async () => {
       const url = 'http://localhost:16999/rest/brokenResponse/b3ea78f4-8d03-4708-9945-d58cadc97b04'
-      helpers.request({
+      const {err, res, json} = await helpers.requestAsync({
         method: 'GET',
         url
-      }, (err, res, json) => {
-        assert.strictEqual(err, null)
-        helpers.validateError(json)
-        const errors = JSON.parse(json).errors
-        assert.strictEqual(res.statusCode, 500, 'Expecting 500')
-        assert.strictEqual(errors.length, 1)
-        assert.strictEqual(errors[0].code, 'EINVALIDITEM')
-        assert.strictEqual(errors[0].detail.error, 'child "boolean" fails because ["boolean" must be a boolean]')
-        done()
       })
+      assert.strictEqual(err, null)
+      helpers.validateError(json)
+      const errors = JSON.parse(json).errors
+      assert.strictEqual(res.statusCode, 500, 'Expecting 500')
+      assert.strictEqual(errors.length, 1)
+      assert.strictEqual(errors[0].code, 'EINVALIDITEM')
+      assert.strictEqual(errors[0].detail.error, 'child "boolean" fails because ["boolean" must be a boolean]')
     })
 
     it('valid lookup', done => {
