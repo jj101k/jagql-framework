@@ -38,7 +38,7 @@ jsonApi.setConfig({
   },
   protocol: 'http',
   hostname: 'localhost',
-  port: 16006,
+  port: 16999,
   base: 'rest',
   meta: {
     description: 'This block shows up in the root node of every payload'
@@ -74,7 +74,7 @@ jsonApi.metrics.on('data', data => {
 // wait for the tests to call .start();
 if (typeof describe === 'undefined') {
   jsonApi.start(() => {
-    console.log('Server running on http://localhost:16006')
+    console.log('Server running on http://localhost:16999')
   })
 }
 server.start = jsonApi.start

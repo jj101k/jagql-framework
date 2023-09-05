@@ -10,7 +10,7 @@ describe('Testing jsonapi-server', () => {
     it('blocks access with the blockMe header', done => {
       const data = {
         method: 'get',
-        url: 'http://localhost:16006/rest/articles',
+        url: 'http://localhost:16999/rest/articles',
         headers: {
           'blockMe': 'please'
         }
@@ -26,7 +26,7 @@ describe('Testing jsonapi-server', () => {
     it('blocks access with the blockMe cookies', done => {
       const data = {
         method: 'get',
-        url: 'http://localhost:16006/rest/articles',
+        url: 'http://localhost:16999/rest/articles',
         headers: {
           'cookie': 'blockMe=please'
         }

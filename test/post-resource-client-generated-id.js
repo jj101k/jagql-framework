@@ -14,7 +14,7 @@ describe('Testing jsonapi-server', () => {
       it('works', done => {
         const data = {
           method: 'post',
-          url: 'http://localhost:16006/rest/people',
+          url: 'http://localhost:16999/rest/people',
           headers: {
             'Content-Type': 'application/vnd.api+json'
           },
@@ -35,7 +35,7 @@ describe('Testing jsonapi-server', () => {
           json = helpers.validateJson(json)
 
           assert.strictEqual(json.data.id, id)
-          assert.strictEqual(res.headers.location, `http://localhost:16006/rest/people/${json.data.id}`)
+          assert.strictEqual(res.headers.location, `http://localhost:16999/rest/people/${json.data.id}`)
           assert.strictEqual(res.statusCode, 201, 'Expecting 201')
           assert.strictEqual(json.data.type, 'people', 'Should be a people resource')
 
@@ -44,7 +44,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('new resource is retrievable', done => {
-        const url = `http://localhost:16006/rest/people/${id}`
+        const url = `http://localhost:16999/rest/people/${id}`
         helpers.request({
           method: 'GET',
           url
@@ -62,7 +62,7 @@ describe('Testing jsonapi-server', () => {
       it('deletes the resource', done => {
         const data = {
           method: 'delete',
-          url: 'http://localhost:16006/rest/people/' + id
+          url: 'http://localhost:16999/rest/people/' + id
         }
         request(data, (err, res, json) => {
           assert.strictEqual(err, null)

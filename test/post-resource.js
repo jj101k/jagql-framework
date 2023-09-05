@@ -10,7 +10,7 @@ describe('Testing jsonapi-server', () => {
     it('errors with invalid type', done => {
       const data = {
         method: 'post',
-        url: 'http://localhost:16006/rest/foobar'
+        url: 'http://localhost:16999/rest/foobar'
       }
       helpers.request(data, (err, res, json) => {
         assert.strictEqual(err, null)
@@ -24,7 +24,7 @@ describe('Testing jsonapi-server', () => {
     it('errors if resource doesnt validate', done => {
       const data = {
         method: 'post',
-        url: 'http://localhost:16006/rest/articles',
+        url: 'http://localhost:16999/rest/articles',
         headers: {
           'Content-Type': 'application/vnd.api+json'
         },
@@ -49,7 +49,7 @@ describe('Testing jsonapi-server', () => {
     it('errors if content-type specifies a media type parameter', done => {
       const data = {
         method: 'post',
-        url: 'http://localhost:16006/rest/photos',
+        url: 'http://localhost:16999/rest/photos',
         headers: {
           'Content-Type': 'application/vnd.api+json;foobar'
         },
@@ -68,7 +68,7 @@ describe('Testing jsonapi-server', () => {
     it('errors if accept header doesnt match JSON:APIs type', done => {
       const data = {
         method: 'post',
-        url: 'http://localhost:16006/rest/photos',
+        url: 'http://localhost:16999/rest/photos',
         headers: {
           'Accept': 'application/vnd.api+xml, application/vnd.api+json;foobar, text/json'
         },
@@ -87,7 +87,7 @@ describe('Testing jsonapi-server', () => {
     it('errors if no body is detected', done => {
       const data = {
         method: 'post',
-        url: 'http://localhost:16006/rest/photos'
+        url: 'http://localhost:16999/rest/photos'
       }
       request(data, (err, res, json) => {
         assert.strictEqual(err, null)
@@ -105,7 +105,7 @@ describe('Testing jsonapi-server', () => {
         // note that if data comes in as a string, then the value of the string
         // is discarded and an empty people object would be created, which is
         // likely not what the developer of the api client would have intended.
-        url: 'http://localhost:16006/rest/people',
+        url: 'http://localhost:16999/rest/people',
         headers: {
           'Content-Type': 'application/vnd.api+json'
         },
@@ -146,7 +146,7 @@ describe('Testing jsonapi-server', () => {
       it('works', done => {
         const data = {
           method: 'post',
-          url: 'http://localhost:16006/rest/photos',
+          url: 'http://localhost:16999/rest/photos',
           headers: {
             'Content-Type': 'application/vnd.api+json'
           },
@@ -174,7 +174,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(err, null)
           json = helpers.validateJson(json)
 
-          assert.strictEqual(res.headers.location, `http://localhost:16006/rest/photos/${json.data.id}`)
+          assert.strictEqual(res.headers.location, `http://localhost:16999/rest/photos/${json.data.id}`)
           assert.strictEqual(res.statusCode, 201, 'Expecting 201')
           assert.strictEqual(json.data.type, 'photos', 'Should be a people resource')
           helpers.validatePhoto(json.data)
@@ -185,7 +185,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('new resource is retrievable', done => {
-        const url = `http://localhost:16006/rest/photos/${id}`
+        const url = `http://localhost:16999/rest/photos/${id}`
         helpers.request({
           method: 'GET',
           url
@@ -207,7 +207,7 @@ describe('Testing jsonapi-server', () => {
         it('works', done => {
           const data = {
             method: 'post',
-            url: 'http://localhost:16006/rest/autoincrement',
+            url: 'http://localhost:16999/rest/autoincrement',
             headers: {
               'Content-Type': 'application/vnd.api+json'
             },
@@ -225,7 +225,7 @@ describe('Testing jsonapi-server', () => {
             json = helpers.validateJson(json)
 
             assert.strictEqual(json.data.id, '2')
-            assert.strictEqual(res.headers.location, `http://localhost:16006/rest/autoincrement/${json.data.id}`)
+            assert.strictEqual(res.headers.location, `http://localhost:16999/rest/autoincrement/${json.data.id}`)
             assert.strictEqual(res.statusCode, 201, 'Expecting 201')
             assert.strictEqual(json.data.type, 'autoincrement', 'Should be a autoincrement resource')
             id = json.data.id
@@ -235,7 +235,7 @@ describe('Testing jsonapi-server', () => {
         })
 
         it('new resource is retrievable', done => {
-          const url = `http://localhost:16006/rest/autoincrement/${id}`
+          const url = `http://localhost:16999/rest/autoincrement/${id}`
           helpers.request({
             method: 'GET',
             url

@@ -7,7 +7,7 @@ const jsonApiTestServer = require('../example/server')
 describe('Testing jsonapi-server', () => {
   describe('OPTIONS request', () => {
     it('returns 204', done => {
-      const url = 'http://localhost:16006/rest/'
+      const url = 'http://localhost:16999/rest/'
       request({
         method: 'OPTIONS',
         url

@@ -7,13 +7,13 @@ const jsonApiTestServer = require('../example/server.js')
 const Lokka = require('lokka').Lokka
 const Transport = require('lokka-transport-http').Transport
 const client = new Lokka({
-  transport: new Transport('http://localhost:16006/rest/')
+  transport: new Transport('http://localhost:16999/rest/')
 })
 
 describe('Testing jsonapi-server', () => {
   describe('polymorphic relationships', () => {
     it('including the tuple', done => {
-      const url = 'http://localhost:16006/rest/tuples?include=media'
+      const url = 'http://localhost:16999/rest/tuples?include=media'
       helpers.request({
         method: 'GET',
         url
@@ -31,7 +31,7 @@ describe('Testing jsonapi-server', () => {
 
     context('including through the tuple', () => {
       it('including the first half', done => {
-        const url = 'http://localhost:16006/rest/tuples?include=media.photographer'
+        const url = 'http://localhost:16999/rest/tuples?include=media.photographer'
         helpers.request({
           method: 'GET',
           url
@@ -52,7 +52,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('including the second half', done => {
-        const url = 'http://localhost:16006/rest/tuples?include=media.author'
+        const url = 'http://localhost:16999/rest/tuples?include=media.author'
         helpers.request({
           method: 'GET',
           url
@@ -73,7 +73,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('including both', done => {
-        const url = 'http://localhost:16006/rest/tuples?include=media.photographer,media.author'
+        const url = 'http://localhost:16999/rest/tuples?include=media.photographer,media.author'
         helpers.request({
           method: 'GET',
           url

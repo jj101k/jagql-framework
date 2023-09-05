@@ -13,7 +13,7 @@ describe('Testing jsonapi-server', () => {
   ].forEach(resource => {
     describe(`Searching for ${resource.name}`, () => {
       it(`should find ${resource.count}`, done => {
-        const url = `http://localhost:16006/rest/${resource.name}`
+        const url = `http://localhost:16999/rest/${resource.name}`
         helpers.request({
           method: 'GET',
           url

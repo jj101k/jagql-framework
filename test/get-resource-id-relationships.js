@@ -8,7 +8,7 @@ const jsonApiTestServer = require('../example/server.js')
 describe('Testing jsonapi-server', () => {
   describe('foreign lookup', () => {
     it('unknown id should error', done => {
-      const url = 'http://localhost:16006/rest/foobar/relationships?author=cc5cca2e-0dd8-4b95-8cfc-a11230e73116'
+      const url = 'http://localhost:16999/rest/foobar/relationships?author=cc5cca2e-0dd8-4b95-8cfc-a11230e73116'
       request({
         method: 'GET',
         url
@@ -22,7 +22,7 @@ describe('Testing jsonapi-server', () => {
     })
 
     it('unknown relation should error', done => {
-      const url = 'http://localhost:16006/rest/articles/relationships?title=cc5cca2e-0dd8-4b95-8cfc-a11230e73116'
+      const url = 'http://localhost:16999/rest/articles/relationships?title=cc5cca2e-0dd8-4b95-8cfc-a11230e73116'
       request({
         method: 'GET',
         url
@@ -36,7 +36,7 @@ describe('Testing jsonapi-server', () => {
     })
 
     it('Lookup by id', done => {
-      const url = 'http://localhost:16006/rest/articles/relationships?author=cc5cca2e-0dd8-4b95-8cfc-a11230e73116'
+      const url = 'http://localhost:16999/rest/articles/relationships?author=cc5cca2e-0dd8-4b95-8cfc-a11230e73116'
       request({
         method: 'GET',
         url

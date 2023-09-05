@@ -10,7 +10,7 @@ describe('Testing jsonapi-server', () => {
     it('responds with a clear error', done => {
       const data = {
         method: 'delete',
-        url: 'http://localhost:16006/rest/photos/14'
+        url: 'http://localhost:16999/rest/photos/14'
       }
       request(data, (err, res, json) => {
         assert.strictEqual(err, null)

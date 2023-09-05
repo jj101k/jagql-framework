@@ -12,7 +12,7 @@ describe('Testing jsonapi-server', () => {
     it('errors with invalid page parameters', done => {
       const data = {
         method: 'get',
-        url: 'http://localhost:16006/rest/articles?page[size]=10'
+        url: 'http://localhost:16999/rest/articles?page[size]=10'
       }
       helpers.request(data, (err, res) => {
         assert.strictEqual(err, null)
@@ -26,7 +26,7 @@ describe('Testing jsonapi-server', () => {
       it('fetches the first page', done => {
         const data = {
           method: 'get',
-          url: 'http://localhost:16006/rest/articles?page[offset]=0&page[limit]=1&sort=title'
+          url: 'http://localhost:16999/rest/articles?page[offset]=0&page[limit]=1&sort=title'
         }
         helpers.request(data, (err, res, json) => {
           assert.strictEqual(err, null)

@@ -6,7 +6,7 @@ describe('Use a tool to validate the generated swagger document', () => {
   it('should not contain any errors', done => {
     const validator = require('swagger-tools').specs.v2
 
-    const uri = 'http://localhost:16006/rest/swagger.json'
+    const uri = 'http://localhost:16999/rest/swagger.json'
     request(uri, (meh, res, swaggerObject) => {
       swaggerObject = JSON.parse(swaggerObject)
 

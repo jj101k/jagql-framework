@@ -8,7 +8,7 @@ const jsonApiTestServer = require('../example/server.js')
 describe('Testing jsonapi-server', () => {
   describe('Searching for resources', () => {
     it('unknown resource should error', done => {
-      const url = 'http://localhost:16006/rest/foobar'
+      const url = 'http://localhost:16999/rest/foobar'
       helpers.request({
         method: 'GET',
         url
@@ -21,7 +21,7 @@ describe('Testing jsonapi-server', () => {
     })
 
     it('empty search should return all objects', done => {
-      const url = 'http://localhost:16006/rest/articles'
+      const url = 'http://localhost:16999/rest/articles'
       helpers.request({
         method: 'GET',
         url
@@ -42,7 +42,7 @@ describe('Testing jsonapi-server', () => {
 
     describe('applying sort', () => {
       it('ASC sort', done => {
-        const url = 'http://localhost:16006/rest/articles?sort=title'
+        const url = 'http://localhost:16999/rest/articles?sort=title'
         helpers.request({
           method: 'GET',
           url
@@ -65,7 +65,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('DESC sort', done => {
-        const url = 'http://localhost:16006/rest/articles?sort=-title'
+        const url = 'http://localhost:16999/rest/articles?sort=-title'
         helpers.request({
           method: 'GET',
           url
@@ -91,7 +91,7 @@ describe('Testing jsonapi-server', () => {
 
     describe('applying filter', () => {
       it('unknown attribute should error', done => {
-        const url = 'http://localhost:16006/rest/articles?filter[foobar]=<M'
+        const url = 'http://localhost:16999/rest/articles?filter[foobar]=<M'
         helpers.request({
           method: 'GET',
           url
@@ -107,7 +107,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('unknown multiple attribute should error', done => {
-        const url = 'http://localhost:16006/rest/articles?filter[foo]=bar&filter[foo]=baz'
+        const url = 'http://localhost:16999/rest/articles?filter[foo]=bar&filter[foo]=baz'
         helpers.request({
           method: 'GET',
           url
@@ -123,7 +123,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('value of wrong type should error', done => {
-        const url = 'http://localhost:16006/rest/photos?filter[raw]=bob'
+        const url = 'http://localhost:16999/rest/photos?filter[raw]=bob'
         helpers.request({
           method: 'GET',
           url
@@ -140,7 +140,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('equality for strings', done => {
-        const url = 'http://localhost:16006/rest/articles?filter[title]=How%20to%20AWS'
+        const url = 'http://localhost:16999/rest/articles?filter[title]=How%20to%20AWS'
         helpers.request({
           method: 'GET',
           url
@@ -158,7 +158,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('equality for numbers', done => {
-        const url = 'http://localhost:16006/rest/articles?filter[views]=10'
+        const url = 'http://localhost:16999/rest/articles?filter[views]=10'
         helpers.request({
           method: 'GET',
           url
@@ -177,7 +177,7 @@ describe('Testing jsonapi-server', () => {
 
       describe('equality for booleans', () => {
         it('matches false', done => {
-          const url = 'http://localhost:16006/rest/photos?filter[raw]=false'
+          const url = 'http://localhost:16999/rest/photos?filter[raw]=false'
           helpers.request({
             method: 'GET',
             url
@@ -194,7 +194,7 @@ describe('Testing jsonapi-server', () => {
         })
 
         it('matches true', done => {
-          const url = 'http://localhost:16006/rest/photos?filter[raw]=true'
+          const url = 'http://localhost:16999/rest/photos?filter[raw]=true'
           helpers.request({
             method: 'GET',
             url
@@ -212,7 +212,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('less than for strings', done => {
-        const url = 'http://localhost:16006/rest/articles?filter[title]=<M'
+        const url = 'http://localhost:16999/rest/articles?filter[title]=<M'
         helpers.request({
           method: 'GET',
           url
@@ -230,7 +230,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('less than for numbers', done => {
-        const url = 'http://localhost:16006/rest/articles?filter[views]=<23'
+        const url = 'http://localhost:16999/rest/articles?filter[views]=<23'
         helpers.request({
           method: 'GET',
           url
@@ -248,7 +248,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('greater than for strings', done => {
-        const url = 'http://localhost:16006/rest/articles?filter[title]=>M'
+        const url = 'http://localhost:16999/rest/articles?filter[title]=>M'
         helpers.request({
           method: 'GET',
           url
@@ -266,7 +266,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('greater than for numbers', done => {
-        const url = 'http://localhost:16006/rest/articles?filter[views]=>27'
+        const url = 'http://localhost:16999/rest/articles?filter[views]=>27'
         helpers.request({
           method: 'GET',
           url
@@ -284,7 +284,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('case insensitive', done => {
-        const url = 'http://localhost:16006/rest/articles?filter[title]=~linux rocks'
+        const url = 'http://localhost:16999/rest/articles?filter[title]=~linux rocks'
         helpers.request({
           method: 'GET',
           url
@@ -301,7 +301,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('case insensitive for non-string types', done => {
-        const url = 'http://localhost:16006/rest/articles?filter[created]=~2016-01-01'
+        const url = 'http://localhost:16999/rest/articles?filter[created]=~2016-01-01'
         helpers.request({
           method: 'GET',
           url
@@ -317,7 +317,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('similar to', done => {
-        const url = 'http://localhost:16006/rest/articles?filter[title]=:for'
+        const url = 'http://localhost:16999/rest/articles?filter[title]=:for'
         helpers.request({
           method: 'GET',
           url
@@ -334,7 +334,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('similar to for non-string types', done => {
-        const url = 'http://localhost:16006/rest/articles?filter[created]=:2016-01-01'
+        const url = 'http://localhost:16999/rest/articles?filter[created]=:2016-01-01'
         helpers.request({
           method: 'GET',
           url
@@ -350,7 +350,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('allows filtering by id', done => {
-        const url = 'http://localhost:16006/rest/articles?filter[id]=1be0913c-3c25-4261-98f1-e41174025ed5&filter[id]=de305d54-75b4-431b-adb2-eb6b9e546014'
+        const url = 'http://localhost:16999/rest/articles?filter[id]=1be0913c-3c25-4261-98f1-e41174025ed5&filter[id]=de305d54-75b4-431b-adb2-eb6b9e546014'
         helpers.request({
           method: 'GET',
           url
@@ -366,7 +366,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('allows for multiple filter values to be combined in a comma-separated list', done => {
-        const url = 'http://localhost:16006/rest/articles?filter[tags]=6ec62f6d-9f82-40c5-b4f4-279ed1765492,7541a4de-4986-4597-81b9-cf31b6762486,2a3bdea4-a889-480d-b886-104498c86f69'
+        const url = 'http://localhost:16999/rest/articles?filter[tags]=6ec62f6d-9f82-40c5-b4f4-279ed1765492,7541a4de-4986-4597-81b9-cf31b6762486,2a3bdea4-a889-480d-b886-104498c86f69'
         helpers.request({
           method: 'GET',
           url
@@ -382,7 +382,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('allows for a compound of comma-separated list filters', done => {
-        const url = 'http://localhost:16006/rest/articles?filter[tags]=6ec62f6d-9f82-40c5-b4f4-279ed1765492,7541a4de-4986-4597-81b9-cf31b6762486,2a3bdea4-a889-480d-b886-104498c86f69&filter[id]=de305d54-75b4-431b-adb2-eb6b9e546014,1be0913c-3c25-4261-98f1-e41174025ed5'
+        const url = 'http://localhost:16999/rest/articles?filter[tags]=6ec62f6d-9f82-40c5-b4f4-279ed1765492,7541a4de-4986-4597-81b9-cf31b6762486,2a3bdea4-a889-480d-b886-104498c86f69&filter[id]=de305d54-75b4-431b-adb2-eb6b9e546014,1be0913c-3c25-4261-98f1-e41174025ed5'
         helpers.request({
           method: 'GET',
           url
@@ -398,7 +398,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('allows deep filtering', done => {
-        const url = 'http://localhost:16006/rest/articles?include=author&filter[author]=d850ea75-4427-4f81-8595-039990aeede5&filter[author][firstname]=Mark'
+        const url = 'http://localhost:16999/rest/articles?include=author&filter[author]=d850ea75-4427-4f81-8595-039990aeede5&filter[author][firstname]=Mark'
         helpers.request({
           method: 'GET',
           url
@@ -417,7 +417,7 @@ describe('Testing jsonapi-server', () => {
 
     describe('applying fields', () => {
       it('unknown attribute should error', done => {
-        const url = 'http://localhost:16006/rest/articles?fields[article]=title'
+        const url = 'http://localhost:16999/rest/articles?fields[article]=title'
         helpers.request({
           method: 'GET',
           url
@@ -430,7 +430,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('just title', done => {
-        const url = 'http://localhost:16006/rest/articles?fields[articles]=title'
+        const url = 'http://localhost:16999/rest/articles?fields[articles]=title'
         request({
           method: 'GET',
           url
@@ -449,7 +449,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('title AND content', done => {
-        const url = 'http://localhost:16006/rest/articles?fields[articles]=title,content'
+        const url = 'http://localhost:16999/rest/articles?fields[articles]=title,content'
         request({
           method: 'GET',
           url
@@ -470,7 +470,7 @@ describe('Testing jsonapi-server', () => {
 
     describe('applying includes', () => {
       it('unknown attribute should error', done => {
-        const url = 'http://localhost:16006/rest/articles?include=foobar'
+        const url = 'http://localhost:16999/rest/articles?include=foobar'
         helpers.request({
           method: 'GET',
           url
@@ -483,7 +483,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('include author', done => {
-        const url = 'http://localhost:16006/rest/articles?include=author'
+        const url = 'http://localhost:16999/rest/articles?include=author'
         helpers.request({
           method: 'GET',
           url
@@ -502,7 +502,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('include author and photos', done => {
-        const url = 'http://localhost:16006/rest/articles?include=author,photos'
+        const url = 'http://localhost:16999/rest/articles?include=author,photos'
         helpers.request({
           method: 'GET',
           url
@@ -524,7 +524,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('include author.photos and photos', done => {
-        const url = 'http://localhost:16006/rest/articles?include=author.photos,photos'
+        const url = 'http://localhost:16999/rest/articles?include=author.photos,photos'
         helpers.request({
           method: 'GET',
           url
@@ -546,7 +546,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('include author.photos', done => {
-        const url = 'http://localhost:16006/rest/articles?include=author.photos'
+        const url = 'http://localhost:16999/rest/articles?include=author.photos'
         helpers.request({
           method: 'GET',
           url
@@ -568,7 +568,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('include author with filter and people fields', done => {
-        const url = 'http://localhost:16006/rest/articles?include=author&filter[title]=Linux+Rocks&fields[people]=email'
+        const url = 'http://localhost:16999/rest/articles?include=author&filter[title]=Linux+Rocks&fields[people]=email'
         request({
           method: 'GET',
           url
@@ -590,7 +590,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('include author with filter and article fields', done => {
-        const url = 'http://localhost:16006/rest/articles?include=author&filter[title]=Linux+Rocks&fields[articles]=created'
+        const url = 'http://localhost:16999/rest/articles?include=author&filter[title]=Linux+Rocks&fields[articles]=created'
         request({
           method: 'GET',
           url
@@ -612,7 +612,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('include author with filter and people+article fields', done => {
-        const url = 'http://localhost:16006/rest/articles?include=author&filter[title]=Linux+Rocks&fields[people]=email&fields[articles]=created'
+        const url = 'http://localhost:16999/rest/articles?include=author&filter[title]=Linux+Rocks&fields[people]=email&fields[articles]=created'
         request({
           method: 'GET',
           url
@@ -634,7 +634,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('include author.photos with filter', done => {
-        const url = 'http://localhost:16006/rest/articles?include=author.photos&filter[author][firstname]=Mark'
+        const url = 'http://localhost:16999/rest/articles?include=author.photos&filter[author][firstname]=Mark'
         helpers.request({
           method: 'GET',
           url
@@ -656,7 +656,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('include author.photos with multiple filters', done => {
-        const url = 'http://localhost:16006/rest/articles?include=author.photos&filter[author]=ad3aa89e-9c5b-4ac9-a652-6670f9f27587&filter[author]=cc5cca2e-0dd8-4b95-8cfc-a11230e73116'
+        const url = 'http://localhost:16999/rest/articles?include=author.photos&filter[author]=ad3aa89e-9c5b-4ac9-a652-6670f9f27587&filter[author]=cc5cca2e-0dd8-4b95-8cfc-a11230e73116'
         helpers.request({
           method: 'GET',
           url
@@ -678,7 +678,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('include author.photos with multiple filters comma delineated', done => {
-        const url = 'http://localhost:16006/rest/articles?include=author.photos&filter[author][firstname]=Mark,Oli'
+        const url = 'http://localhost:16999/rest/articles?include=author.photos&filter[author][firstname]=Mark,Oli'
         helpers.request({
           method: 'GET',
           url
@@ -702,7 +702,7 @@ describe('Testing jsonapi-server', () => {
 
     describe('by foreign key', () => {
       it('should find resources by a relation', done => {
-        const url = 'http://localhost:16006/rest/articles/?filter[photos]=aab14844-97e7-401c-98c8-0bd5ec922d93'
+        const url = 'http://localhost:16999/rest/articles/?filter[photos]=aab14844-97e7-401c-98c8-0bd5ec922d93'
         helpers.request({
           method: 'GET',
           url
@@ -717,7 +717,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('should find resources by many relations', done => {
-        const url = 'http://localhost:16006/rest/articles/?filter[photos]=aab14844-97e7-401c-98c8-0bd5ec922d93&filter[photos]=4a8acd65-78bb-4020-b9eb-2d058a86a2a0'
+        const url = 'http://localhost:16999/rest/articles/?filter[photos]=aab14844-97e7-401c-98c8-0bd5ec922d93&filter[photos]=4a8acd65-78bb-4020-b9eb-2d058a86a2a0'
         helpers.request({
           method: 'GET',
           url
@@ -732,7 +732,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('should error with incorrectly named relations', done => {
-        const url = 'http://localhost:16006/rest/articles/?filter[photo]=aab14844-97e7-401c-98c8-0bd5ec922d93'
+        const url = 'http://localhost:16999/rest/articles/?filter[photo]=aab14844-97e7-401c-98c8-0bd5ec922d93'
         helpers.request({
           method: 'GET',
           url
@@ -750,7 +750,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('should error when querying the foreign end of a relationship', done => {
-        const url = 'http://localhost:16006/rest/comments/?filter[article]=aab14844-97e7-401c-98c8-0bd5ec922d93'
+        const url = 'http://localhost:16999/rest/comments/?filter[article]=aab14844-97e7-401c-98c8-0bd5ec922d93'
         helpers.request({
           method: 'GET',
           url
@@ -768,7 +768,7 @@ describe('Testing jsonapi-server', () => {
       })
 
       it('should give clean validation errors', done => {
-        const url = 'http://localhost:16006/rest/articles?include=fdfdds,sdf'
+        const url = 'http://localhost:16999/rest/articles?include=fdfdds,sdf'
         helpers.request({
           method: 'GET',
           url
