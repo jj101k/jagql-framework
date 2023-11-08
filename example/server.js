@@ -59,9 +59,10 @@ fs.readdirSync(path.join(__dirname, '/resources')).filter(filename => /^[a-z].*\
 
 jsonApi.onUncaughtException((request, error) => {
   const errorDetails = error.stack.split('\n')
+  const currentError = errorDetails.shift()
   console.error(JSON.stringify({
-    request,
-    error: errorDetails.shift(),
+    request: Object.fromEntries(Object.entries(request).filter(([k, v]) => typeof v !== 'object')),
+    error: currentError,
     stack: errorDetails
   }))
 })
