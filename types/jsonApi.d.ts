@@ -38,7 +38,6 @@ interface ApiConfig {
  *
  */
 interface DefineOptions {
-  idType: "string" | "number"
   idRequired: boolean
 }
 
