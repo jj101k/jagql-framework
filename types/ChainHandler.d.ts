@@ -36,7 +36,7 @@ interface AfterUpdateFunction<R=any> {
  */
 declare class ChainHandler<R=any> extends Handler<R>{
   constructor()
-  chain(nextHandler: Handler): this
+  chain(nextHandler: Handler<R>): this
   beforeInitialise(...args: any[]): any // TODO
   afterInitialise(...args: any[]): any // TODO
   beforeClose(...args: any[]): any // TODO
