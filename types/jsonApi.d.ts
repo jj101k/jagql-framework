@@ -33,6 +33,15 @@ interface ApiConfig {
   router?: Router
   bodyParserJsonOpts?: any
 }
+
+/**
+ *
+ */
+interface DefineOptions {
+  idType: "string" | "number"
+  idRequired: boolean
+}
+
 /**
  * Our modified Joi instance
  */
@@ -52,8 +61,9 @@ export function setConfig(apiConfig: ApiConfig): void
 /**
  * [[include:resources.md]]
  * @param {ResourceConfig<T>} resConfig
+ * @param {DefineOptions} [options]
  */
-export function define<T>(resConfig: ResourceConfig<T>): void
+export function define<T>(resConfig: ResourceConfig<T>, options?: DefineOptions): void
 export function authenticate(authenticator: (req: Request, cb: () => void) => void): void
 
 /**
