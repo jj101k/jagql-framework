@@ -18,7 +18,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.statusCode, 404, 'Expecting 404')
 
         done()
-      })
+      }).catch(done)
     })
 
     it('unknown relation should error', done => {
@@ -32,7 +32,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.statusCode, 403, 'Expecting 403')
 
         done()
-      })
+      }).catch(done)
     })
 
     it('Lookup by id', done => {
@@ -62,7 +62,7 @@ describe('Testing jsonapi-server', () => {
         })
 
         done()
-      })
+      }).catch(done)
     })
   })
 

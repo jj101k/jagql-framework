@@ -18,7 +18,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.statusCode, 404, 'Expecting 404')
 
         done()
-      })
+      }).catch(done)
     })
 
     it('errors with invalid type #2', done => {
@@ -32,7 +32,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.statusCode, 404, 'Expecting 404')
 
         done()
-      })
+      }).catch(done)
     })
   })
 

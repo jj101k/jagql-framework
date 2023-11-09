@@ -18,7 +18,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.statusCode, 404, 'Expecting 404')
 
         done()
-      })
+      }).catch(done)
     })
 
     it('errors if resource doesnt validate', done => {
@@ -43,7 +43,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.statusCode, 403, 'Expecting 403')
 
         done()
-      })
+      }).catch(done)
     })
 
     it('errors if content-type specifies a media type parameter', done => {
@@ -62,7 +62,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.statusCode, 415, 'Expecting 415')
 
         done()
-      })
+      }).catch(done)
     })
 
     it('errors if accept header doesnt match JSON:APIs type', done => {
@@ -81,7 +81,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.statusCode, 406, 'Expecting 406')
 
         done()
-      })
+      }).catch(done)
     })
 
     it('errors if no body is detected', done => {
@@ -95,7 +95,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.statusCode, 403, 'Expecting 403')
 
         done()
-      })
+      }).catch(done)
     })
 
     it('errors if body.data is not an object', done => {
@@ -137,7 +137,7 @@ describe('Testing jsonapi-server', () => {
           }
         ])
         done()
-      })
+      }).catch(done)
     })
 
     describe('creates a resource', () => {
@@ -181,7 +181,7 @@ describe('Testing jsonapi-server', () => {
           id = json.data.id
 
           done()
-        })
+        }).catch(done)
       })
 
       it('new resource is retrievable', done => {
@@ -199,7 +199,7 @@ describe('Testing jsonapi-server', () => {
           assert.deepEqual(json.data.meta, { created: '2015-01-01' })
 
           done()
-        })
+        }).catch(done)
       })
       describe('creates a resource with non-UUID ID', () => {
         let id
@@ -231,7 +231,7 @@ describe('Testing jsonapi-server', () => {
             id = json.data.id
 
             done()
-          })
+          }).catch(done)
         })
 
         it('new resource is retrievable', done => {
@@ -245,7 +245,7 @@ describe('Testing jsonapi-server', () => {
             assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
             assert.strictEqual(json.included.length, 0, 'Should be no included resources')
             done()
-          })
+          }).catch(done)
         })
       })
     })

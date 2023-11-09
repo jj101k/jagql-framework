@@ -20,7 +20,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.statusCode, 401, 'Expecting 401')
         helpers.validateError(json)
         done()
-      })
+      }).catch(done)
     })
 
     it('blocks access with the blockMe cookies', done => {
@@ -36,7 +36,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.statusCode, 401, 'Expecting 401')
         helpers.validateError(json)
         done()
-      })
+      }).catch(done)
     })
   })
 

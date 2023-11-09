@@ -19,7 +19,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.statusCode, 403, 'Expecting 403')
 
         done()
-      })
+      }).catch(done)
     })
 
     describe('clicks through a full result set', () => {
@@ -45,7 +45,7 @@ describe('Testing jsonapi-server', () => {
 
           pageLinks = json.links
           done()
-        })
+        }).catch(done)
       })
 
       it('fetches the second page', done => {
@@ -72,7 +72,7 @@ describe('Testing jsonapi-server', () => {
 
           pageLinks = json.links
           done()
-        })
+        }).catch(done)
       })
 
       it('fetches the third page', done => {
@@ -99,7 +99,7 @@ describe('Testing jsonapi-server', () => {
 
           pageLinks = json.links
           done()
-        })
+        }).catch(done)
       })
 
       it('fetches the final page', done => {
@@ -124,7 +124,7 @@ describe('Testing jsonapi-server', () => {
 
           pageLinks = json.links
           done()
-        })
+        }).catch(done)
       })
     })
 

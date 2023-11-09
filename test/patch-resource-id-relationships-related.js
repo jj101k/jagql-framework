@@ -17,7 +17,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.statusCode, 404, 'Expecting 404')
 
         done()
-      })
+      }).catch(done)
     })
 
     it('errors with invalid id', done => {
@@ -37,7 +37,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.statusCode, 404, 'Expecting 404')
 
         done()
-      })
+      }).catch(done)
     })
 
     it('errors with a foreign relation', done => {
@@ -57,7 +57,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.statusCode, 403, 'Expecting 403')
 
         done()
-      })
+      }).catch(done)
     })
 
     describe('adding', () => {
@@ -79,7 +79,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(res.statusCode, 200, 'Expecting 200')
 
           done()
-        })
+        }).catch(done)
       })
 
       it('new resource has changed', done => {
@@ -102,7 +102,7 @@ describe('Testing jsonapi-server', () => {
           })
 
           done()
-        })
+        }).catch(done)
       })
     })
   })

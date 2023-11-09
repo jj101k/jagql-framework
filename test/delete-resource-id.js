@@ -18,7 +18,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.statusCode, 404, 'Expecting 404')
 
         done()
-      })
+      }).catch(done)
     })
 
     it('errors with invalid id', done => {
@@ -32,7 +32,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.statusCode, 404, 'Expecting 404')
 
         done()
-      })
+      }).catch(done)
     })
 
     describe('deleting a comment', () => {
@@ -49,7 +49,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(res.statusCode, 200, 'Expecting 200')
 
           done()
-        })
+        }).catch(done)
       })
 
       it('new resource is gone', done => {
@@ -63,7 +63,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(res.statusCode, 404, 'Expecting 404')
 
           done()
-        })
+        }).catch(done)
       })
     })
   })

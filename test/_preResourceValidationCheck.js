@@ -22,7 +22,7 @@ describe('Testing jsonapi-server (pre)', () => {
           json = helpers.validateJson(json)
           assert.strictEqual(json.data.length, resource.count, `Expected ${resource.count} resources`)
           done()
-        })
+        }).catch(done)
       })
     })
   })

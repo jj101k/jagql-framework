@@ -17,7 +17,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.statusCode, 404, 'Expecting 404')
 
         done()
-      })
+      }).catch(done)
     })
 
     it('unknown relation should error', done => {
@@ -31,7 +31,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.statusCode, 404, 'Expecting 404')
 
         done()
-      })
+      }).catch(done)
     })
 
     it('foreign relation should error', done => {
@@ -46,7 +46,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.statusCode, 404, 'Expecting 404')
 
         done()
-      })
+      }).catch(done)
     })
 
     it('Lookup by id', done => {
@@ -64,7 +64,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(json.meta.page, undefined, 'Pagination should be undefined')
 
         done()
-      })
+      }).catch(done)
     })
 
     it('Lookup by id for 1:m', done => {
@@ -82,7 +82,7 @@ describe('Testing jsonapi-server', () => {
         helpers.validatePagination(json)
 
         done()
-      })
+      }).catch(done)
     })
 
     it('Lookup by id for 1:m paginated', async () => {
@@ -115,7 +115,7 @@ describe('Testing jsonapi-server', () => {
         assert(!('included' in json), "Null resource DON'T have `includes` attribute")
 
         done()
-      })
+      }).catch(done)
     })
 
     it('with fields', done => {
@@ -133,7 +133,7 @@ describe('Testing jsonapi-server', () => {
         assert.deepEqual(keys, [ 'email' ], 'Should only contain email attribute')
 
         done()
-      })
+      }).catch(done)
     })
 
     it('with filter', done => {
@@ -149,7 +149,7 @@ describe('Testing jsonapi-server', () => {
         assert(!json.data)
 
         done()
-      })
+      }).catch(done)
     })
 
     it('with includes', done => {
@@ -168,7 +168,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(people.length, 1, 'Should be 1 included articles resource')
 
         done()
-      })
+      }).catch(done)
     })
   })
 

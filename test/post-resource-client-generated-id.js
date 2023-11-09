@@ -40,7 +40,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(json.data.type, 'people', 'Should be a people resource')
 
           done()
-        })
+        }).catch(done)
       })
 
       it('new resource is retrievable', done => {
@@ -56,7 +56,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(json.included.length, 0, 'Should be no included resources')
 
           done()
-        })
+        }).catch(done)
       })
 
       it('deletes the resource', done => {
@@ -72,7 +72,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(res.statusCode, 200, 'Expecting 200')
 
           done()
-        })
+        }).catch(done)
       })
     })
   })

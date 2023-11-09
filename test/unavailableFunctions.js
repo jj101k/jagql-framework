@@ -19,7 +19,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(json.errors[0].detail, "The requested resource 'photos' does not support 'delete'")
 
         done()
-      })
+      }).catch(done)
     })
   })
 

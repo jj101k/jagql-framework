@@ -17,7 +17,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.statusCode, 404, 'Expecting 404')
 
         done()
-      })
+      }).catch(done)
     })
 
     it('errors with invalid id', done => {
@@ -37,7 +37,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.statusCode, 404, 'Expecting 404')
 
         done()
-      })
+      }).catch(done)
     })
 
     it('errors with unknown key', done => {
@@ -57,7 +57,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.statusCode, 403, 'Expecting 403')
 
         done()
-      })
+      }).catch(done)
     })
 
     it('errors with invalid type', done => {
@@ -77,7 +77,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.statusCode, 403, 'Expecting 403')
 
         done()
-      })
+      }).catch(done)
     })
 
     describe('deleting', () => {
@@ -99,7 +99,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(res.statusCode, 200, 'Expecting 200')
 
           done()
-        })
+        }).catch(done)
       })
 
       it('new resource has changed', done => {
@@ -121,7 +121,7 @@ describe('Testing jsonapi-server', () => {
           ])
 
           done()
-        })
+        }).catch(done)
       })
     })
 
@@ -144,7 +144,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(res.statusCode, 200, 'Expecting 200')
 
           done()
-        })
+        }).catch(done)
       })
 
       it('new resource has changed', done => {
@@ -160,7 +160,7 @@ describe('Testing jsonapi-server', () => {
           assert.deepEqual(json.data, null)
 
           done()
-        })
+        }).catch(done)
       })
 
       it('restore relation', done => {
@@ -181,7 +181,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(res.statusCode, 201, 'Expecting 201')
 
           done()
-        })
+        }).catch(done)
       })
     })
   })

@@ -17,7 +17,7 @@ describe('Testing jsonapi-server', () => {
         helpers.validateError(json)
         assert.strictEqual(res.statusCode, 404, 'Expecting 404')
         done()
-      })
+      }).catch(done)
     })
 
     it('broken response should error', async () => {
@@ -49,7 +49,7 @@ describe('Testing jsonapi-server', () => {
         helpers.validateResource(json.data)
 
         done()
-      })
+      }).catch(done)
     })
 
     it('with fields', done => {
@@ -67,7 +67,7 @@ describe('Testing jsonapi-server', () => {
         assert.deepEqual(keys, [ 'title' ], 'Should only contain title attribute')
 
         done()
-      })
+      }).catch(done)
     })
 
     it('with filter', done => {
@@ -83,7 +83,7 @@ describe('Testing jsonapi-server', () => {
         // assert.deepEqual(json.data, null)
 
         done()
-      })
+      }).catch(done)
     })
 
     describe('with includes', () => {
@@ -103,7 +103,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(people.length, 1, 'Should be 1 included people resource')
 
           done()
-        })
+        }).catch(done)
       })
 
       it('including over a null relation', done => {
@@ -118,7 +118,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
           assert.strictEqual(json.included.length, 0, 'Should be 0 included resources')
           done()
-        })
+        }).catch(done)
       })
     })
 
@@ -136,7 +136,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(json.included.length, 5, 'Should be 5 included resources')
           assert.strictEqual(json.included[4].type, 'articles', 'Last include should be an article')
           done()
-        })
+        }).catch(done)
       })
     })
   })

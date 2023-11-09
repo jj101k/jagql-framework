@@ -128,7 +128,7 @@ testHelpers.validatePhoto = resource => {
 }
 
 testHelpers.request = (params, callback) => {
-  request(params, (err, res, json) => {
+  return request(params, (err, res, json) => {
     try {
       swaggerValidator.assert(params, res.statusCode, json)
     } catch (e) {

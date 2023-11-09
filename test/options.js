@@ -21,7 +21,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.headers['cache-control'], 'private, must-revalidate, max-age=0', 'should have non-caching headers')
         assert.strictEqual(res.headers.expires, 'Thu, 01 Jan 1970 00:00:00', 'should have non-caching headers')
         done()
-      })
+      }).catch(done)
     })
   })
 

@@ -16,7 +16,7 @@ describe('Testing jsonapi-server', () => {
         assert(!err)
         assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
         done()
-      })
+      }).catch(done)
     })
 
     it('returns 503 if resource is NOT ready', done => {
@@ -32,7 +32,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.statusCode, 503, 'Expecting 503 SERVICE UNAVAILABLE')
         handlers.ready = savedHandlersReady
         done()
-      })
+      }).catch(done)
     })
   })
 

@@ -17,7 +17,7 @@ describe('Testing jsonapi-server', () => {
         helpers.validateError(json)
         assert.strictEqual(res.statusCode, 404, 'Expecting 404')
         done()
-      })
+      }).catch(done)
     })
 
     it('empty search should return all objects', async () => {
@@ -58,7 +58,7 @@ describe('Testing jsonapi-server', () => {
           }
 
           done()
-        })
+        }).catch(done)
       })
 
       it('DESC sort', done => {
@@ -82,7 +82,7 @@ describe('Testing jsonapi-server', () => {
           }
 
           done()
-        })
+        }).catch(done)
       })
     })
 
@@ -100,7 +100,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(error.code, 'EFORBIDDEN')
           assert.strictEqual(error.title, 'Invalid filter')
           done()
-        })
+        }).catch(done)
       })
 
       it('unknown multiple attribute should error', done => {
@@ -116,7 +116,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(error.code, 'EFORBIDDEN')
           assert.strictEqual(error.title, 'Invalid filter')
           done()
-        })
+        }).catch(done)
       })
 
       it('value of wrong type should error', done => {
@@ -133,7 +133,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(error.title, 'Invalid filter')
           assert(error.detail.match("Filter value for key '.*?' is invalid"))
           done()
-        })
+        }).catch(done)
       })
 
       it('equality for strings', done => {
@@ -151,7 +151,7 @@ describe('Testing jsonapi-server', () => {
           assert.deepEqual(titles, [ 'How to AWS' ], 'expected matching resources')
 
           done()
-        })
+        }).catch(done)
       })
 
       it('equality for numbers', done => {
@@ -169,7 +169,7 @@ describe('Testing jsonapi-server', () => {
           assert.deepEqual(titles, [ 'NodeJS Best Practices' ], 'expected matching resources')
 
           done()
-        })
+        }).catch(done)
       })
 
       describe('equality for booleans', () => {
@@ -201,7 +201,7 @@ describe('Testing jsonapi-server', () => {
             assert.deepEqual(photoTypes, [ true, true ], 'expected matching resources')
 
             done()
-          })
+          }).catch(done)
         })
       })
 
@@ -220,7 +220,7 @@ describe('Testing jsonapi-server', () => {
           assert.deepEqual(titles, [ 'How to AWS', 'Linux Rocks' ], 'expected matching resources')
 
           done()
-        })
+        }).catch(done)
       })
 
       it('less than for numbers', done => {
@@ -238,7 +238,7 @@ describe('Testing jsonapi-server', () => {
           assert.deepEqual(titles, [ 'Linux Rocks', 'NodeJS Best Practices' ], 'expected matching resources')
 
           done()
-        })
+        }).catch(done)
       })
 
       it('greater than for strings', done => {
@@ -256,7 +256,7 @@ describe('Testing jsonapi-server', () => {
           assert.deepEqual(titles, [ 'NodeJS Best Practices', 'Tea for Beginners' ], 'expected matching resources')
 
           done()
-        })
+        }).catch(done)
       })
 
       it('greater than for numbers', done => {
@@ -274,7 +274,7 @@ describe('Testing jsonapi-server', () => {
           assert.deepEqual(titles, [ 'How to AWS', 'Tea for Beginners' ], 'expected matching resources')
 
           done()
-        })
+        }).catch(done)
       })
 
       it('case insensitive', done => {
@@ -291,7 +291,7 @@ describe('Testing jsonapi-server', () => {
           assert.deepEqual(titles, [ 'Linux Rocks' ], 'expected matching resources')
 
           done()
-        })
+        }).catch(done)
       })
 
       it('case insensitive for non-string types', done => {
@@ -307,7 +307,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(json.data.length, 0, "didn't expect matching resources")
 
           done()
-        })
+        }).catch(done)
       })
 
       it('similar to', done => {
@@ -324,7 +324,7 @@ describe('Testing jsonapi-server', () => {
           assert.deepEqual(titles, [ 'Tea for Beginners' ], 'expected matching resources')
 
           done()
-        })
+        }).catch(done)
       })
 
       it('similar to for non-string types', done => {
@@ -340,7 +340,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(json.data.length, 0, "didn't expect matching resources")
 
           done()
-        })
+        }).catch(done)
       })
 
       it('allows filtering by id', done => {
@@ -356,7 +356,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(json.data.length, 2, 'Should only give the 2x requested resources')
 
           done()
-        })
+        }).catch(done)
       })
 
       it('allows for multiple filter values to be combined in a comma-separated list', done => {
@@ -372,7 +372,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(json.data.length, 3, 'Should only give the 3x requested resources')
 
           done()
-        })
+        }).catch(done)
       })
 
       it('allows for a compound of comma-separated list filters', done => {
@@ -388,7 +388,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(json.data.length, 2, 'Should only give the 2x requested resources')
 
           done()
-        })
+        }).catch(done)
       })
 
       it('allows deep filtering', done => {
@@ -405,7 +405,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(json.included.length, 1, 'Should give the one matching include')
 
           done()
-        })
+        }).catch(done)
       })
     })
 
@@ -420,7 +420,7 @@ describe('Testing jsonapi-server', () => {
           helpers.validateError(json)
           assert.strictEqual(res.statusCode, 403, 'Expecting 403')
           done()
-        })
+        }).catch(done)
       })
 
       it('just title', done => {
@@ -439,7 +439,7 @@ describe('Testing jsonapi-server', () => {
           })
 
           done()
-        })
+        }).catch(done)
       })
 
       it('title AND content', done => {
@@ -458,7 +458,7 @@ describe('Testing jsonapi-server', () => {
           })
 
           done()
-        })
+        }).catch(done)
       })
     })
 
@@ -473,7 +473,7 @@ describe('Testing jsonapi-server', () => {
           helpers.validateError(json)
           assert.strictEqual(res.statusCode, 403, 'Expecting 403')
           done()
-        })
+        }).catch(done)
       })
 
       it('include author', done => {
@@ -492,7 +492,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(people.length, 4, 'Should be 4 included people resources')
 
           done()
-        })
+        }).catch(done)
       })
 
       it('include author and photos', done => {
@@ -514,7 +514,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(photos.length, 3, 'Should be 3 included photos resources')
 
           done()
-        })
+        }).catch(done)
       })
 
       it('include author.photos and photos', done => {
@@ -536,7 +536,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(photos.length, 4, 'Should be 4 included photos resources')
 
           done()
-        })
+        }).catch(done)
       })
 
       it('include author.photos', done => {
@@ -558,7 +558,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(photos.length, 4, 'Should be 4 included photos resources')
 
           done()
-        })
+        }).catch(done)
       })
 
       it('include author with filter and people fields', done => {
@@ -580,7 +580,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(people[0].attributes.email, 'mark.fermor@example.com', 'Included people should have email attribute')
 
           done()
-        })
+        }).catch(done)
       })
 
       it('include author with filter and article fields', done => {
@@ -602,7 +602,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(people[0].attributes.email, 'mark.fermor@example.com', 'Included people should have email attribute')
 
           done()
-        })
+        }).catch(done)
       })
 
       it('include author with filter and people+article fields', done => {
@@ -624,7 +624,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(people[0].attributes.email, 'mark.fermor@example.com', 'Included people should have email attribute')
 
           done()
-        })
+        }).catch(done)
       })
 
       it('include author.photos with filter', done => {
@@ -646,7 +646,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(photos.length, 1, 'Should be 1 included photos resource')
 
           done()
-        })
+        }).catch(done)
       })
 
       it('include author.photos with multiple filters', done => {
@@ -690,7 +690,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(photos.length, 2, 'Should be 2 included photos resource')
 
           done()
-        })
+        }).catch(done)
       })
     })
 
@@ -707,7 +707,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
           assert.strictEqual(json.data.length, 2, 'Should be 2 matching resources')
           done()
-        })
+        }).catch(done)
       })
 
       it('should find resources by many relations', done => {
@@ -722,7 +722,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
           assert.strictEqual(json.data.length, 3, 'Should be 3 matching resources')
           done()
-        })
+        }).catch(done)
       })
 
       it('should error with incorrectly named relations', done => {
@@ -740,7 +740,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(error.title, 'Invalid filter')
           assert(error.detail.match('do not have attribute or relationship'))
           done()
-        })
+        }).catch(done)
       })
 
       it('should error when querying the foreign end of a relationship', done => {
@@ -758,7 +758,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(error.title, 'Invalid filter')
           assert(error.detail.match('is a foreign reference and does not exist on'))
           done()
-        })
+        }).catch(done)
       })
 
       it('should give clean validation errors', done => {
@@ -774,7 +774,7 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(json.errors.length, 2, 'Should be 2 errors')
 
           done()
-        })
+        }).catch(done)
       })
     })
   })
