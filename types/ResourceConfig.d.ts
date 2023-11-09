@@ -23,7 +23,7 @@ export interface ResourceConfig<Item> {
   namespace?: string,
   description?: string,
   resource: string,
-  handlers: Handler
+  handlers: Handler<Item>
   primaryKey: PrimaryKeyType,
   attributes: ResourceAttributes<Item>
   examples: (BaseType & Item)[]
