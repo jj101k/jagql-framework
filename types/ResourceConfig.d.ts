@@ -25,7 +25,7 @@ export interface ResourceConfig<Item> {
   resource: string,
   handlers: Handler<Item>
   primaryKey: PrimaryKeyType,
-  attributes: ResourceAttributes<Item>
+  attributes: ResourceAttributes<Partial<Item>>
   examples: (BaseType & Item)[]
   searchParams?: OptionalResourceAttributes<Item>
 }
