@@ -57,7 +57,7 @@ export interface DeleteFunction {
 }
 
 export interface UpdateFunction<R=any> {
-  (request: JsonApiRequest, newPartialResource: Partial<R> & Pick<R, "id">, callback: HandlerCallback<R>): void
+  (request: JsonApiRequest, newPartialResource: Partial<Exclude<R, "id">> & {id: string}, callback: HandlerCallback<R>): void
 }
 
 /**
