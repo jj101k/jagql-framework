@@ -81,7 +81,7 @@ describe('Testing jsonapi-server', () => {
     })
 
     describe('deleting', () => {
-      it('deletes the resource on many()', done => {
+      it('deletes the resource on many() (tags)', done => {
         const data = {
           method: 'delete',
           url: 'http://localhost:16999/rest/articles/fa2a073f-8c64-4cbb-9158-b8f67a4ab9f5/relationships/tags',
