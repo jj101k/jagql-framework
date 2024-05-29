@@ -8,6 +8,7 @@
     "swagger",
     "api"
   ],
+  "version": "6.1.7",
   "main": "lib/jsonApi.js",
   "types": "types/jsonApi.d.ts",
   "author": "Arnav Gupta <arnav@codingblocks.com>",
