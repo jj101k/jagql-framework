@@ -1,5 +1,5 @@
 {
-  "name": "@jagql/framework",
+  "name": "@ekko/jagql-framework",
   "description": "A config driven NodeJS framework implementing json:api",
   "keywords": [
     "jsonapi",
@@ -8,14 +8,14 @@
     "swagger",
     "api"
   ],
-  "version": "6.1.7",
+  "version": "7.0.0",
   "main": "lib/jsonApi.js",
   "types": "types/jsonApi.d.ts",
-  "author": "Arnav Gupta <arnav@codingblocks.com>",
+  "author": "",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jagql/framework"
+    "url": "https://github.com/EkkoSense/jagql-framework"
   },
   "engines": {
     "node": ">=8",
