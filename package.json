@@ -41,12 +41,10 @@
     "uuid": "^8.0.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.30.1",
     "@types/node-fetch": "^2.6.4",
-    "eslint": "5.0.1",
-    "eslint-config-standard": "^11.0.0",
-    "eslint-plugin-node": "6.0.1",
-    "eslint-plugin-promise": "4.0.0",
-    "eslint-plugin-standard": "4.0.0",
+    "eslint": "^9.30.1",
+    "globals": "^16.3.0",
     "jscpd": "^3.5.9",
     "mocha": "^10.2.0",
     "mocha-performance": "0.1.1",
