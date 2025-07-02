@@ -20,19 +20,19 @@ describe('Testing jsonapi-server', () => {
       }).catch(done)
     })
 
-    it('broken response should error', async () => {
-      const url = 'http://localhost:16999/rest/brokenResponse/b3ea78f4-8d03-4708-9945-d58cadc97b04'
-      const {err, res, json} = await helpers.requestAsync({
-        method: 'GET',
+    it("should produce an error for a broken response", async () => {
+      const url = "http://localhost:16999/rest/brokenResponse/b3ea78f4-8d03-4708-9945-d58cadc97b04"
+      const {err, res, json} = await helpers.requestAsyncNoAssert({
+        method: "GET",
         url
       })
       assert.strictEqual(err, null)
       helpers.validateError(json)
       const errors = JSON.parse(json).errors
-      assert.strictEqual(res.statusCode, 500, 'Expecting 500')
+      assert.strictEqual(res.statusCode, 500, "Expecting 500")
       assert.strictEqual(errors.length, 1)
-      assert.strictEqual(errors[0].code, 'EINVALIDITEM')
-      assert.strictEqual(errors[0].detail.error, 'child "boolean" fails because ["boolean" must be a boolean]')
+      assert.strictEqual(errors[0].code, "EINVALIDITEM")
+      assert.strictEqual(errors[0].detail.error, `child "boolean" fails because ["boolean" must be a boolean]`)
     })
 
     it('valid lookup', done => {

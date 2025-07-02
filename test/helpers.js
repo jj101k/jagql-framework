@@ -156,3 +156,13 @@ testHelpers.requestAsync = (params) => {
     })
   })
 }
+
+/**
+ *
+ * @param {*} params
+ * @returns {{err: any, res: any, json: any}}
+ */
+testHelpers.requestAsyncNoAssert = (params) => {
+  return new Promise((resolve) => request(params, (err, res, json) => {
+    resolve({err, res, json})}))
+}
