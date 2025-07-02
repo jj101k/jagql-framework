@@ -27,6 +27,9 @@ interface ApiConfig {
   urlPrefixAlias?: string
   hostname: string
   port: number
+  /**
+   * No leading / required
+   */
   base: string,
   meta: any
   swagger?: any
