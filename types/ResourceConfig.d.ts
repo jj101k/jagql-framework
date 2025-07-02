@@ -17,10 +17,15 @@ export type OptionalResourceAttributes<Item> = {
   [x in keyof Item]?: Schema
 }
 
+interface ResourceConfigOptions {
+  enforceSchemaOnGet?: boolean
+}
+
 type PrimaryKeyType = 'uuid' | 'autoincrement' | 'string'
 
 export interface ResourceConfig<Item> {
   namespace?: string,
+  options?: ResourceConfigOptions,
   description?: string,
   resource: string,
   handlers: Handler<Item>
