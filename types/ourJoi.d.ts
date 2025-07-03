@@ -29,4 +29,11 @@ interface OurJoi extends BaseJoi.Root {
   action(config: ActionConfig): FunctionSchema
 }
 
+export interface OurJoiSettings {
+  _jagql: true
+  __one?: string[]
+  __many?: string[]
+  _uidType?: string
+}
+
 export const Joi: OurJoi
