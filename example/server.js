@@ -2,7 +2,7 @@
 
 const server = module.exports = { }
 
-const jsonApi = require('../.')
+const jsonApi = require('../lib/jsonApi')
 const fs = require('fs')
 const path = require('path')
 const debug = require('debug')

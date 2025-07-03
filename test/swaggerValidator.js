@@ -7,27 +7,33 @@ let swaggerDoc
  * This supports validation against a JSON schema (not a Joi one)
  */
 module.exports = class swaggerValidator {
+  /**
+   *
+   * @param {string} method
+   * @param {string} path
+   * @returns
+   */
   static #getModel(method, path) {
-    path = path.replace('/rest/', '/').replace(/\/$/, '')
+    const normalisedPath = path.replace("/rest/", "/").replace(/\/$/, "")
     let match = Object.keys(swaggerDoc.paths).filter(somePath => {
       somePath = somePath.replace(/\{[a-zA-Z-_]*\}/gi, '(.*?)')
       somePath = `^${somePath}$`
       somePath = new RegExp(somePath)
-      return somePath.test(path)
+      return somePath.test(normalisedPath)
     }).pop()
 
     if (!match) {
-      if (path.indexOf('foobar') !== -1) {
+      if (normalisedPath.indexOf('foobar') !== -1) {
         return { responses: { default: { schema: { $ref: '#/definitions/error' } } } }
       }
-      throw new Error(`Swagger Validation: No matching path for ${path}`)
+      throw new Error(`Swagger Validation: No matching path for ${normalisedPath}`)
     }
 
     match = swaggerDoc.paths[match]
     match = match[method]
 
     if (!match) {
-      throw new Error(`Swagger Validation: No matching path for ${method} ${path}`)
+      throw new Error(`Swagger Validation: No matching path for ${method} ${normalisedPath}`)
     }
     return match
   }
@@ -62,7 +68,18 @@ module.exports = class swaggerValidator {
       model = this.#getRef(model.$ref)
     }
 
-    if (model.type === 'array') {
+    if (model.oneOf) {
+      let lastError
+      for(const m of model.oneOf) {
+        try {
+          this.#validateModel(m, payload, urlPath, validationPath, required)
+          return
+        } catch(e) {
+          lastError = e
+        }
+      }
+      throw lastError
+    } else if (model.type === 'array') {
       this.#validateArray(model, payload, urlPath, validationPath)
     } else if (model.type === 'object') {
       this.#validateObject(model, payload, urlPath, validationPath)

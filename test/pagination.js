@@ -40,8 +40,8 @@ describe('Testing jsonapi-server', () => {
           assert.strictEqual(json.data[0].attributes.title, 'How to AWS', 'should be on the first article')
 
           assert.ok(Object.keys(json.links).length, 3, 'should have 3x links')
-          assert.ok(json.links.last.match(/page%5Boffset%5D=3&page%5Blimit%5D=1/), 'last should target offset-3 limit-1')
-          assert.ok(json.links.next.match(/page%5Boffset%5D=1&page%5Blimit%5D=1/), 'next should target offset-1 limit-1')
+          assert.match(json.links.last, /page%5Boffset%5D=3&page%5Blimit%5D=1/)
+          assert.match(json.links.next, /page%5Boffset%5D=1&page%5Blimit%5D=1/)
 
           pageLinks = json.links
           done()
@@ -138,7 +138,7 @@ describe('Testing jsonapi-server', () => {
           page
         },
         route: {
-          combined: ''
+          combined: 'https://example.org/example'
         }
       }
 
