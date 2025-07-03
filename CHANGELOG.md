@@ -1,10 +1,10 @@
-# CHANGELOG (`@jagql/framework`)
+# CHANGELOG (`@ekko/jagql-framework`)
 
 - 2025-07-03 v8.0.0. This updates Joi to version 17. COMPATIBILITY: newer Joi accept()/valid() no longer permit an array as an argument, so you will need to change that if you've been using that syntax.
 - 2025-07-02 v7.0.4
 - 2024-10-03 v7.0.3
 - 2024-06-27 v7.0.1, v7.0.2
-- 2024-05-30 v7.0.0
+- 2024-05-30 v7.0.0. This renames from the original `@jagql/framework` to `@ekko/jagql-framework`.
 - 2023-11-09 v6.0.0, v6.1.0
 
 - - - - - -
