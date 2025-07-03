@@ -1,5 +1,6 @@
 # CHANGELOG (`@ekko/jagql-framework`)
 
+- 2025-07-03 v8.1.0. Adds a more stable API for fetching settings, jsonApi.getSchemaSettings(schema)
 - 2025-07-03 v8.0.0. This updates Joi to version 17. COMPATIBILITY: newer Joi accept()/valid() no longer permit an array as an argument, so you will need to change that if you've been using that syntax. Also if you were directly introspecting schema._settings, that won't work any more - use schema.describe().metas?.find(m => (typeof m == "object") && m._jagql) instead.
 - 2025-07-02 v7.0.4
 - 2024-10-03 v7.0.3
