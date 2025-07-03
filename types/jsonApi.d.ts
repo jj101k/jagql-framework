@@ -4,15 +4,14 @@
 
 /// <reference types="express" />
 
-import {Application, Request, Router} from 'express'
-import {Schema} from 'joi'
+import { Application, Request, Router } from 'express'
+import * as H from './Handler'
+import { Metrics } from './metrics'
+import * as RC from './ResourceConfig'
+import { ResourceConfig } from './ResourceConfig'
 import OurJoi = require('./ourJoi')
 import ChainHandlerType = require('./ChainHandler')
 import MemoryHandlerType = require('./MemoryHandler')
-import {ResourceConfig} from './ResourceConfig'
-import {Metrics} from './metrics'
-import * as RC from './ResourceConfig'
-import * as H from './Handler'
 
 export import ResourceConfig = RC.ResourceConfig
 
