@@ -2,7 +2,6 @@
  * @module @jagql/framework/lib/handlers/Handler
  */
 
-import {PathParams} from 'express-serve-static-core'
 import {Request, Response} from 'express'
 import {ResourceConfig} from './ResourceConfig'
 
@@ -26,6 +25,7 @@ export interface JsonApiRequest {
     query: string
     combined: string
   }
+  resourceConfig?: ResourceConfig
 }
 
 export interface JsonApiError {

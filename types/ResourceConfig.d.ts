@@ -23,7 +23,7 @@ interface ResourceConfigOptions {
 
 type PrimaryKeyType = 'uuid' | 'autoincrement' | 'string'
 
-export interface ResourceConfig<Item> {
+export interface ResourceConfig<Item = any> {
   actions?: Record<string, Schema>
   namespace?: string,
   options?: ResourceConfigOptions,
