@@ -8,7 +8,33 @@ export interface JsonApiResponseBodyBase {
     links?: Record<string, string>
 }
 
-export interface JsonApiResponseBody<T = any> extends JsonApiResponseBodyBase {
+interface JsonApiResourceIdentifierObject {
+    id: string
+    type: string
+    meta?: any
+}
+
+interface JsonApiRelationshipObject {
+    links?: any
+    data?: JsonApiResourceIdentifierObject[] | JsonApiResourceIdentifierObject | null
+    meta?: any
+}
+
+interface JsonApiResourceObject {
+    id: string
+    type: string
+    attributes?: Record<string, any>
+    relationships?: Record<string, JsonApiRelationshipObject>
+    links?: any
+    meta?: any
+}
+
+export type JsonApiPrimaryDataSingle = JsonApiResourceObject | null
+type JsonApiPrimaryDataMultiple = JsonApiResourceObject[]
+
+type JsonApiPrimaryData = JsonApiPrimaryDataMultiple | JsonApiPrimaryDataSingle
+
+export interface JsonApiResponseBody<T extends JsonApiPrimaryData = JsonApiPrimaryData> extends JsonApiResponseBodyBase {
     links?: Record<string, string>
     data?: T
 }
@@ -23,4 +49,4 @@ export interface JsonApiResponseBodyError extends JsonApiResponseBodyBase {
 
 export type JsonApiResponseBodyErrorWithMeta = JsonApiResponseBodyError & JsonApiResponseBodyMeta
 
-export type JsonApiResponseBodyWithMeta<T = any> = JsonApiResponseBody<T> & JsonApiResponseBodyMeta
+export type JsonApiResponseBodyWithMeta<T extends JsonApiPrimaryData = JsonApiPrimaryData> = JsonApiResponseBody<T> & JsonApiResponseBodyMeta

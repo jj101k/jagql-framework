@@ -7,8 +7,35 @@ import {ResourceConfig} from './ResourceConfig'
 
 export type HttpVerbs = 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH'
 
+export type FilterSpec = {operator: "<" | ">" | "~" | ":", value: string} | {operator: null, value: string}
+
+/**
+ * Classic form: a string[*]. This includes the ID for relationships.
+ * Comma form: Classic form, but comma-separated
+ * Array form: An array of classic form values
+ * Recursive form: field name (relation) mapped to a filter applicable to
+ * that relation.
+ *
+ * * Values may start with "<" (less-than), ">" (greater-than), ":" (contains,
+ * case-insensitive) or "~" (equal, case-insensitive), or no prefix (equal).
+ */
+export type FilterSpecIn = string | string[] | FilterSpecByAttrIn
+
+/**
+ * Each key must be a defined resource attribute; and must not be a
+ * "foreign reference".
+ *
+ * @see FilterSpecIn
+ */
+export interface FilterSpecByAttrIn {
+  [k: string]: FilterSpecIn
+}
+
 export interface JsonApiRequest {
-  params: any
+  params: {
+    filter?: FilterSpecByAttrIn
+  }
+  processedFilter?: Record<string, FilterSpec[]>
   headers: any
   safeHeaders: any
   cookies: any
