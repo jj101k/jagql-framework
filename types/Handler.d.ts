@@ -14,10 +14,12 @@ export type FilterSpec = {operator: "<" | ">" | "~" | ":", value: string} | {ope
  * Comma form: Classic form, but comma-separated
  * Array form: An array of classic form values
  * Recursive form: field name (relation) mapped to a filter applicable to
- * that relation.
+ * that relation[**]
  *
  * * Values may start with "<" (less-than), ">" (greater-than), ":" (contains,
  * case-insensitive) or "~" (equal, case-insensitive), or no prefix (equal).
+ * ** Semantically, this will filter _the relation_. It will not filter the
+ * top-level item(s). Handlers may of course filter as they please.
  */
 export type FilterSpecIn = string | string[] | FilterSpecByAttrIn
 
