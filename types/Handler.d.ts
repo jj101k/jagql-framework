@@ -33,10 +33,24 @@ export interface FilterSpecByAttrIn {
   [k: string]: FilterSpecIn
 }
 
+interface JsonApiRequestParams {
+  fields?: any
+  filter?: FilterSpecByAttrIn
+  include?: any
+  page?: any
+  sort?: any
+}
+
+interface JsonApiInternalParams extends JsonApiRequestParams {
+  data?: any
+  id?: any
+  relation?: any
+  relationships?: any
+  type?: any
+}
+
 export interface JsonApiRequest {
-  params: {
-    filter?: FilterSpecByAttrIn
-  }
+  params: JsonApiInternalParams
   processedFilter?: Record<string, FilterSpec[]>
   headers: any
   safeHeaders: any
