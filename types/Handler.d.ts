@@ -36,7 +36,7 @@ export interface FilterSpecByAttrIn {
 interface JsonApiRequestParams {
   fields?: any
   filter?: FilterSpecByAttrIn
-  include?: any
+  include?: string | string[]
   page?: any
   sort?: any
 }
