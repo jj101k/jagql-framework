@@ -29,7 +29,6 @@
     "express": "^4.16.4",
     "joi": "^17.13.3",
     "lodash.isequal": "4.5.0",
-    "lodash.omit": "4.5.0",
     "lodash.uniqby": "4.7.0",
     "qs": "^6.5.3",
     "use-strict": "1.0.1",
