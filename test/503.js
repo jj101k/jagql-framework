@@ -2,8 +2,8 @@
 
 const assert = require('assert')
 const helpers = require('./helpers.js')
-const jsonApi = require('../lib/jsonApi')
 const jsonApiTestServer = require('../example/server')
+const jsonApiResources = require('../lib/jsonApiResources.js')
 
 describe('Testing jsonapi-server', () => {
   describe('resource readiness', () => {
@@ -20,7 +20,7 @@ describe('Testing jsonapi-server', () => {
     })
 
     it('returns 503 if resource is NOT ready', done => {
-      const handlers = jsonApi._resources.articles.handlers
+      const handlers = jsonApiResources.articles.handlers
       const savedHandlersReady = handlers.ready
       handlers.ready = false
       const url = 'http://localhost:16999/rest/articles/de305d54-75b4-431b-adb2-eb6b9e546014'
