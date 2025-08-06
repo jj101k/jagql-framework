@@ -1,5 +1,8 @@
 # CHANGELOG (`@ekko/jagql-framework`)
 
+- 2025-08-05 v8.4.0. Drop "async" in favour of native async/await; fix error
+  handling being called twice via verifyRequest; replace most uses of lodash
+  with modern equivalents.
 - 2025-07-21 v8.3.0. Expose the remaining include on recursive include fetches.
 - 2025-07-18 v8.2.1. Highlight when relations are actually missing.
 - 2025-07-16 v8.1.2. Fix a broken error message
