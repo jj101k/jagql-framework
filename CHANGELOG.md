@@ -1,5 +1,6 @@
 # CHANGELOG (`@ekko/jagql-framework`)
 
+- 2025-08-05 v9.0.0. Convert to classes in most cases; avoid hotpatching Joi
 - 2025-08-05 v8.4.0. Drop "async" in favour of native async/await; fix error
   handling being called twice via verifyRequest; replace most uses of lodash
   with modern equivalents.
