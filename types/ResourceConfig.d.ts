@@ -26,6 +26,7 @@ type PrimaryKeyType = 'uuid' | 'autoincrement' | 'string'
 
 export interface ResourceConfig<Item = any> {
   actions?: Record<string, Schema>
+  actionSettings?: Record<string, OurJoiSettings>
   namespace?: string,
   options?: ResourceConfigOptions,
   description?: string,
