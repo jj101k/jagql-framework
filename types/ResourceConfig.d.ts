@@ -3,6 +3,7 @@
  */
 import {Schema} from 'joi'
 import {Handler} from './Handler'
+import { OurJoiSettings } from "./ourJoi"
 
 export type BaseType = {
   id?: string
@@ -32,6 +33,7 @@ export interface ResourceConfig<Item = any> {
   handlers: Handler<Item>
   primaryKey: PrimaryKeyType,
   attributes: ResourceAttributes<Partial<Item>>
+  attributeSettings?: Record<string, OurJoiSettings>
   examples: (BaseType & Item)[]
   searchParams?: OptionalResourceAttributes<Item>
 }
