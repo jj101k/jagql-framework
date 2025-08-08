@@ -29,7 +29,7 @@ jsonApi.define({
       .example(false),
     tags: jsonApi.Joi.array().items(jsonApi.Joi.string())
       .description('Tags for the photo'),
-    photographer: jsonApi.Joi.one('people')
+    photographer: jsonApi.Joi.oneOf('people')
       .description('The person who took the photo'),
     articles: jsonApi.Joi.belongsToMany({
       resource: 'articles',

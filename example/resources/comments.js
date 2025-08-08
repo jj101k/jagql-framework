@@ -17,7 +17,7 @@ jsonApi.define({
     timestamp: jsonApi.Joi.string().regex(/^[12]\d\d\d-[01]\d-[0123]\d$/)
       .description('The date on which the comment was created, YYYY-MM-DD')
       .example('2017-05-01'),
-    author: jsonApi.Joi.one('people')
+    author: jsonApi.Joi.one('people') // Old syntax
       .description('The person who wrote the comment'),
     article: jsonApi.Joi.belongsToOne({
       resource: 'articles',

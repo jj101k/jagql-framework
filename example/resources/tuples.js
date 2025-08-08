@@ -11,8 +11,8 @@ jsonApi.define({
   searchParams: { },
   primaryKey: 'uuid',
   attributes: {
-    media: jsonApi.Joi.many('articles', 'photos'),
-    preferred: jsonApi.Joi.one('articles', 'photos')
+    media: jsonApi.Joi.manyOf(['articles', 'photos']),
+    preferred: jsonApi.Joi.oneOf(['articles', 'photos'])
   },
   examples: [
     {

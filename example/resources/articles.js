@@ -31,13 +31,13 @@ jsonApi.define({
       .example('published'),
     views: jsonApi.Joi.number().default(0)
       .description('Number of views for this article'),
-    author: jsonApi.Joi.one('people').uidType('uuid')
+    author: jsonApi.Joi.oneOf('people', 'uuid')
       .description('The person who wrote the article'),
-    tags: jsonApi.Joi.many('tags')
+    tags: jsonApi.Joi.many('tags') // Old syntax
       .description('All of the tags associated with an article'),
-    photos: jsonApi.Joi.many('photos')
+    photos: jsonApi.Joi.manyOf('photos')
       .description('List of all the photos included in an article'),
-    comments: jsonApi.Joi.many('comments')
+    comments: jsonApi.Joi.manyOf('comments')
       .description('All of the comments posted on this article')
   },
   examples: [

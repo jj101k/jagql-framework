@@ -18,7 +18,7 @@ jsonApi.define({
       resource: 'articles',
       as: 'tags'
     }),
-    parent: jsonApi.Joi.one('tags'),
+    parent: jsonApi.Joi.oneOf('tags'),
     children: jsonApi.Joi.belongsToMany({
       resource: 'tags',
       as: 'parent'
