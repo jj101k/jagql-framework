@@ -30,7 +30,7 @@ jsonApi.define({
     })
   },
   actions: {
-    login: jsonApi.Joi.action({
+    login: {
       params: {
         username: jsonApi.Joi.string(),
         password: jsonApi.Joi.string()},
@@ -40,7 +40,7 @@ jsonApi.define({
       post () {
         return {}
       }
-    })
+    }
   },
   examples: [
     {

@@ -26,7 +26,6 @@ interface OurJoi extends BaseJoi.Root {
   many(...model: string[]): OurJoiSchema
   belongsToOne(modelOpts: ModelOptions): OurJoiSchema
   belongsToMany(modelOpts: ModelOptions): OurJoiSchema
-  action(config: ActionConfig): FunctionSchema
 }
 
 export interface OurJoiSettings {

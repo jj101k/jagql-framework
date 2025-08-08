@@ -3,7 +3,7 @@
  */
 import {Schema} from 'joi'
 import {Handler} from './Handler'
-import { OurJoiSettings } from "./ourJoi"
+import { ActionConfig, OurJoiSettings } from "./ourJoi"
 
 export type BaseType = {
   id?: string
@@ -25,8 +25,7 @@ interface ResourceConfigOptions {
 type PrimaryKeyType = 'uuid' | 'autoincrement' | 'string'
 
 export interface ResourceConfig<Item = any> {
-  actions?: Record<string, Schema>
-  actionSettings?: Record<string, OurJoiSettings>
+  actions?: Record<string, ActionConfig>
   namespace?: string,
   options?: ResourceConfigOptions,
   description?: string,
