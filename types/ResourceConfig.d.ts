@@ -4,6 +4,7 @@
 import {Schema} from 'joi'
 import {Handler} from './Handler'
 import { ActionConfig, OurJoiSettings } from "./ourJoi"
+import Relation from "../lib/Relation"
 
 export type BaseType = {
   id?: string
@@ -11,7 +12,7 @@ export type BaseType = {
 }
 
 export type ResourceAttributes<Item> = {
-  [x in keyof Item]: Schema
+  [x in keyof Item]: Schema | Relation
 }
 
 export type OptionalResourceAttributes<Item> = {

@@ -4,6 +4,7 @@
  */
 import { AnySchema, FunctionSchema, Schema } from 'joi'
 import BaseJoi = require('joi')
+import Relation from "../lib/Relation"
 
 type UidType = 'uuid' | 'autoincrement'
 
@@ -30,9 +31,7 @@ interface OurJoi extends BaseJoi.Root {
 
 export interface OurJoiSettings {
   _jagql: true
-  __one?: string[]
-  __many?: string[]
-  _uidType?: string
+  __relation?: number
 }
 
 export const Joi: OurJoi

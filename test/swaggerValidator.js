@@ -68,6 +68,8 @@ module.exports = class swaggerValidator {
       model = this.#getRef(model.$ref)
     }
 
+    console.log(model, payload)
+
     if (model.oneOf) {
       let lastError
       for(const m of model.oneOf) {
@@ -106,7 +108,7 @@ module.exports = class swaggerValidator {
 
     for (const j in payload) {
       if (!model.properties[j]) {
-        throw new Error(`Swagger Validation: ${urlPath} Found unexpected property at ${validationPath}.${j}`)
+        throw new Error(`Swagger Validation: ${urlPath} Found unexpected property '${j}' at ${validationPath}.${j}`)
       }
     }
   }
