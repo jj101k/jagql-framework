@@ -68,8 +68,6 @@ module.exports = class swaggerValidator {
       model = this.#getRef(model.$ref)
     }
 
-    console.log(model, payload)
-
     if (model.oneOf) {
       let lastError
       for(const m of model.oneOf) {
