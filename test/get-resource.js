@@ -4,12 +4,13 @@ const assert = require('assert')
 const helpers = require('./helpers.js')
 const request = require('./request')
 const jsonApiTestServer = require('../example/server.js')
-const { expect } = require('chai')
+
 
 describe('Testing jsonapi-server', () => {
   describe('Searching for resources', () => {
     describe("Load test", () => {
       it("can load 100k objects in acceptable time", async () => {
+        const { expect } = await import('chai')
         const start = new Date()
         const {err, res, json} = await helpers.requestAsync({
           method: "GET",
