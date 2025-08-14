@@ -54,7 +54,6 @@ export const Joi: typeof OurJoi.Joi
  *  - host, port
  *  - enable/disable swagger
  *
- * For detailed info please check https://jagql.github.io/docs/pages/configuration.html
  * @param {ApiConfig} apiConfig
  */
 export function setConfig(apiConfig: ApiConfig): void
@@ -77,8 +76,6 @@ export function authenticate(authenticator: (req: Request, cb: () => void) => vo
  *   // send data to your metrics stack
  * });
  * ```
- *
- * For details read - https://jagql.github.io/docs/pages/debugging/metrics.html
  */
 export const metrics: Metrics
 export function getExpressServer(): Application

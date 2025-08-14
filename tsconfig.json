@@ -9,13 +9,5 @@
   "exclude": [
     "node_modules",
     "lib"
-  ],
-  "typedocOptions": {
-    "includes": "resources/guides",
-    "out": "docs",
-    "name": "jagql",
-    "includeDeclarations": true,
-    "excludeExternals": true,
-    "mode": "modules"
-  }
+  ]
 }
