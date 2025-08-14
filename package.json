@@ -43,9 +43,7 @@
     "mocha": "^10.2.0",
     "mocha-performance": "0.1.1",
     "node-fetch": "^2.7.0",
-    "nyc": "^15.1.0",
-    "typedoc": "^0.25.1",
-    "typedoc-plugin-external-module-name": "^1.1.1"
+    "nyc": "^15.1.0"
   },
   "scripts": {
     "start": "node example/server.js",
