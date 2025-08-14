@@ -19,14 +19,14 @@ testHelpers.validateError = json => {
   assert.deepEqual(keys, [ 'jsonapi', 'meta', 'links', 'errors' ], 'Errors should have specific properties')
   assert.strictEqual(typeof json.links.self, 'string', 'Errors should have a "self" link')
   assert.ok(json.errors instanceof Array, 'errors should be an array')
-  json.errors.forEach(error => {
+  for(const error of json.errors) {
     keys = Object.keys(error)
     assert.deepEqual(keys, [ 'status', 'code', 'title', 'detail' ], 'errors should have specific properties')
-    keys.forEach(i => {
-      if (i === 'detail') return
+    for(const i of keys) {
+      if (i === 'detail') continue
       assert.strictEqual(typeof error[i], 'string', `${i} should be a string`)
-    })
-  })
+    }
+  }
   return json
 }
 
@@ -84,12 +84,12 @@ testHelpers.validateRelationship = relationship => {
 
   let someDataBlock = relationship.data
   if (!(someDataBlock instanceof Array)) someDataBlock = [ someDataBlock ]
-  someDataBlock.forEach(dataBlock => {
+  for(const dataBlock of someDataBlock) {
     assert.ok(dataBlock.id, 'Relationship block should have an id')
     assert.strictEqual(typeof dataBlock.id, 'string', 'Relationship data blocks id should be string')
     assert.ok(dataBlock.type, 'Relationship block should have a type')
     assert.strictEqual(typeof dataBlock.type, 'string', 'Relationship data blocks type should be string')
-  })
+  }
 }
 
 testHelpers.validateResource = resource => {

@@ -15,7 +15,12 @@ jsonApi.setConfig({
 })
 
 const resourcesPath = path.join(__dirname, '..', '..', 'example', 'resources')
-fs.readdirSync(resourcesPath).filter(filename => /^[a-z].*\.js$/.test(filename)).map(filename => path.join(resourcesPath, filename)).forEach(require)
+const resourcePaths = fs.readdirSync(resourcesPath).filter(filename => /^[a-z].*\.js$/.test(filename))
+  .map(filename => path.join(resourcesPath, filename))
+
+for(const path of resourcePaths) {
+  require(path)
+}
 
 jsonApi.start()
 const server = app.listen(0)

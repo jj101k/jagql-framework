@@ -54,12 +54,12 @@ describe('Testing jsonapi-server', () => {
 
         let someDataBlock = json.data
         if (!(someDataBlock instanceof Array)) someDataBlock = [ someDataBlock ]
-        someDataBlock.forEach(dataBlock => {
+        for(const dataBlock of someDataBlock) {
           const keys = Object.keys(dataBlock)
           assert.deepEqual(keys, [ 'id', 'type' ], 'Relationship data blocks should have specific properties')
           assert.strictEqual(typeof dataBlock.id, 'string', 'Relationship data blocks id should be string')
           assert.strictEqual(typeof dataBlock.type, 'string', 'Relationship data blocks type should be string')
-        })
+        }
 
         done()
       }).catch(done)

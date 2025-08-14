@@ -77,7 +77,9 @@ describe('Testing jsonapi-server', () => {
         json = helpers.validateJson(json)
 
         assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
-        json.data.forEach(resource => helpers.validateResource(resource))
+        for(const resource of json.data) {
+          helpers.validateResource(resource)
+        }
         assert.strictEqual(json.meta.page && json.meta.page.total, 2, 'should include pagination')
         helpers.validatePagination(json)
 

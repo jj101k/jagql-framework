@@ -32,9 +32,9 @@ describe('Testing jsonapi-server', () => {
       assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
       assert.deepEqual(json.included, [ ], 'Response should have no included resources')
       assert.strictEqual(json.data.length, 4, 'Response should contain exactly 4 resources')
-      json.data.forEach(resource => {
+      for(const resource of json.data) {
         helpers.validateArticle(resource)
-      })
+      }
     })
 
     describe('applying sort', () => {
@@ -433,10 +433,10 @@ describe('Testing jsonapi-server', () => {
           json = helpers.validateJson(json)
 
           assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
-          json.data.forEach(resource => {
+          for(const resource of json.data) {
             const keys = Object.keys(resource.attributes)
             assert.deepEqual(keys, [ 'title' ], 'should only have the title attribute')
-          })
+          }
 
           done()
         }).catch(done)
@@ -452,10 +452,10 @@ describe('Testing jsonapi-server', () => {
           json = helpers.validateJson(json)
 
           assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
-          json.data.forEach(resource => {
+          for(const resource of json.data) {
             const keys = Object.keys(resource.attributes)
             assert.deepEqual(keys, [ 'title', 'content' ], 'should only have the title attribute')
-          })
+          }
 
           done()
         }).catch(done)

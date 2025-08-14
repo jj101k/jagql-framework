@@ -55,7 +55,13 @@ jsonApi.authenticate((request, callback) => {
   return callback()
 })
 
-fs.readdirSync(path.join(__dirname, '/resources')).filter(filename => /^[a-z].*\.js$/.test(filename)).map(filename => path.join(__dirname, '/resources/', filename)).forEach(require)
+const resourcePaths = fs.readdirSync(path.join(__dirname, '/resources'))
+  .filter(filename => /^[a-z].*\.js$/.test(filename))
+  .map(filename => path.join(__dirname, '/resources/', filename))
+
+for(const path of resourcePaths) {
+  require(path)
+}
 
 jsonApi.onUncaughtException((request, error) => {
   const errorDetails = error.stack.split('\n')

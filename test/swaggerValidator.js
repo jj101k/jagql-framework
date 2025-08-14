@@ -52,9 +52,9 @@ module.exports = class swaggerValidator {
     if (!(payload instanceof Array)) {
       throw new Error(`Swagger Validation: ${urlPath} Expected Array at ${validationPath}`)
     }
-    payload.forEach((i, j) => {
+    for(const [j, i] of payload.entries()) {
       this.#validateModel(model.items, i, urlPath, `${validationPath}[${j}]`, model.required)
-    })
+    }
   }
 
   static #validateModel(model, payload, urlPath, validationPath, required) {
@@ -94,7 +94,9 @@ module.exports = class swaggerValidator {
     // the model.  As a work around, if the payload is an array, we're validating each element in the array separately.
     // todo: not sure this is the right thing to do here... is the error being bypassed here a legitamate swagger validation failure?
     if (payload instanceof Array) {
-      payload.forEach(i => this.#validateObject(model, i, urlPath, validationPath))
+      for(const i of payload) {
+        this.#validateObject(model, i, urlPath, validationPath)
+      }
       return
     }
     if (!model.properties) return
