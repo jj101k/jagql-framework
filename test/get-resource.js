@@ -19,6 +19,7 @@ describe('Testing jsonapi-server', () => {
         const finish = new Date()
         const elapsedMs = finish.valueOf() - start.valueOf()
         assert.strictEqual(err, null)
+        // Note that 100,000 * 5us = 500,000us = 500ms
         expect(elapsedMs).to.be.lessThan(500, "Elapsed time is <5us per item")
         const vjson = helpers.validateJson(json)
 
