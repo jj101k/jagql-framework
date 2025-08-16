@@ -18,4 +18,4 @@ class TimestampHandler extends jsonApi.ChainHandler {
   }
 }
 
-module.exports = new jsonApi.ChainHandler()
+module.exports = new TimestampHandler()
