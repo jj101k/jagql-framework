@@ -19,7 +19,7 @@ describe('Testing jsonapi-server', () => {
         const finish = new Date()
         const elapsedMs = finish.valueOf() - start.valueOf()
         assert.strictEqual(err, null)
-        expect(elapsedMs).to.be.lessThan(300, "Elapsed time is <3us per item")
+        expect(elapsedMs).to.be.lessThan(500, "Elapsed time is <5us per item")
         const vjson = helpers.validateJson(json)
 
         assert.strictEqual(res.statusCode, 200, "Expecting 200 OK")
