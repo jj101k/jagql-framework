@@ -2,7 +2,7 @@
  * @module @jagql/framework
  */
 import {Schema} from 'joi'
-import {Handler} from './Handler'
+import {CallbackHandler as CallbackHandler} from './CallbackHandler'
 import { ActionConfig, OurJoiSettings } from "./ourJoi"
 import Relation from "../lib/Relation"
 
@@ -31,7 +31,7 @@ export interface ResourceConfig<Item = any> {
   options?: ResourceConfigOptions,
   description?: string,
   resource: string,
-  handlers: Handler<Item>
+  handlers: CallbackHandler<Item>
   primaryKey: PrimaryKeyType,
   attributes: ResourceAttributes<Partial<Item>>
   attributeSettings?: Record<string, OurJoiSettings>

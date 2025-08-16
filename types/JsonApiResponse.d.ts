@@ -50,3 +50,13 @@ export interface JsonApiResponseBodyError extends JsonApiResponseBodyBase {
 export type JsonApiResponseBodyErrorWithMeta = JsonApiResponseBodyError & JsonApiResponseBodyMeta
 
 export type JsonApiResponseBodyWithMeta<T extends JsonApiPrimaryData = JsonApiPrimaryData> = JsonApiResponseBody<T> & JsonApiResponseBodyMeta
+
+/**
+ *
+ */
+export interface JsonApiError {
+  status: string
+  code: string
+  title: string
+  detail: string
+}

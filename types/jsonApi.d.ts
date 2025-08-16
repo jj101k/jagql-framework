@@ -5,7 +5,7 @@
 /// <reference types="express" />
 
 import { Application, Request, Router } from 'express'
-import * as H from './Handler'
+import * as H from './CallbackHandler'
 import { Metrics } from './metrics'
 import * as RC from './ResourceConfig'
 import { ResourceConfig } from './ResourceConfig'
@@ -16,7 +16,7 @@ import MemoryHandlerType = require('./MemoryHandler')
 export import ResourceConfig = RC.ResourceConfig
 
 type JsonApiProtocols = 'http' | 'https'
-export import Handler = H.Handler
+export import CallbackHandler = H.CallbackHandler
 export import BaseType = RC.BaseType
 
 interface ApiConfig {

@@ -1,0 +1,12 @@
+import { JsonApiRequest } from "./JsonApiRequest"
+
+/**
+ *
+ */
+export interface PromiseHandler<R = any> {
+  create(request: JsonApiRequest, newResource: R): Promise<R>
+  delete(request: JsonApiRequest): Promise<void>
+  find(request: JsonApiRequest): Promise<R>
+  search(request: JsonApiRequest): Promise<[R[], number]>
+  update(request: JsonApiRequest, newPartialResource: Partial<Exclude<R, "id">> & { id: string} ): Promise<R>
+}

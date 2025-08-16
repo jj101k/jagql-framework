@@ -2,9 +2,13 @@
  * @module @jagql/framework/lib/handlers/ChainHandler
  */
 import {
-  CreateFunction, DeleteFunction, FindFunction, Handler, HandlerCallback, JsonApiError, JsonApiRequest, SearchFunction,
+  CallbackHandler,
+  CreateFunction, DeleteFunction, FindFunction,
+  HandlerCallback,
+  SearchFunction,
   UpdateFunction
-} from './Handler'
+} from './CallbackHandler'
+import { JsonApiRequest } from "./JsonApiRequest"
 
 type BeforeSearchFunction = SearchFunction
 type BeforeFindFunction = FindFunction
@@ -34,9 +38,9 @@ interface AfterUpdateFunction<R=any> {
 /**
  * [[include:chain-handler.md]]
  */
-declare class ChainHandler<R=any> extends Handler<R>{
+declare class ChainHandler<R=any> extends CallbackHandler<R>{
   constructor()
-  chain(nextHandler: Handler<R>): this
+  chain(nextHandler: CallbackHandler<R>): this
   beforeInitialise(...args: any[]): any // TODO
   afterInitialise(...args: any[]): any // TODO
   beforeClose(...args: any[]): any // TODO
