@@ -68,7 +68,7 @@ export interface JsonApiRequest {
     query: string
     combined: string
   }
-  resourceConfig?: ResourceConfig
+  resourceConfig?: ResourceConfig | ResourceConfig[]
 }
 
 export interface JsonApiError {
@@ -117,7 +117,15 @@ declare class Handler<R=any> {
   delete: DeleteFunction
   close: () => any
   ready: boolean
+  /**
+   * Indicates that search() already covers sorting. If not, the results will be
+   * sorted afterwards.
+   */
   handlesSort: boolean
+  /**
+   * Indicates that search() already covers filtering. If not, the results will be
+   * filtered afterwards.
+   */
   handlesFilter: boolean
 }
 
