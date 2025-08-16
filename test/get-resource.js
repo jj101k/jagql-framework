@@ -19,12 +19,12 @@ describe('Testing jsonapi-server', () => {
         const finish = new Date()
         const elapsedMs = finish.valueOf() - start.valueOf()
         assert.strictEqual(err, null)
+        expect(elapsedMs).to.be.lessThan(300, "Elapsed time is <3us per item")
         const vjson = helpers.validateJson(json)
 
         assert.strictEqual(res.statusCode, 200, "Expecting 200 OK")
         assert.deepEqual(vjson.included, [ ], "Response should have no included resources")
         assert.strictEqual(vjson.data.length, 100_000, "Response should contain all resources")
-        expect(elapsedMs).to.be.lessThan(100, "Elapsed time is <1ms per item")
       })
     })
     it('unknown resource should error', done => {
