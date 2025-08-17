@@ -132,7 +132,11 @@ testHelpers.request = (params, callback) => {
     try {
       swaggerValidator.assert(params, res.statusCode, json)
     } catch (e) {
+      console.warn("Swagger validation error triggered", e)
       return callback(err ?? e, res, json)
+    }
+    if(err) {
+      console.warn("Internal error running fetch", err)
     }
     return callback(err, res, json)
   })
