@@ -33,6 +33,7 @@ export interface UpdateFunction<R=any> {
  */
 declare class CallbackHandler<R=any> {
   constructor(o?: any)
+  readonly jagqlVersion?: 0
   initialise(resConfig: ResourceConfig<R>): any
   create: CreateFunction<R>
   search: SearchFunction<R>

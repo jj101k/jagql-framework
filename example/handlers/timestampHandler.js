@@ -2,7 +2,7 @@
 
 const jsonApi = require('../..')
 
-class TimestampHandler extends jsonApi.ChainHandler {
+class TimestampHandler extends jsonApi.CallbackHandlers.Chain {
   beforeSearch(request, callback) {
     console.log('Before Search 2')
     return callback(null, request)

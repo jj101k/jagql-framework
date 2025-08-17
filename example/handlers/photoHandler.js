@@ -2,5 +2,5 @@
 
 const jsonApi = require('../..')
 
-module.exports = new jsonApi.MemoryHandler()
+module.exports = new jsonApi.CallbackHandlers.Memory()
 module.exports.delete = null

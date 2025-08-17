@@ -5,6 +5,7 @@ import {Schema} from 'joi'
 import {CallbackHandler as CallbackHandler} from './CallbackHandler'
 import { ActionConfig, OurJoiSettings } from "./ourJoi"
 import Relation from "../lib/Relation"
+import { PromiseHandler } from "./PromiseHandler"
 
 export type BaseType = {
   id?: string
@@ -31,7 +32,7 @@ export interface ResourceConfig<Item = any> {
   options?: ResourceConfigOptions,
   description?: string,
   resource: string,
-  handlers: CallbackHandler<Item>
+  handlers: CallbackHandler<Item> | PromiseHandler<Item>
   primaryKey: PrimaryKeyType,
   attributes: ResourceAttributes<Partial<Item>>
   attributeSettings?: Record<string, OurJoiSettings>

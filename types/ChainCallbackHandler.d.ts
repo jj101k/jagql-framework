@@ -1,6 +1,3 @@
-/**
- * @module @jagql/framework/lib/handlers/ChainHandler
- */
 import {
   CallbackHandler,
   CreateFunction, DeleteFunction, FindFunction,
@@ -38,7 +35,7 @@ interface AfterUpdateFunction<R=any> {
 /**
  * [[include:chain-handler.md]]
  */
-declare class ChainHandler<R=any> extends CallbackHandler<R>{
+declare class ChainCallbackHandler<R=any> extends CallbackHandler<R>{
   constructor()
   chain(nextHandler: CallbackHandler<R>): this
   beforeInitialise(...args: any[]): any // TODO
@@ -57,4 +54,4 @@ declare class ChainHandler<R=any> extends CallbackHandler<R>{
   afterDelete: AfterDeleteFunction
 }
 
-export = ChainHandler
+export = ChainCallbackHandler

@@ -2,7 +2,7 @@
 
 const jsonApi = require('../..')
 
-class ChainHandler extends jsonApi.ChainHandler {
+class ChainHandler extends jsonApi.CallbackHandlers.Chain {
   // 1 is used by the example in resources/autoincrement.js
   #i = 2
 
@@ -16,4 +16,4 @@ class ChainHandler extends jsonApi.ChainHandler {
 
 const chainHandler = new ChainHandler()
 
-module.exports = chainHandler.chain(new jsonApi.MemoryHandler())
+module.exports = chainHandler.chain(new jsonApi.CallbackHandlers.Memory())

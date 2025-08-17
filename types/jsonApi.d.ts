@@ -10,14 +10,16 @@ import { Metrics } from './metrics'
 import * as RC from './ResourceConfig'
 import { ResourceConfig } from './ResourceConfig'
 import OurJoi = require('./ourJoi')
-import ChainHandlerType = require('./ChainHandler')
-import MemoryHandlerType = require('./MemoryHandler')
+import ChainCallbackHandlerType = require('./ChainCallbackHandler')
+import MemoryHandlerType = require('./MemoryCallbackHandler')
 
 export import ResourceConfig = RC.ResourceConfig
 
 type JsonApiProtocols = 'http' | 'https'
 export import CallbackHandler = H.CallbackHandler
 export import BaseType = RC.BaseType
+import ChainPromiseHandler from "../lib/handlers/ChainPromiseHandler"
+import MemoryPromiseHandler from "./MemoryPromiseHandler"
 
 interface ApiConfig {
   graphiql?: boolean
@@ -79,7 +81,21 @@ export function authenticate(authenticator: (req: Request, cb: () => void) => vo
  */
 export const metrics: Metrics
 export function getExpressServer(): Application
-export const ChainHandler: typeof ChainHandlerType
+/**
+ * @deprecated use CallbackHandlers.Chain
+ */
+export const ChainHandler: typeof ChainCallbackHandlerType
+export const CallbackHandlers: {
+  Chain: typeof ChainCallbackHandlerType
+  Memory: typeof MemoryHandlerType
+}
+export const PromiseHandlers: {
+  Chain: typeof ChainPromiseHandler
+  Memory: typeof MemoryPromiseHandler
+}
+/**
+ * @deprecated use CallbackHandlers.Memory
+ */
 export const MemoryHandler: typeof MemoryHandlerType
 export function onUncaughtException(err: Error): void
 export function start(callback: Function): void

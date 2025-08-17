@@ -3,7 +3,8 @@ import { JsonApiRequest } from "./JsonApiRequest"
 /**
  *
  */
-export interface PromiseHandler<R = any> {
+export class PromiseHandler<R = any> {
+  readonly jagqlVersion: 1
   create(request: JsonApiRequest, newResource: R): Promise<R>
   delete(request: JsonApiRequest): Promise<void>
   find(request: JsonApiRequest): Promise<R>
