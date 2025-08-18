@@ -143,21 +143,6 @@ testHelpers.validatePhoto = resource => {
   assert.strictEqual(resource.relationships.articles.meta.relation, 'foreign', 'An photos articles are a foreign relation')
 }
 
-testHelpers.request = (params, callback) => {
-  return request(params, (err, res, json) => {
-    try {
-      swaggerValidator.assert(params, res.statusCode, json)
-    } catch (e) {
-      console.warn("Swagger validation error triggered", e)
-      return callback(err ?? e, res, json)
-    }
-    if(err) {
-      console.warn("Internal error running fetch", err)
-    }
-    return callback(err, res, json)
-  })
-}
-
 /**
  *
  * @param {*} params
