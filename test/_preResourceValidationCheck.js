@@ -13,17 +13,15 @@ describe('Testing jsonapi-server (pre)', () => {
   ]
   for(const resource of resources) {
     describe(`Searching for ${resource.name}`, () => {
-      it(`should find ${resource.count}`, done => {
+      it(`should find ${resource.count}`, async () => {
         const url = `http://localhost:16999/rest/${resource.name}`
-        helpers.request({
+        const {err, json} = await helpers.requestAsync({
           method: 'GET',
           url
-        }, (err, res, json) => {
-          assert.strictEqual(err, null)
-          json = helpers.validateJson(json)
-          assert.strictEqual(json.data.length, resource.count, `Expected ${resource.count} resources`)
-          done()
-        }).catch(done)
+        })
+        assert.strictEqual(err, null)
+        const data = helpers.validateJson(json)
+        assert.strictEqual(data.data.length, resource.count, `Expected ${resource.count} resources`)
       })
     })
   }

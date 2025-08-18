@@ -1,6 +1,5 @@
 'use strict'
 
-const request = require('./request')
 const assert = require('assert')
 
 const helpers = require('./helpers.js')
@@ -11,7 +10,7 @@ describe('Testing jsonapi-server', () => {
     describe('creates a resource', () => {
       let id = 'e4a1a34f-151b-41ca-a0d9-21726068ba8b'
 
-      it('works', done => {
+      it('works', async () => {
         const data = {
           method: 'post',
           url: 'http://localhost:16999/rest/people',
@@ -30,49 +29,40 @@ describe('Testing jsonapi-server', () => {
             }
           })
         }
-        helpers.request(data, (err, res, json) => {
-          assert.strictEqual(err, null)
-          json = helpers.validateJson(json)
+        const {err, res, json} = await helpers.requestAsync(data)
+        assert.strictEqual(err, null)
+        const responseBody = helpers.validateJson(json)
 
-          assert.strictEqual(json.data.id, id)
-          assert.strictEqual(res.headers.location, `http://localhost:16999/rest/people/${json.data.id}`)
-          assert.strictEqual(res.statusCode, 201, 'Expecting 201')
-          assert.strictEqual(json.data.type, 'people', 'Should be a people resource')
-
-          done()
-        }).catch(done)
+        assert.strictEqual(responseBody.data.id, id)
+        assert.strictEqual(res.headers.location, `http://localhost:16999/rest/people/${responseBody.data.id}`)
+        assert.strictEqual(res.statusCode, 201, 'Expecting 201')
+        assert.strictEqual(responseBody.data.type, 'people', 'Should be a people resource')
       })
 
-      it('new resource is retrievable', done => {
+      it('new resource is retrievable', async () => {
         const url = `http://localhost:16999/rest/people/${id}`
-        helpers.request({
+        const {err, res, json} = await helpers.requestAsync({
           method: 'GET',
           url
-        }, (err, res, json) => {
-          assert.strictEqual(err, null)
-          json = helpers.validateJson(json)
+        })
+        assert.strictEqual(err, null)
+        const data = helpers.validateJson(json)
 
-          assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
-          assert.strictEqual(json.included.length, 0, 'Should be no included resources')
-
-          done()
-        }).catch(done)
+        assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
+        assert.strictEqual(data.included.length, 0, 'Should be no included resources')
       })
 
-      it('deletes the resource', done => {
+      it('deletes the resource', async () => {
         const data = {
           method: 'delete',
           url: 'http://localhost:16999/rest/people/' + id
         }
-        request(data, (err, res, json) => {
-          assert.strictEqual(err, null)
-          json = JSON.parse(json)
-          const keys = Object.keys(json)
-          assert.deepEqual(keys, [ 'meta' ], 'Should only have a meta block')
-          assert.strictEqual(res.statusCode, 200, 'Expecting 200')
-
-          done()
-        }).catch(done)
+        const {err, res, json} = await helpers.requestAsyncNoAssert(data)
+        assert.strictEqual(err, null)
+        const responseBody = JSON.parse(json)
+        const keys = Object.keys(responseBody)
+        assert.deepEqual(keys, [ 'meta' ], 'Should only have a meta block')
+        assert.strictEqual(res.statusCode, 200, 'Expecting 200')
       })
     })
   })

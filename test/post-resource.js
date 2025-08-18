@@ -1,27 +1,23 @@
 'use strict'
 
-const request = require('./request')
 const assert = require('assert')
 const helpers = require('./helpers.js')
 const jsonApiTestServer = require('../example/server.js')
 
 describe('Testing jsonapi-server', () => {
   describe('Creating a new resource', () => {
-    it('errors with invalid type', done => {
+    it('errors with invalid type', async () => {
       const data = {
         method: 'post',
         url: 'http://localhost:16999/rest/foobar'
       }
-      helpers.request(data, (err, res, json) => {
-        assert.strictEqual(err, null)
-        helpers.validateError(json)
-        assert.strictEqual(res.statusCode, 404, 'Expecting 404')
-
-        done()
-      }).catch(done)
+      const {err, res, json} = await helpers.requestAsync(data)
+      assert.strictEqual(err, null)
+      helpers.validateError(json)
+      assert.strictEqual(res.statusCode, 404, 'Expecting 404')
     })
 
-    it('errors if resource doesnt validate', done => {
+    it('errors if resource doesnt validate', async () => {
       const data = {
         method: 'post',
         url: 'http://localhost:16999/rest/articles',
@@ -36,17 +32,14 @@ describe('Testing jsonapi-server', () => {
           }
         })
       }
-      request(data, (err, res, json) => {
-        assert.strictEqual(err, null)
-        json = helpers.validateError(json)
-        assert.strictEqual(json.errors[0].detail.length, 2, 'Expecting several validation errors')
-        assert.strictEqual(res.statusCode, 403, 'Expecting 403')
-
-        done()
-      }).catch(done)
+      const {err, res, json} = await helpers.requestAsyncNoAssert(data)
+      assert.strictEqual(err, null)
+      const responseBody = helpers.validateError(json)
+      assert.strictEqual(responseBody.errors[0].detail.length, 2, 'Expecting several validation errors')
+      assert.strictEqual(res.statusCode, 403, 'Expecting 403')
     })
 
-    it('errors if content-type specifies a media type parameter', done => {
+    it('errors if content-type specifies a media type parameter', async () => {
       const data = {
         method: 'post',
         url: 'http://localhost:16999/rest/photos',
@@ -57,15 +50,12 @@ describe('Testing jsonapi-server', () => {
           'data': { }
         })
       }
-      request(data, (err, res) => {
-        assert.strictEqual(err, null)
-        assert.strictEqual(res.statusCode, 415, 'Expecting 415')
-
-        done()
-      }).catch(done)
+      const {err, res} = await helpers.requestAsyncNoAssert(data)
+      assert.strictEqual(err, null)
+      assert.strictEqual(res.statusCode, 415, 'Expecting 415')
     })
 
-    it('errors if accept header doesnt match JSON:APIs type', done => {
+    it('errors if accept header doesnt match JSON:APIs type', async () => {
       const data = {
         method: 'post',
         url: 'http://localhost:16999/rest/photos',
@@ -76,29 +66,23 @@ describe('Testing jsonapi-server', () => {
           'data': { }
         })
       }
-      request(data, (err, res) => {
-        assert.strictEqual(err, null)
-        assert.strictEqual(res.statusCode, 406, 'Expecting 406')
-
-        done()
-      }).catch(done)
+      const {err, res} = await helpers.requestAsyncNoAssert(data)
+      assert.strictEqual(err, null)
+      assert.strictEqual(res.statusCode, 406, 'Expecting 406')
     })
 
-    it('errors if no body is detected', done => {
+    it('errors if no body is detected', async () => {
       const data = {
         method: 'post',
         url: 'http://localhost:16999/rest/photos'
       }
-      request(data, (err, res, json) => {
-        assert.strictEqual(err, null)
-        helpers.validateError(json)
-        assert.strictEqual(res.statusCode, 403, 'Expecting 403')
-
-        done()
-      }).catch(done)
+      const {err, res, json} = await helpers.requestAsyncNoAssert(data)
+      assert.strictEqual(err, null)
+      helpers.validateError(json)
+      assert.strictEqual(res.statusCode, 403, 'Expecting 403')
     })
 
-    it('errors if body.data is not an object', done => {
+    it('errors if body.data is not an object', async () => {
       const data = {
         method: 'post',
         // IMPORTANT: we're using people here because it has no required attributes.
@@ -117,33 +101,31 @@ describe('Testing jsonapi-server', () => {
           'data': 'attributes'
         })
       }
-      request(data, (err, res, json) => {
-        assert.strictEqual(err, null)
-        json = helpers.validateError(json)
-        assert.strictEqual(res.statusCode, 403, 'Expecting 403')
-        // we're checking the deep equal of errors here in case
-        // someone makes a field on people required, or changes
-        // the resource used on this test to a resource that
-        // has a required field.  With this check, this will
-        // continue to work properly even if that happens; however,
-        // ideally, this test should be run against a resource
-        // with NO required fields.
-        assert.deepEqual(json.errors, [
-          {
-            'code': 'EFORBIDDEN',
-            'detail': '"data" must be an object - have you sent the right http headers?',
-            'status': '403',
-            'title': 'Request validation failed'
-          }
-        ])
-        done()
-      }).catch(done)
+      const {err, res, json} = await helpers.requestAsyncNoAssert(data)
+      assert.strictEqual(err, null)
+      const responseBody = helpers.validateError(json)
+      assert.strictEqual(res.statusCode, 403, 'Expecting 403')
+      // we're checking the deep equal of errors here in case
+      // someone makes a field on people required, or changes
+      // the resource used on this test to a resource that
+      // has a required field.  With this check, this will
+      // continue to work properly even if that happens; however,
+      // ideally, this test should be run against a resource
+      // with NO required fields.
+      assert.deepEqual(responseBody.errors, [
+        {
+          'code': 'EFORBIDDEN',
+          'detail': '"data" must be an object - have you sent the right http headers?',
+          'status': '403',
+          'title': 'Request validation failed'
+        }
+      ])
     })
 
     describe('creates a resource', () => {
       let id
 
-      it('works', done => {
+      it('works', async () => {
         const data = {
           method: 'post',
           url: 'http://localhost:16999/rest/photos',
@@ -170,41 +152,35 @@ describe('Testing jsonapi-server', () => {
             }
           })
         }
-        helpers.request(data, (err, res, json) => {
-          assert.strictEqual(err, null)
-          json = helpers.validateJson(json)
+        const {err, res, json} = await helpers.requestAsync(data)
+        assert.strictEqual(err, null)
+        const responseBody = helpers.validateJson(json)
 
-          assert.strictEqual(res.headers.location, `http://localhost:16999/rest/photos/${json.data.id}`)
-          assert.strictEqual(res.statusCode, 201, 'Expecting 201')
-          assert.strictEqual(json.data.type, 'photos', 'Should be a people resource')
-          helpers.validatePhoto(json.data)
-          id = json.data.id
-
-          done()
-        }).catch(done)
+        assert.strictEqual(res.headers.location, `http://localhost:16999/rest/photos/${responseBody.data.id}`)
+        assert.strictEqual(res.statusCode, 201, 'Expecting 201')
+        assert.strictEqual(responseBody.data.type, 'photos', 'Should be a people resource')
+        helpers.validatePhoto(responseBody.data)
+        id = responseBody.data.id
       })
 
-      it('new resource is retrievable', done => {
+      it('new resource is retrievable', async () => {
         const url = `http://localhost:16999/rest/photos/${id}`
-        helpers.request({
+        const {err, res, json} = await helpers.requestAsync({
           method: 'GET',
           url
-        }, (err, res, json) => {
-          assert.strictEqual(err, null)
-          json = helpers.validateJson(json)
+        })
+        assert.strictEqual(err, null)
+        const data = helpers.validateJson(json)
 
-          assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
-          assert.strictEqual(json.included.length, 0, 'Should be no included resources')
-          helpers.validatePhoto(json.data)
-          assert.deepEqual(json.data.meta, { created: '2015-01-01' })
-
-          done()
-        }).catch(done)
+        assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
+        assert.strictEqual(data.included.length, 0, 'Should be no included resources')
+        helpers.validatePhoto(data.data)
+        assert.deepEqual(data.data.meta, { created: '2015-01-01' })
       })
       describe('creates a resource with non-UUID ID', () => {
         let id
 
-        it('works', done => {
+        it('works', async () => {
           const data = {
             method: 'post',
             url: 'http://localhost:16999/rest/autoincrement',
@@ -220,32 +196,27 @@ describe('Testing jsonapi-server', () => {
               }
             })
           }
-          helpers.request(data, (err, res, json) => {
-            assert.strictEqual(err, null)
-            json = helpers.validateJson(json)
+          const {err, res, json} = await helpers.requestAsync(data)
+          assert.strictEqual(err, null)
+          const responseBody = helpers.validateJson(json)
 
-            assert.strictEqual(json.data.id, '2')
-            assert.strictEqual(res.headers.location, `http://localhost:16999/rest/autoincrement/${json.data.id}`)
-            assert.strictEqual(res.statusCode, 201, 'Expecting 201')
-            assert.strictEqual(json.data.type, 'autoincrement', 'Should be a autoincrement resource')
-            id = json.data.id
-
-            done()
-          }).catch(done)
+          assert.strictEqual(responseBody.data.id, '2')
+          assert.strictEqual(res.headers.location, `http://localhost:16999/rest/autoincrement/${responseBody.data.id}`)
+          assert.strictEqual(res.statusCode, 201, 'Expecting 201')
+          assert.strictEqual(responseBody.data.type, 'autoincrement', 'Should be a autoincrement resource')
+          id = responseBody.data.id
         })
 
-        it('new resource is retrievable', done => {
+        it('new resource is retrievable', async () => {
           const url = `http://localhost:16999/rest/autoincrement/${id}`
-          helpers.request({
+          const {err, res, json} = await helpers.requestAsync({
             method: 'GET',
             url
-          }, (err, res, json) => {
-            assert.strictEqual(err, null)
-            json = helpers.validateJson(json)
-            assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
-            assert.strictEqual(json.included.length, 0, 'Should be no included resources')
-            done()
-          }).catch(done)
+          })
+          assert.strictEqual(err, null)
+          const data = helpers.validateJson(json)
+          assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
+          assert.strictEqual(data.included.length, 0, 'Should be no included resources')
         })
       })
     })

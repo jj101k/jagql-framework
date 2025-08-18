@@ -1,28 +1,24 @@
 'use strict'
 
 const assert = require('assert')
-const request = require('./request')
 const helpers = require('./helpers.js')
 const jsonApiTestServer = require('../example/server.js')
 
 describe('Testing jsonapi-server', () => {
   describe('Updating a resource', () => {
     context('with invalid urls', () => {
-      it('errors with invalid type', done => {
+      it('errors with invalid type', async () => {
         const data = {
           method: 'patch',
           url: 'http://localhost:16999/rest/foobar/someId'
         }
-        helpers.request(data, (err, res, json) => {
-          assert.strictEqual(err, null)
-          helpers.validateError(json)
-          assert.strictEqual(res.statusCode, 404, 'Expecting 404')
-
-          done()
-        }).catch(done)
+        const {err, res, json} = await helpers.requestAsync(data)
+        assert.strictEqual(err, null)
+        helpers.validateError(json)
+        assert.strictEqual(res.statusCode, 404, 'Expecting 404')
       })
 
-      it('errors with invalid id', done => {
+      it('errors with invalid id', async () => {
         const data = {
           method: 'patch',
           url: 'http://localhost:16999/rest/comments/foobar',
@@ -35,18 +31,15 @@ describe('Testing jsonapi-server', () => {
             }
           })
         }
-        request(data, (err, res, json) => {
-          assert.strictEqual(err, null)
-          helpers.validateError(json)
-          assert.strictEqual(res.statusCode, 404, 'Expecting 404')
-
-          done()
-        }).catch(done)
+        const {err, res, json} = await helpers.requestAsyncNoAssert(data)
+        assert.strictEqual(err, null)
+        helpers.validateError(json)
+        assert.strictEqual(res.statusCode, 404, 'Expecting 404')
       })
     })
 
     context('with invalid payloads', () => {
-      it('errors with invalid attributes', done => {
+      it('errors with invalid attributes', async () => {
         const data = {
           method: 'patch',
           url: 'http://localhost:16999/rest/comments/3f1a89c2-eb85-4799-a048-6735db24b7eb',
@@ -61,16 +54,13 @@ describe('Testing jsonapi-server', () => {
             }
           })
         }
-        request(data, (err, res, json) => {
-          assert.strictEqual(err, null)
-          helpers.validateError(json)
-          assert.strictEqual(res.statusCode, 403, 'Expecting 403')
-
-          done()
-        }).catch(done)
+        const {err, res, json} = await helpers.requestAsyncNoAssert(data)
+        assert.strictEqual(err, null)
+        helpers.validateError(json)
+        assert.strictEqual(res.statusCode, 403, 'Expecting 403')
       })
 
-      it('errors with invalid one relations', done => {
+      it('errors with invalid one relations', async () => {
         const data = {
           method: 'patch',
           url: 'http://localhost:16999/rest/articles/d850ea75-4427-4f81-8595-039990aeede5',
@@ -87,16 +77,13 @@ describe('Testing jsonapi-server', () => {
             }
           })
         }
-        request(data, (err, res, json) => {
-          assert.strictEqual(err, null)
-          helpers.validateError(json)
-          assert.strictEqual(res.statusCode, 403, 'Expecting 403')
-
-          done()
-        }).catch(done)
+        const {err, res, json} = await helpers.requestAsyncNoAssert(data)
+        assert.strictEqual(err, null)
+        helpers.validateError(json)
+        assert.strictEqual(res.statusCode, 403, 'Expecting 403')
       })
 
-      it('errors with invalid many relations 1', done => {
+      it('errors with invalid many relations 1', async () => {
         const data = {
           method: 'patch',
           url: 'http://localhost:16999/rest/articles/d850ea75-4427-4f81-8595-039990aeede5',
@@ -113,16 +100,13 @@ describe('Testing jsonapi-server', () => {
             }
           })
         }
-        helpers.request(data, (err, res, json) => {
-          assert.strictEqual(err, null)
-          helpers.validateError(json)
-          assert.strictEqual(res.statusCode, 403, 'Expecting 403')
-
-          done()
-        }).catch(done)
+        const {err, res, json} = await helpers.requestAsync(data)
+        assert.strictEqual(err, null)
+        helpers.validateError(json)
+        assert.strictEqual(res.statusCode, 403, 'Expecting 403')
       })
 
-      it('errors with invalid many relations 2', done => {
+      it('errors with invalid many relations 2', async () => {
         const data = {
           method: 'patch',
           url: 'http://localhost:16999/rest/articles/d850ea75-4427-4f81-8595-039990aeede5',
@@ -139,17 +123,14 @@ describe('Testing jsonapi-server', () => {
             }
           })
         }
-        helpers.request(data, (err, res, json) => {
-          assert.strictEqual(err, null)
-          helpers.validateError(json)
-          assert.strictEqual(res.statusCode, 403, 'Expecting 403')
-
-          done()
-        }).catch(done)
+        const {err, res, json} = await helpers.requestAsync(data)
+        assert.strictEqual(err, null)
+        helpers.validateError(json)
+        assert.strictEqual(res.statusCode, 403, 'Expecting 403')
       })
     })
 
-    it('only validates named attributes', done => {
+    it('only validates named attributes', async () => {
       const data = {
         method: 'patch',
         url: 'http://localhost:16999/rest/articles/d850ea75-4427-4f81-8595-039990aeede5',
@@ -165,18 +146,15 @@ describe('Testing jsonapi-server', () => {
           }
         })
       }
-      request(data, (err, res, json) => {
-        assert.strictEqual(err, null)
-        helpers.validateJson(json)
+      const {err, res, json} = await helpers.requestAsyncNoAssert(data)
+      assert.strictEqual(err, null)
+      helpers.validateJson(json)
 
-        assert.strictEqual(res.statusCode, 200, 'Expecting 200')
-
-        done()
-      }).catch(done)
+      assert.strictEqual(res.statusCode, 200, 'Expecting 200')
     })
 
     describe('updating a comment', () => {
-      it('updates the resource', done => {
+      it('updates the resource', async () => {
         const data = {
           method: 'patch',
           url: 'http://localhost:16999/rest/comments/3f1a89c2-eb85-4799-a048-6735db24b7eb',
@@ -199,76 +177,70 @@ describe('Testing jsonapi-server', () => {
             }
           })
         }
-        request(data, (err, res, json) => {
-          assert.strictEqual(err, null)
-          helpers.validateJson(json)
+        const {err, res, json} = await helpers.requestAsyncNoAssert(data)
+        assert.strictEqual(err, null)
+        helpers.validateJson(json)
 
-          assert.strictEqual(res.statusCode, 200, 'Expecting 200')
-
-          done()
-        }).catch(done)
+        assert.strictEqual(res.statusCode, 200, 'Expecting 200')
       })
 
-      it('new resource has changed', done => {
+      it('new resource has changed', async () => {
         const url = 'http://localhost:16999/rest/comments/3f1a89c2-eb85-4799-a048-6735db24b7eb'
-        helpers.request({
+        const {err, res, json} = await helpers.requestAsync({
           method: 'GET',
           url
-        }, (err, res, json) => {
-          assert.strictEqual(err, null)
-          json = helpers.validateJson(json)
+        })
+        assert.strictEqual(err, null)
+        const data = helpers.validateJson(json)
 
-          assert.strictEqual(res.statusCode, 200, 'Expecting 200')
+        assert.strictEqual(res.statusCode, 200, 'Expecting 200')
 
-          assert.deepEqual(json.data, {
-            'type': 'comments',
-            'id': '3f1a89c2-eb85-4799-a048-6735db24b7eb',
-            'attributes': {
-              'body': 'I like XML better',
-              'timestamp': '2017-06-29'
-            },
-            'links': {
-              'self': 'http://localhost:16999/rest/comments/3f1a89c2-eb85-4799-a048-6735db24b7eb'
-            },
-            'relationships': {
-              'author': {
-                'meta': {
-                  'relation': 'primary',
-                  'readOnly': false
-                },
-                'links': {
-                  'self': 'http://localhost:16999/rest/comments/3f1a89c2-eb85-4799-a048-6735db24b7eb/relationships/author',
-                  'related': 'http://localhost:16999/rest/comments/3f1a89c2-eb85-4799-a048-6735db24b7eb/author'
-                },
-                'data': {
-                  'type': 'people',
-                  'id': 'd850ea75-4427-4f81-8595-039990aeede5'
-                }
+        assert.deepEqual(data.data, {
+          'type': 'comments',
+          'id': '3f1a89c2-eb85-4799-a048-6735db24b7eb',
+          'attributes': {
+            'body': 'I like XML better',
+            'timestamp': '2017-06-29'
+          },
+          'links': {
+            'self': 'http://localhost:16999/rest/comments/3f1a89c2-eb85-4799-a048-6735db24b7eb'
+          },
+          'relationships': {
+            'author': {
+              'meta': {
+                'relation': 'primary',
+                'readOnly': false
               },
-              'article': {
-                'meta': {
-                  'relation': 'foreign',
-                  'belongsTo': 'articles',
-                  'as': 'comments',
-                  'readOnly': true,
-                  'many': false
-                },
-                'links': {
-                  'self': 'http://localhost:16999/rest/articles/relationships/?comments=3f1a89c2-eb85-4799-a048-6735db24b7eb',
-                  'related': 'http://localhost:16999/rest/articles/?filter[comments]=3f1a89c2-eb85-4799-a048-6735db24b7eb'
-                }
+              'links': {
+                'self': 'http://localhost:16999/rest/comments/3f1a89c2-eb85-4799-a048-6735db24b7eb/relationships/author',
+                'related': 'http://localhost:16999/rest/comments/3f1a89c2-eb85-4799-a048-6735db24b7eb/author'
+              },
+              'data': {
+                'type': 'people',
+                'id': 'd850ea75-4427-4f81-8595-039990aeede5'
               }
             },
-            'meta': {
-              'created': '2013-01-01'
+            'article': {
+              'meta': {
+                'relation': 'foreign',
+                'belongsTo': 'articles',
+                'as': 'comments',
+                'readOnly': true,
+                'many': false
+              },
+              'links': {
+                'self': 'http://localhost:16999/rest/articles/relationships/?comments=3f1a89c2-eb85-4799-a048-6735db24b7eb',
+                'related': 'http://localhost:16999/rest/articles/?filter[comments]=3f1a89c2-eb85-4799-a048-6735db24b7eb'
+              }
             }
-          })
-
-          done()
-        }).catch(done)
+          },
+          'meta': {
+            'created': '2013-01-01'
+          }
+        })
       })
 
-      it('deletes a relationship', done => {
+      it('deletes a relationship', async () => {
         const data = {
           method: 'patch',
           url: 'http://localhost:16999/rest/comments/3f1a89c2-eb85-4799-a048-6735db24b7eb',
@@ -291,70 +263,64 @@ describe('Testing jsonapi-server', () => {
             }
           })
         }
-        request(data, (err, res, json) => {
-          assert.strictEqual(err, null)
-          helpers.validateJson(json)
+        const {err, res, json} = await helpers.requestAsyncNoAssert(data)
+        assert.strictEqual(err, null)
+        helpers.validateJson(json)
 
-          assert.strictEqual(res.statusCode, 200, 'Expecting 200')
-
-          done()
-        }).catch(done)
+        assert.strictEqual(res.statusCode, 200, 'Expecting 200')
       })
 
-      it('new resource has changed', done => {
+      it('new resource has changed', async () => {
         const url = 'http://localhost:16999/rest/comments/3f1a89c2-eb85-4799-a048-6735db24b7eb'
-        helpers.request({
+        const {err, res, json} = await helpers.requestAsync({
           method: 'GET',
           url
-        }, (err, res, json) => {
-          assert.strictEqual(err, null)
-          json = helpers.validateJson(json)
+        })
+        assert.strictEqual(err, null)
+        const data = helpers.validateJson(json)
 
-          assert.strictEqual(res.statusCode, 200, 'Expecting 200')
+        assert.strictEqual(res.statusCode, 200, 'Expecting 200')
 
-          assert.deepEqual(json.data, {
-            'type': 'comments',
-            'id': '3f1a89c2-eb85-4799-a048-6735db24b7eb',
-            'attributes': {
-              'body': 'I like XML better',
-              'timestamp': '2017-06-29'
-            },
-            'links': {
-              'self': 'http://localhost:16999/rest/comments/3f1a89c2-eb85-4799-a048-6735db24b7eb'
-            },
-            'relationships': {
-              'author': {
-                'meta': {
-                  'relation': 'primary',
-                  'readOnly': false
-                },
-                'links': {
-                  'self': 'http://localhost:16999/rest/comments/3f1a89c2-eb85-4799-a048-6735db24b7eb/relationships/author',
-                  'related': 'http://localhost:16999/rest/comments/3f1a89c2-eb85-4799-a048-6735db24b7eb/author'
-                },
-                'data': null
+        assert.deepEqual(data.data, {
+          'type': 'comments',
+          'id': '3f1a89c2-eb85-4799-a048-6735db24b7eb',
+          'attributes': {
+            'body': 'I like XML better',
+            'timestamp': '2017-06-29'
+          },
+          'links': {
+            'self': 'http://localhost:16999/rest/comments/3f1a89c2-eb85-4799-a048-6735db24b7eb'
+          },
+          'relationships': {
+            'author': {
+              'meta': {
+                'relation': 'primary',
+                'readOnly': false
               },
-              'article': {
-                'meta': {
-                  'relation': 'foreign',
-                  'belongsTo': 'articles',
-                  'as': 'comments',
-                  'readOnly': true,
-                  'many': false
-                },
-                'links': {
-                  'self': 'http://localhost:16999/rest/articles/relationships/?comments=3f1a89c2-eb85-4799-a048-6735db24b7eb',
-                  'related': 'http://localhost:16999/rest/articles/?filter[comments]=3f1a89c2-eb85-4799-a048-6735db24b7eb'
-                }
-              }
+              'links': {
+                'self': 'http://localhost:16999/rest/comments/3f1a89c2-eb85-4799-a048-6735db24b7eb/relationships/author',
+                'related': 'http://localhost:16999/rest/comments/3f1a89c2-eb85-4799-a048-6735db24b7eb/author'
+              },
+              'data': null
             },
-            'meta': {
-              'created': '2013-01-01'
+            'article': {
+              'meta': {
+                'relation': 'foreign',
+                'belongsTo': 'articles',
+                'as': 'comments',
+                'readOnly': true,
+                'many': false
+              },
+              'links': {
+                'self': 'http://localhost:16999/rest/articles/relationships/?comments=3f1a89c2-eb85-4799-a048-6735db24b7eb',
+                'related': 'http://localhost:16999/rest/articles/?filter[comments]=3f1a89c2-eb85-4799-a048-6735db24b7eb'
+              }
             }
-          })
-
-          done()
-        }).catch(done)
+          },
+          'meta': {
+            'created': '2013-01-01'
+          }
+        })
       })
     })
   })

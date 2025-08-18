@@ -2,22 +2,19 @@
 
 const assert = require('assert')
 const helpers = require('./helpers.js')
-const request = require('./request')
 const jsonApiTestServer = require('../example/server.js')
 
 describe('Testing jsonapi-server', () => {
   describe('Finding a specific resource', () => {
-    it('unknown id should error', done => {
+    it('unknown id should error', async () => {
       const url = 'http://localhost:16999/rest/articles/foobar'
-      helpers.request({
+      const {err, res, json} = await helpers.requestAsync({
         method: 'GET',
         url
-      }, (err, res, json) => {
-        assert.strictEqual(err, null)
-        helpers.validateError(json)
-        assert.strictEqual(res.statusCode, 404, 'Expecting 404')
-        done()
-      }).catch(done)
+      })
+      assert.strictEqual(err, null)
+      helpers.validateError(json)
+      assert.strictEqual(res.statusCode, 404, 'Expecting 404')
     })
 
     it("should produce an error for a broken response", async () => {
@@ -35,108 +32,91 @@ describe('Testing jsonapi-server', () => {
       assert.strictEqual(errors[0].detail.error, `"boolean" must be a boolean`)
     })
 
-    it('valid lookup', done => {
+    it('valid lookup', async () => {
       const url = 'http://localhost:16999/rest/articles/de305d54-75b4-431b-adb2-eb6b9e546014'
-      helpers.request({
+      const {err, res, json} = await helpers.requestAsync({
         method: 'GET',
         url
-      }, (err, res, json) => {
-        assert.strictEqual(err, null)
-        json = helpers.validateJson(json)
+      })
+      assert.strictEqual(err, null)
+      const data = helpers.validateJson(json)
 
-        assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
-        assert.strictEqual(json.included.length, 0, 'Should be no included resources')
-        helpers.validateResource(json.data)
-
-        done()
-      }).catch(done)
+      assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
+      assert.strictEqual(data.included.length, 0, 'Should be no included resources')
+      helpers.validateResource(data.data)
     })
 
-    it('with fields', done => {
+    it('with fields', async () => {
       const url = 'http://localhost:16999/rest/articles/de305d54-75b4-431b-adb2-eb6b9e546014?fields[articles]=title'
-      request({
+      const {err, res, json} = await helpers.requestAsyncNoAssert({
         method: 'GET',
         url
-      }, (err, res, json) => {
-        assert.strictEqual(err, null)
-        json = helpers.validateJson(json)
+      })
+      assert.strictEqual(err, null)
+      const data = helpers.validateJson(json)
 
-        assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
-        helpers.validateResource(json.data)
-        const keys = Object.keys(json.data.attributes)
-        assert.deepEqual(keys, [ 'title' ], 'Should only contain title attribute')
-
-        done()
-      }).catch(done)
+      assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
+      helpers.validateResource(data.data)
+      const keys = Object.keys(data.data.attributes)
+      assert.deepEqual(keys, [ 'title' ], 'Should only contain title attribute')
     })
 
-    it('with filter', done => {
+    it('with filter', async () => {
       const url = 'http://localhost:16999/rest/articles/de305d54-75b4-431b-adb2-eb6b9e546014?filter[title]=title'
-      helpers.request({
+      const {err, res, json} = await helpers.requestAsync({
         method: 'GET',
         url
-      }, (err, res, json) => {
-        assert.strictEqual(err, null)
-        json = helpers.validateError(json)
+      })
+      assert.strictEqual(err, null)
+      helpers.validateError(json)
 
-        assert.strictEqual(res.statusCode, 404, 'Expecting 404 NOT FOUND')
-        // assert.deepEqual(json.data, null)
-
-        done()
-      }).catch(done)
+      assert.strictEqual(res.statusCode, 404, 'Expecting 404 NOT FOUND')
     })
 
     describe('with includes', () => {
-      it('basic include', done => {
+      it('basic include', async () => {
         const url = 'http://localhost:16999/rest/articles/de305d54-75b4-431b-adb2-eb6b9e546014?include=author'
-        helpers.request({
+        const {err, res, json} = await helpers.requestAsync({
           method: 'GET',
           url
-        }, (err, res, json) => {
-          assert.strictEqual(err, null)
-          json = helpers.validateJson(json)
+        })
+        assert.strictEqual(err, null)
+        const data = helpers.validateJson(json)
 
-          assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
-          assert.strictEqual(json.included.length, 1, 'Should be 1 included resource')
+        assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
+        assert.strictEqual(data.included.length, 1, 'Should be 1 included resource')
 
-          const people = json.included.filter(resource => resource.type === 'people')
-          assert.strictEqual(people.length, 1, 'Should be 1 included people resource')
-
-          done()
-        }).catch(done)
+        const people = data.included.filter(resource => resource.type === 'people')
+        assert.strictEqual(people.length, 1, 'Should be 1 included people resource')
       })
 
-      it('including over a null relation', done => {
+      it('including over a null relation', async () => {
         const url = 'http://localhost:16999/rest/tags/8d196606-134c-4504-a93a-0d372f78d6c5?include=parent'
-        helpers.request({
+        const {err, res, json} = await helpers.requestAsync({
           method: 'GET',
           url
-        }, (err, res, json) => {
-          assert.strictEqual(err, null)
-          json = helpers.validateJson(json)
+        })
+        assert.strictEqual(err, null)
+        const data = helpers.validateJson(json)
 
-          assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
-          assert.strictEqual(json.included.length, 0, 'Should be 0 included resources')
-          done()
-        }).catch(done)
+        assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
+        assert.strictEqual(data.included.length, 0, 'Should be 0 included resources')
       })
     })
 
     describe('with recursive includes', () => {
-      it('works with a manually expanded string', done => {
+      it('works with a manually expanded string', async () => {
         const url = 'http://localhost:16999/rest/tags/7541a4de-4986-4597-81b9-cf31b6762486?include=parent.parent.parent.parent.articles'
-        helpers.request({
+        const {err, res, json} = await helpers.requestAsync({
           method: 'GET',
           url
-        }, (err, res, json) => {
-          assert.strictEqual(err, null)
-          json = helpers.validateJson(json)
+        })
+        assert.strictEqual(err, null)
+        const data = helpers.validateJson(json)
 
-          assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
-          assert.strictEqual(json.included.length, 5, 'Should be 5 included resources')
-          assert.strictEqual(json.included[4].type, 'articles', 'Last include should be an article')
-          done()
-        }).catch(done)
+        assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
+        assert.strictEqual(data.included.length, 5, 'Should be 5 included resources')
+        assert.strictEqual(data.included[4].type, 'articles', 'Last include should be an article')
       })
     })
   })

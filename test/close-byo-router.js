@@ -13,20 +13,19 @@ describe('Testing jsonapi-server with bring-your-own router', () => {
   let exitCode
   let exitSignal
 
-  it('"exit" event, no "error" event', (done) => {
-    setTimeout(() => {
+  it('"exit" event, no "error" event', () => new Promise(resolve => setTimeout(() => {
       assert.strictEqual(isExitEmitted, true)
       assert.strictEqual(isErrorEmitted, false)
-      done()
+      resolve()
     }, 1000)
-  })
+  ))
 
   it('exit code is 0 (success)', () => {
     assert.strictEqual(exitCode, 0)
     assert.strictEqual(exitSignal, null)
   })
 
-  before((done) => {
+  before(() => {
     child = null
     isErrorEmitted = false
     isExitEmitted = false
@@ -34,12 +33,12 @@ describe('Testing jsonapi-server with bring-your-own router', () => {
 
     child = childProcess.fork(serverPath, [], { stdio: 'inherit' })
     child.on('error', () => { isErrorEmitted = true })
-    child.on('exit', (code, signal) => {
+    return new Promise(resolve => child.on('exit', (code, signal) => {
       exitCode = code
       exitSignal = signal
       isExitEmitted = true
-      done()
-    })
+      resolve()
+    }))
   })
 
   after(() => {

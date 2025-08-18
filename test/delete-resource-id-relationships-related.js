@@ -6,21 +6,18 @@ const jsonApiTestServer = require('../example/server.js')
 
 describe('Testing jsonapi-server', () => {
   describe('Removing from a relation', () => {
-    it('errors with invalid type', done => {
+    it('errors with invalid type', async () => {
       const data = {
         method: 'delete',
         url: 'http://localhost:16999/rest/foobar/someId/relationships/author'
       }
-      helpers.request(data, (err, res, json) => {
-        assert.strictEqual(err, null)
-        helpers.validateError(json)
-        assert.strictEqual(res.statusCode, 404, 'Expecting 404')
-
-        done()
-      }).catch(done)
+      const {err, res, json} = await helpers.requestAsync(data)
+      assert.strictEqual(err, null)
+      helpers.validateError(json)
+      assert.strictEqual(res.statusCode, 404, 'Expecting 404')
     })
 
-    it('errors with invalid id', done => {
+    it('errors with invalid id', async () => {
       const data = {
         method: 'delete',
         url: 'http://localhost:16999/rest/articles/foobar/relationships/photos',
@@ -31,16 +28,13 @@ describe('Testing jsonapi-server', () => {
           'data': { 'type': 'people', 'id': 'fa2a073f-8c64-4cbb-9158-b8f67a4ab9f5' }
         })
       }
-      helpers.request(data, (err, res, json) => {
-        assert.strictEqual(err, null)
-        helpers.validateError(json)
-        assert.strictEqual(res.statusCode, 404, 'Expecting 404')
-
-        done()
-      }).catch(done)
+      const {err, res, json} = await helpers.requestAsync(data)
+      assert.strictEqual(err, null)
+      helpers.validateError(json)
+      assert.strictEqual(res.statusCode, 404, 'Expecting 404')
     })
 
-    it('errors with unknown key', done => {
+    it('errors with unknown key', async () => {
       const data = {
         method: 'delete',
         url: 'http://localhost:16999/rest/articles/fa2a073f-8c64-4cbb-9158-b8f67a4ab9f5/relationships/tags',
@@ -51,16 +45,13 @@ describe('Testing jsonapi-server', () => {
           'data': { 'type': 'tags', 'id': 'foobar' }
         })
       }
-      helpers.request(data, (err, res, json) => {
-        assert.strictEqual(err, null)
-        helpers.validateError(json)
-        assert.strictEqual(res.statusCode, 403, 'Expecting 403')
-
-        done()
-      }).catch(done)
+      const {err, res, json} = await helpers.requestAsync(data)
+      assert.strictEqual(err, null)
+      helpers.validateError(json)
+      assert.strictEqual(res.statusCode, 403, 'Expecting 403')
     })
 
-    it('errors with invalid type', done => {
+    it('errors with invalid type', async () => {
       const data = {
         method: 'delete',
         url: 'http://localhost:16999/rest/articles/fa2a073f-8c64-4cbb-9158-b8f67a4ab9f5/relationships/tags',
@@ -71,17 +62,14 @@ describe('Testing jsonapi-server', () => {
           'data': { 'type': 'people', 'id': '7541a4de-4986-4597-81b9-cf31b6762486' }
         })
       }
-      helpers.request(data, (err, res, json) => {
-        assert.strictEqual(err, null)
-        helpers.validateError(json)
-        assert.strictEqual(res.statusCode, 403, 'Expecting 403')
-
-        done()
-      }).catch(done)
+      const {err, res, json} = await helpers.requestAsync(data)
+      assert.strictEqual(err, null)
+      helpers.validateError(json)
+      assert.strictEqual(res.statusCode, 403, 'Expecting 403')
     })
 
     describe('deleting', () => {
-      it('deletes the resource on many() (tags)', done => {
+      it('deletes the resource on many() (tags)', async () => {
         const data = {
           method: 'delete',
           url: 'http://localhost:16999/rest/articles/fa2a073f-8c64-4cbb-9158-b8f67a4ab9f5/relationships/tags',
@@ -92,41 +80,35 @@ describe('Testing jsonapi-server', () => {
             'data': { 'type': 'tags', 'id': '7541a4de-4986-4597-81b9-cf31b6762486' }
           })
         }
-        helpers.request(data, (err, res, json) => {
-          assert.strictEqual(err, null)
-          helpers.validateJson(json)
+        const {err, res, json} = await helpers.requestAsync(data)
+        assert.strictEqual(err, null)
+        helpers.validateJson(json)
 
-          assert.strictEqual(res.statusCode, 200, 'Expecting 200')
-
-          done()
-        }).catch(done)
+        assert.strictEqual(res.statusCode, 200, 'Expecting 200')
       })
 
-      it('new resource has changed', done => {
+      it('new resource has changed', async () => {
         const url = 'http://localhost:16999/rest/articles/fa2a073f-8c64-4cbb-9158-b8f67a4ab9f5/relationships/tags'
-        helpers.request({
+        const {err, res, json} = await helpers.requestAsync({
           method: 'GET',
           url
-        }, (err, res, json) => {
-          assert.strictEqual(err, null)
-          json = helpers.validateJson(json)
+        })
+        assert.strictEqual(err, null)
+        const data = helpers.validateJson(json)
 
-          assert.strictEqual(res.statusCode, 200, 'Expecting 200')
+        assert.strictEqual(res.statusCode, 200, 'Expecting 200')
 
-          assert.deepEqual(json.data, [
-            {
-              'type': 'tags',
-              'id': '6ec62f6d-9f82-40c5-b4f4-279ed1765492'
-            }
-          ])
-
-          done()
-        }).catch(done)
+        assert.deepEqual(data.data, [
+          {
+            'type': 'tags',
+            'id': '6ec62f6d-9f82-40c5-b4f4-279ed1765492'
+          }
+        ])
       })
     })
 
     describe('deleting', () => {
-      it('deletes the resource on one()', done => {
+      it('deletes the resource on one()', async () => {
         const data = {
           method: 'delete',
           url: 'http://localhost:16999/rest/articles/fa2a073f-8c64-4cbb-9158-b8f67a4ab9f5/relationships/author',
@@ -137,33 +119,27 @@ describe('Testing jsonapi-server', () => {
             'data': { 'type': 'people', 'id': 'ad3aa89e-9c5b-4ac9-a652-6670f9f27587' }
           })
         }
-        helpers.request(data, (err, res, json) => {
-          assert.strictEqual(err, null)
-          helpers.validateJson(json)
+        const {err, res, json} = await helpers.requestAsync(data)
+        assert.strictEqual(err, null)
+        helpers.validateJson(json)
 
-          assert.strictEqual(res.statusCode, 200, 'Expecting 200')
-
-          done()
-        }).catch(done)
+        assert.strictEqual(res.statusCode, 200, 'Expecting 200')
       })
 
-      it('new resource has changed', done => {
+      it('new resource has changed', async () => {
         const url = 'http://localhost:16999/rest/articles/fa2a073f-8c64-4cbb-9158-b8f67a4ab9f5/relationships/author'
-        helpers.request({
+        const {err, res, json} = await helpers.requestAsync({
           method: 'GET',
           url
-        }, (err, res, json) => {
-          assert.strictEqual(err, null)
-          json = helpers.validateJson(json)
+        })
+        assert.strictEqual(err, null)
+        const data = helpers.validateJson(json)
 
-          assert.strictEqual(res.statusCode, 200, 'Expecting 200')
-          assert.deepEqual(json.data, null)
-
-          done()
-        }).catch(done)
+        assert.strictEqual(res.statusCode, 200, 'Expecting 200')
+        assert.deepEqual(data.data, null)
       })
 
-      it('restore relation', done => {
+      it('restore relation', async () => {
         const data = {
           method: 'post',
           url: 'http://localhost:16999/rest/articles/fa2a073f-8c64-4cbb-9158-b8f67a4ab9f5/relationships/author',
@@ -174,14 +150,11 @@ describe('Testing jsonapi-server', () => {
             'data': { 'type': 'people', 'id': 'ad3aa89e-9c5b-4ac9-a652-6670f9f27587' }
           })
         }
-        helpers.request(data, (err, res, json) => {
-          assert.strictEqual(err, null)
-          helpers.validateJson(json)
+        const {err, res, json} = await helpers.requestAsync(data)
+        assert.strictEqual(err, null)
+        helpers.validateJson(json)
 
-          assert.strictEqual(res.statusCode, 201, 'Expecting 201')
-
-          done()
-        }).catch(done)
+        assert.strictEqual(res.statusCode, 201, 'Expecting 201')
       })
     })
   })

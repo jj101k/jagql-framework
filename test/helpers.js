@@ -5,21 +5,26 @@ const testHelpers = module.exports = { }
 const assert = require('assert')
 const request = require('./request')
 const swaggerValidator = require('./swaggerValidator.js')
-const fs = require('fs')
-const path = require('path')
 
+/**
+ *
+ * @param {*} json
+ * @throws
+ * @returns
+ */
 testHelpers.validateError = json => {
+  let data
   try {
-    json = JSON.parse(json)
+    data = JSON.parse(json)
   } catch (e) {
-    console.log(json)
+    console.log(json, e)
     throw new Error('Failed to parse response')
   }
-  let keys = Object.keys(json)
+  let keys = Object.keys(data)
   assert.deepEqual(keys, [ 'jsonapi', 'meta', 'links', 'errors' ], 'Errors should have specific properties')
-  assert.strictEqual(typeof json.links.self, 'string', 'Errors should have a "self" link')
-  assert.ok(json.errors instanceof Array, 'errors should be an array')
-  for(const error of json.errors) {
+  assert.strictEqual(typeof data.links.self, 'string', 'Errors should have a "self" link')
+  assert.ok(data.errors instanceof Array, 'errors should be an array')
+  for(const error of data.errors) {
     keys = Object.keys(error)
     assert.deepEqual(keys, [ 'status', 'code', 'title', 'detail' ], 'errors should have specific properties')
     for(const i of keys) {
@@ -27,31 +32,42 @@ testHelpers.validateError = json => {
       assert.strictEqual(typeof error[i], 'string', `${i} should be a string`)
     }
   }
-  return json
+  return data
 }
 
+/**
+ *
+ * @param {string} json
+ * @returns {*}
+ */
 testHelpers.validateJson = json => {
+  let data
   try {
-    json = JSON.parse(json)
+    data = JSON.parse(json)
   } catch (e) {
-    console.log(json)
+    console.log(json, e)
     throw new Error('Failed to parse response')
   }
-  assert.ok(json instanceof Object, 'Response should be an object')
-  assert.ok(json.jsonapi instanceof Object, 'Response should have a jsonapi block')
-  assert.ok(json.meta instanceof Object, 'Response should have a meta block')
-  assert.ok(json.links instanceof Object, 'Response should have a links block')
-  assert.ok(!(json.errors instanceof Object), 'Response should not have any errors: ' + JSON.stringify(json.errors))
-  assert.strictEqual(typeof json.links.self, 'string', 'Response should have a "self" link')
-  testHelpers.validatePagination(json)
-  return json
+  assert.ok(data instanceof Object, 'Response should be an object')
+  assert.ok(data.jsonapi instanceof Object, 'Response should have a jsonapi block')
+  assert.ok(data.meta instanceof Object, 'Response should have a meta block')
+  assert.ok(data.links instanceof Object, 'Response should have a links block')
+  assert.ok(!(data.errors instanceof Object), 'Response should not have any errors: ' + JSON.stringify(data.errors))
+  assert.strictEqual(typeof data.links.self, 'string', 'Response should have a "self" link')
+  testHelpers.validatePagination(data)
+  return data
 }
 
-testHelpers.validatePagination = json => {
-  if (!json.meta.page) return
-  if (!(json.data instanceof Array)) return
+/**
+ *
+ * @param {*} data
+ * @returns
+ */
+testHelpers.validatePagination = data => {
+  if (!data.meta.page) return
+  if (!(data.data instanceof Array)) return
 
-  const page = json.meta.page
+  const page = data.meta.page
   let expectedCount = null
   if ((page.offset + page.limit) > page.total) {
     expectedCount = page.total - page.offset
@@ -61,9 +77,9 @@ testHelpers.validatePagination = json => {
     expectedCount = page.total
   }
 
-  if (expectedCount !== json.data.length) {
+  if (expectedCount !== data.data.length) {
     console.warn('!!!!!!!!!!!!')
-    console.warn(json.links.self)
+    console.warn(data.links.self)
     console.warn("WARNING: Pagination count doesn't match resource count.")
     console.warn('This usually indicates the resource hanlder is not filtering correctly!')
     console.warn('!!!!!!!!!!!!')
@@ -145,7 +161,7 @@ testHelpers.request = (params, callback) => {
 /**
  *
  * @param {*} params
- * @returns {{err: any, res: any, json: any}}
+ * @returns {{err: any, res: Express.Response, json?: string}}
  */
 testHelpers.requestAsync = (params) => {
   return new Promise((resolve, reject) => {
@@ -164,7 +180,7 @@ testHelpers.requestAsync = (params) => {
 /**
  *
  * @param {*} params
- * @returns {{err: any, res: any, json: any}}
+ * @returns {{err: any, res: Express.Response, json?: string}}
  */
 testHelpers.requestAsyncNoAssert = (params) => {
   return new Promise((resolve) => request(params, (err, res, json) => {
