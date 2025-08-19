@@ -106,4 +106,5 @@ export function onUncaughtException(err: Error): void
 export function start(callback: Function): void
 export function close(): void
 export function getSchemaSettings(schema: Schema): OurJoi.OurJoiSettings | undefined
+export function toManyRelations(ResourceConfig: ResourceConfig): Iterable<string>
 export const knownResources: string[]
