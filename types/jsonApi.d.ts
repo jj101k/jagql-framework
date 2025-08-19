@@ -24,6 +24,7 @@ export import Handler = H.CallbackHandler
 export import BaseType = RC.BaseType
 import ChainPromiseHandler from "../lib/handlers/ChainPromiseHandler"
 import MemoryPromiseHandler from "./MemoryPromiseHandler"
+import { JsonApiRequest } from "./JsonApiRequest"
 
 interface ApiConfig {
   graphiql?: boolean
@@ -70,7 +71,7 @@ export function setConfig(apiConfig: ApiConfig): void
  * @param {DefineOptions} [options]
  */
 export function define<T>(resConfig: ResourceConfig<T>, options?: DefineOptions): void
-export function authenticate(authenticator: (req: Request, cb: () => void) => void): void
+export function authenticate(authenticator: (req: JsonApiRequest, cb: () => void) => void): void
 
 /**
  * Application metrics are generated and exposed via an event emitter interface.
