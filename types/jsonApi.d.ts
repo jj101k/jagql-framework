@@ -101,3 +101,4 @@ export function onUncaughtException(err: Error): void
 export function start(callback: Function): void
 export function close(): void
 export function getSchemaSettings(schema: Schema): OurJoi.OurJoiSettings | undefined
+export const knownResources: string[]
