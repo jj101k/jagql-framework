@@ -17,6 +17,10 @@ export import ResourceConfig = RC.ResourceConfig
 
 type JsonApiProtocols = 'http' | 'https'
 export import CallbackHandler = H.CallbackHandler
+/**
+ * @deprecated use CallbackHandler
+ */
+export import Handler = H.CallbackHandler
 export import BaseType = RC.BaseType
 import ChainPromiseHandler from "../lib/handlers/ChainPromiseHandler"
 import MemoryPromiseHandler from "./MemoryPromiseHandler"
