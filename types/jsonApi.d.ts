@@ -15,7 +15,7 @@ import MemoryHandlerType = require('./MemoryCallbackHandler')
 
 export import ResourceConfig = RC.ResourceConfig
 
-type JsonApiProtocols = 'http' | 'https'
+export type JsonApiProtocols = 'http' | 'https'
 export import CallbackHandler = H.CallbackHandler
 /**
  * @deprecated use CallbackHandler
@@ -46,7 +46,7 @@ interface ApiConfig {
 /**
  *
  */
-interface DefineOptions {
+export interface DefineOptions {
   idRequired: boolean
 }
 
