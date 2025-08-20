@@ -1,5 +1,10 @@
 # CHANGELOG (`@ekko/jagql-framework`)
 
+- 2025-08-19 v10.0.0. Replace reliance on schema for relation metadata, and
+  generally reduce the impact of that; drop the last uses of lodash; general
+  code modernisation; add completely separate promise-based handler support; add
+  knownResources and getToManyRelationsFor for resource introspection. Some
+  pseudo-private symbols have been removed and some types have been renamed.
 - 2025-08-05 v9.0.0. Convert to classes in most cases; avoid hotpatching Joi
 - 2025-08-05 v8.4.0. Drop "async" in favour of native async/await; fix error
   handling being called twice via verifyRequest; replace most uses of lodash
