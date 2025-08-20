@@ -108,3 +108,4 @@ export function close(): void
 export function getSchemaSettings(schema: Schema): OurJoi.OurJoiSettings | undefined
 export function getToManyRelationsFor(ResourceConfig: ResourceConfig): Iterable<string>
 export const knownResources: string[]
+export * from "./JsonApiRequest"
