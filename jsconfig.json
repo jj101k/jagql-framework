@@ -1,7 +1,9 @@
 {
     "compilerOptions": {
         "checkJs": true,
-        "strict": true
+        "strict": true,
+        "target": "es2024",
+        "moduleResolution": "node10"
     },
     "include": ["lib/"]
 }
