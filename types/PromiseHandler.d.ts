@@ -8,6 +8,6 @@ export class PromiseHandler<R = any> {
   create(request: JsonApiRequest, newResource: R): Promise<R>
   delete(request: JsonApiRequest): Promise<void>
   find(request: JsonApiRequest): Promise<R>
-  search(request: JsonApiRequest): Promise<[R[], number]>
+  search(request: JsonApiRequest): Promise<[R[], number]> | AsyncGenerator<[R[], number]>
   update(request: JsonApiRequest, newPartialResource: Partial<Exclude<R, "id">> & { id: string} ): Promise<R>
 }
