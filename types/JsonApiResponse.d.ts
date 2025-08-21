@@ -34,9 +34,10 @@ type JsonApiPrimaryDataMultiple = JsonApiResourceObject[]
 
 type JsonApiPrimaryData = JsonApiPrimaryDataMultiple | JsonApiPrimaryDataSingle
 
-export interface JsonApiResponseBody<T extends JsonApiPrimaryData = JsonApiPrimaryData> extends JsonApiResponseBodyBase {
+export interface JsonApiResponseBody<T extends JsonApiPrimaryData = JsonApiPrimaryData, I extends JsonApiPrimaryData = JsonApiPrimaryData> extends JsonApiResponseBodyBase {
     links?: Record<string, string>
     data?: T
+    included?: I[]
 }
 
 export interface JsonApiResponseBodyMeta extends JsonApiResponseBodyBase {
@@ -49,7 +50,7 @@ export interface JsonApiResponseBodyError extends JsonApiResponseBodyBase {
 
 export type JsonApiResponseBodyErrorWithMeta = JsonApiResponseBodyError & JsonApiResponseBodyMeta
 
-export type JsonApiResponseBodyWithMeta<T extends JsonApiPrimaryData = JsonApiPrimaryData> = JsonApiResponseBody<T> & JsonApiResponseBodyMeta
+export type JsonApiResponseBodyWithMeta<T extends JsonApiPrimaryData = JsonApiPrimaryData, I extends JsonApiPrimaryData = JsonApiPrimaryData> = JsonApiResponseBody<T, I> & JsonApiResponseBodyMeta
 
 /**
  *
