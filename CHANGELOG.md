@@ -1,5 +1,8 @@
 # CHANGELOG (`@ekko/jagql-framework`)
 
+- 2025-08-22 v10.1.0 Fix support for "locals" in the recursive response; add
+  basic support for async generators from search(); fix recursive retention of
+  includes for heterogenous relationship types
 - 2025-08-19 v10.0.0. Replace reliance on schema for relation metadata, and
   generally reduce the impact of that; drop the last uses of lodash; general
   code modernisation; add completely separate promise-based handler support; add
