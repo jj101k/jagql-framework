@@ -11,7 +11,7 @@ interface JsonApiRequestParams {
   fields?: any
   filter?: FilterSpecByAttrIn
   include?: string | string[]
-  page?: {size: number}
+  page?: {offset?: number, size: number}
   sort?: any
 }
 interface JsonApiInternalParams extends JsonApiRequestParams {
@@ -24,6 +24,7 @@ interface JsonApiInternalParams extends JsonApiRequestParams {
 
 export interface JsonApiRequest {
   params: JsonApiInternalParams
+  postProcess?: string
   processedFilter?: Record<string, FilterSpec[]>
   headers: any
   safeHeaders: any
