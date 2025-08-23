@@ -29,9 +29,18 @@ interface OurJoi extends BaseJoi.Root {
   belongsToMany(modelOpts: ModelOptions): OurJoiSchema
 }
 
+/**
+ *
+ */
 export interface OurJoiSettings {
-  _jagql: true
-  __relation?: number
+  /**
+   *
+   */
+  origin: "json-api-server"
+  /**
+   *
+   */
+  relationId?: number
 }
 
 export const Joi: OurJoi
