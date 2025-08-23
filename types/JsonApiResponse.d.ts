@@ -20,12 +20,33 @@ interface JsonApiRelationshipObject {
     meta?: any
 }
 
+/**
+ *
+ */
+export interface JsonApiLink {
+    meta: {
+        relation: "primary",
+        readOnly: boolean
+    } | {
+        as: string
+        belongsTo: string
+        many: boolean
+        relation: "foreign",
+        readOnly: boolean
+    },
+    links: {
+        self: string,
+        related: string,
+    },
+    data: any | undefined
+}
+
 interface JsonApiResourceObject {
     id: string
     type: string
     attributes?: Record<string, any>
     relationships?: Record<string, JsonApiRelationshipObject>
-    links?: any
+    links?: Record<string, JsonApiLink>
     meta?: any
 }
 
