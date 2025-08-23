@@ -11,7 +11,7 @@ interface JsonApiRequestParams {
   fields?: any
   filter?: FilterSpecByAttrIn
   include?: string | string[]
-  page?: any
+  page?: {size: number}
   sort?: any
 }
 interface JsonApiInternalParams extends JsonApiRequestParams {
