@@ -1,5 +1,7 @@
 # CHANGELOG (`@ekko/jagql-framework`)
 
+- 2025-08-26 v11.0.0 SECURITY UPDATE Fix exception stack trace exposure risk,
+  prevent possible object prototype pollution
 - 2025-08-26 v10.2.0 Performance improvements around search handling
 - 2025-08-22 v10.1.0 Fix support for "locals" in the recursive response; add
   basic support for async generators from search(); fix recursive retention of
