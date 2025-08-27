@@ -35,7 +35,7 @@ describe('Testing jsonapi-server', () => {
       const {err, res, json} = await helpers.requestAsyncNoAssert(data)
       assert.strictEqual(err, null)
       const responseBody = helpers.validateError(json)
-      assert.strictEqual(responseBody.errors[0].detail.length, 2, 'Expecting several validation errors')
+      assert.strictEqual(responseBody.errors[0].meta.details.length, 2, 'Expecting several validation errors')
       assert.strictEqual(res.statusCode, 403, 'Expecting 403')
     })
 

@@ -65,8 +65,41 @@ export interface JsonApiResponseBodyMeta extends JsonApiResponseBodyBase {
     meta?: any
 }
 
+export interface JsonApiLinkObject {
+    href: string
+    rel?: string
+    describedBy?: JsonApiAnyLink
+    title?: string
+    type?: string
+    hreflang?: string | string[]
+    meta?: any
+}
+
+type JsonApiAnyLink = JsonApiLinkObject | string | null
+
+/**
+ *
+ */
+export interface JsonApiResponseError {
+    id?: string
+    links?: {
+        about?: JsonApiAnyLink,
+        type?: JsonApiAnyLink,
+    }
+    status?: string
+    code?: string
+    title?: string
+    detail?: string
+    source?: {
+        pointer?: string
+        parameter?: string
+        header?: string
+    }
+    meta?: any
+}
+
 export interface JsonApiResponseBodyError extends JsonApiResponseBodyBase {
-    errors: any[]
+    errors: JsonApiResponseError[]
 }
 
 export type JsonApiResponseBodyErrorWithMeta = JsonApiResponseBodyError & JsonApiResponseBodyMeta

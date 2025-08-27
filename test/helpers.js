@@ -26,9 +26,14 @@ testHelpers.validateError = json => {
   assert.ok(data.errors instanceof Array, 'errors should be an array')
   for(const error of data.errors) {
     keys = Object.keys(error)
-    assert.deepEqual(keys, [ 'status', 'code', 'title', 'detail' ], 'errors should have specific properties')
-    for(const i of keys) {
-      if (i === 'detail') continue
+    assert.ok(keys.includes("status"), "error has a status")
+    assert.ok(keys.includes("code"), "error has a code")
+    assert.ok(keys.includes("title"), "error has a title")
+    assert.equal(keys.filter(k => ![ "status", "code", "title", "detail", "meta" ].includes(k)).length, 0, "error has no unexpected keys")
+    for(const i of ["status", "code", "title", "detail"]) {
+      if(error[i] === undefined) {
+        continue
+      }
       assert.strictEqual(typeof error[i], 'string', `${i} should be a string`)
     }
   }
