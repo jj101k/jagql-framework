@@ -1,6 +1,7 @@
 'use strict'
 
 const jsonApi = require('../../.')
+const Relation = require('../../lib/Relation.js')
 const commentHandler = require('../handlers/commentHandler.js')
 
 jsonApi.define({
@@ -19,7 +20,7 @@ jsonApi.define({
       .example('2017-05-01'),
     author: jsonApi.Joi.one('people') // Old syntax
       .description('The person who wrote the comment'),
-    article: jsonApi.Joi.belongsToOne({
+    article: Relation.belongsToOneOf({
       resource: 'articles',
       as: 'comments'
     })

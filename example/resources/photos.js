@@ -1,6 +1,7 @@
 'use strict'
 
 const jsonApi = require('../../.')
+const Relation = require('../../lib/Relation.js')
 const photoHandler = require('../handlers/photoHandler.js')
 
 jsonApi.define({
@@ -31,7 +32,7 @@ jsonApi.define({
       .description('Tags for the photo'),
     photographer: jsonApi.Joi.oneOf('people')
       .description('The person who took the photo'),
-    articles: jsonApi.Joi.belongsToMany({
+    articles: Relation.belongsToManyOf({
       resource: 'articles',
       as: 'photos'
     })

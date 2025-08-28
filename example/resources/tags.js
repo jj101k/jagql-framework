@@ -1,6 +1,7 @@
 'use strict'
 
 const jsonApi = require('../../.')
+const Relation = require('../../lib/Relation.js')
 const tagHandler = require('../handlers/tagHandler.js')
 
 jsonApi.define({
@@ -14,12 +15,12 @@ jsonApi.define({
     name: jsonApi.Joi.string()
       .description('The tag name')
       .example('Summer'),
-    articles: jsonApi.Joi.belongsToMany({
+    articles: Relation.belongsToManyOf({
       resource: 'articles',
       as: 'tags'
     }),
     parent: jsonApi.Joi.oneOf('tags'),
-    children: jsonApi.Joi.belongsToMany({
+    children: Relation.belongsToManyOf({
       resource: 'tags',
       as: 'parent'
     })
