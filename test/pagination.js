@@ -123,7 +123,7 @@ describe('Testing jsonapi-server', () => {
         limit: 0
       }
       let request = {
-        params: {
+        query: {
           page
         },
         route: {

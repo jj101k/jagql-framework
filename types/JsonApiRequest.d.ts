@@ -7,15 +7,21 @@ import { ResourceConfig } from "./ResourceConfig"
  */
 export type HttpVerbs = 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH'
 
-interface JsonApiRequestParams {
+/**
+ *
+ */
+interface JsonApiQueryParams {
   fields?: any
   filter?: FilterSpecByAttrIn
   include?: string | string[]
   page?: {offset?: number, size: number}
   sort?: any
 }
-interface JsonApiInternalParams extends JsonApiRequestParams {
-  data?: any
+
+/**
+ *
+ */
+interface JsonApiRouteParams {
   /**
    *
    */
@@ -29,19 +35,37 @@ interface JsonApiInternalParams extends JsonApiRequestParams {
    */
   relationship?: string
   /**
-   * Relationship name to ID
-   */
-  relationships?: Record<string, string>
-  /**
    *
    */
   type?: string
 }
 
+/**
+ *
+ */
+interface JsonApiBodyParams {
+  data?: any
+}
+
+interface JsonApiAppParams {
+  /**
+   * Relationship name to ID
+   */
+  relationships?: Record<string, string>
+}
+
 export interface JsonApiRequest {
-  params: JsonApiInternalParams
+  appParams: JsonApiAppParams,
+  body: JsonApiBodyParams
+  /**
+   * @deprecated Please use routeParams (route components: id, type,
+   * relationship); or appParams (relationship lookup details); body; or query
+   */
+  params: JsonApiQueryParams & JsonApiBodyParams & JsonApiRouteParams & JsonApiAppParams
   postProcess?: string
   processedFilter?: Record<string, FilterSpec[]>
+  query: JsonApiQueryParams
+  routeParams: JsonApiRouteParams
   headers: any
   safeHeaders: any
   cookies: any
