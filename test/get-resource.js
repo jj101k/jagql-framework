@@ -119,7 +119,8 @@ describe('Testing jsonapi-server', () => {
         const error = data.errors[0]
         assert.strictEqual(error.code, 'EFORBIDDEN')
         assert.strictEqual(error.title, 'Invalid filter')
-        assert(error.detail.match("Filter value for key '.*?' is invalid"))
+        console.log(error.detail)
+        assert(error.detail.match(/^Filter value for key .*? is invalid/))
       })
 
       it('equality for strings', async () => {

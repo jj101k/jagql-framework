@@ -4,16 +4,22 @@
 import {Schema} from 'joi'
 import {CallbackHandler as CallbackHandler} from './CallbackHandler'
 import { ActionConfig, OurJoiSettings } from "./ourJoi"
-import Relationship from "../lib/Relationship"
 import { PromiseHandler } from "./PromiseHandler"
+import BaseRelationship from "../lib/BaseRelationship"
 
 export type BaseType = {
   id?: string
   type: string
 }
 
+/**
+ *
+ */
 export type ResourceAttributes<Item> = {
-  [x in keyof Item]: Schema | Relationship
+  /**
+   *
+   */
+  [x in keyof Item]: Schema | BaseRelationship
 }
 
 export type OptionalResourceAttributes<Item> = {
