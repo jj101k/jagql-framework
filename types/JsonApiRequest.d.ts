@@ -28,7 +28,10 @@ interface JsonApiInternalParams extends JsonApiRequestParams {
    *
    */
   relationship?: string
-  relationships?: any
+  /**
+   * Relationship name to ID
+   */
+  relationships?: Record<string, string>
   /**
    *
    */
