@@ -33,6 +33,27 @@ which might not be very predictable.
 *Note: you might think of the `<type>` collections as "__the__ collections",*
 *with all other collections being secondary*
 
+## Client Usage
+
+### Differences from other JSON:API servers
+
+This supports pagination via the fields "limit" (page size) and "offset" (how
+many items to skip). This is in the "page" query family, so you might use
+`page[limit]=10` for example.
+
+Filtering is a key (a local attribute, relationship, or "id") mapped to:
+
+* "<" followed by a string/number to express "less than"
+* ">" followed by a string/number to express "greater than"
+* "~" followed by a string to express a case-insensitive match
+* ":" followed by a string to express that the filter string is part of the
+  target (string).
+* Anything else, which will be taken as an exact (string) match.
+
+You can supply multiple of these as an array, or multiple comma-separated. These
+are in the "filter" query family, so a valid query might include
+`filter[a]=:foo,:bar` or `filter[a][]=:foo&filter[a][]=:bar`.
+
 ## Configuring Resources
 
 ### Relationships
