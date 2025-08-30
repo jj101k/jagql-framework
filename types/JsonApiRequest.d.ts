@@ -5,95 +5,189 @@ import { ResourceConfig } from "./ResourceConfig"
 /**
  *
  */
-export type HttpVerbs = 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH'
+export type HttpVerbs = "GET" | "POST" | "DELETE" | "PUT" | "PATCH"
+
+/**
+ *
+ */
+interface JsonApiPaginationSettings {
+    /**
+     * How many items are in a page
+     */
+    limit: number
+    /**
+     * How many items to skip
+     */
+    offset: number
+}
 
 /**
  *
  */
 interface JsonApiQueryParams {
-  fields?: any
-  filter?: FilterSpecByAttrIn
-  include?: string | string[]
-  page?: {
     /**
-     * How many items are in a page
+     *
      */
-    limit?: number
+    fields?: any
     /**
-     * How many items to skip
+     *
      */
-    offset?: number
+    filter?: FilterSpecByAttrIn
     /**
-     * @deprecated Use limit
+     *
      */
-    size?: number
-  }
-  sort?: any
+    include?: string | string[]
+    /**
+     *
+     */
+    page?: Partial<JsonApiPaginationSettings> & {
+        /**
+         * @deprecated Use limit
+         */
+        size?: number
+    }
+    /**
+     *
+     */
+    sort?: any
 }
 
 /**
  *
  */
 interface JsonApiRouteParams {
-  /**
-   *
-   */
-  id?: string
-  /**
-   * @deprecated Please use relationship
-   */
-  relation?: string
-  /**
-   *
-   */
-  relationship?: string
-  /**
-   *
-   */
-  type?: string
+    /**
+     *
+     */
+    id?: string
+    /**
+     * @deprecated Please use relationship
+     */
+    relation?: string
+    /**
+     *
+     */
+    relationship?: string
+    /**
+     *
+     */
+    type?: string
 }
 
 /**
  *
  */
 interface JsonApiBodyParams {
-  data?: any
+    /**
+     *
+     */
+    data?: any
 }
 
+/**
+ *
+ */
 interface JsonApiAppParams {
-  /**
-   * Relationship name to ID
-   */
-  relationships?: Record<string, string>
+    /**
+     *
+     */
+    page?: JsonApiPaginationSettings
+    /**
+     * Relationship name to ID
+     */
+    relationships?: Record<string, string>
 }
 
 export interface JsonApiRequest {
-  appParams: JsonApiAppParams,
-  body: JsonApiBodyParams
-  /**
-   * @deprecated Please use routeParams (route components: id, type,
-   * relationship); or appParams (relationship lookup details); body; or query
-   */
-  params: JsonApiQueryParams & JsonApiBodyParams & JsonApiRouteParams & JsonApiAppParams
-  postProcess?: string
-  processedFilter?: Record<string, FilterSpec[]>
-  query: JsonApiQueryParams
-  routeParams: JsonApiRouteParams
-  headers: any
-  safeHeaders: any
-  cookies: any
-  originalUrl: string
-  express: {
-    req: Request
-    res: Response
-  }
-  route: {
-    verb: HttpVerbs
-    host: string
-    base: string
-    path: string
-    query: string
-    combined: string
-  }
-  resourceConfig?: ResourceConfig | ResourceConfig[]
+    /**
+     *
+     */
+    appParams: JsonApiAppParams
+    /**
+     *
+     */
+    body: JsonApiBodyParams
+    /**
+     *
+     */
+    cookies: any
+    /**
+     *
+     */
+    express: {
+        /**
+         *
+         */
+        req: Request
+        /**
+         *
+         */
+        res: Response
+    }
+    /**
+     *
+     */
+    headers: any
+    /**
+     *
+     */
+    originalUrl: string
+    /**
+     * @deprecated Please use routeParams (route components: id, type,
+     * relationship); or appParams (relationship lookup details); body; or query
+     */
+    params: JsonApiQueryParams & JsonApiBodyParams & JsonApiRouteParams & JsonApiAppParams
+    /**
+     *
+     */
+    postProcess?: string
+    /**
+     *
+     */
+    processedFilter?: Record<string, FilterSpec[]>
+    /**
+     *
+     */
+    query: JsonApiQueryParams
+    /**
+     *
+     */
+    resourceConfig?: ResourceConfig | ResourceConfig[]
+    /**
+     *
+     */
+    route: {
+        /**
+         *
+         */
+        base: string
+        /**
+         *
+         */
+        combined: string
+        /**
+         *
+         */
+        host: string
+        /**
+         *
+         */
+        path: string
+        /**
+         *
+         */
+        query: string
+        /**
+         *
+         */
+        verb: HttpVerbs
+    }
+    /**
+     *
+     */
+    routeParams: JsonApiRouteParams
+    /**
+     *
+     */
+    safeHeaders: any
 }
