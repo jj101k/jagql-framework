@@ -39,7 +39,8 @@ which might not be very predictable.
 
 This supports pagination via the fields "limit" (page size) and "offset" (how
 many items to skip). This is in the "page" query family, so you might use
-`page[limit]=10` for example.
+`page[limit]=10` for example. The default limit is 50, and the default offset is
+0.
 
 Filtering is a key (a local attribute, relationship, or "id") mapped to:
 
