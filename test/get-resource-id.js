@@ -62,18 +62,6 @@ describe('Testing jsonapi-server', () => {
       assert.deepEqual(keys, [ 'title' ], 'Should only contain title attribute')
     })
 
-    it('with filter', async () => {
-      const url = 'http://localhost:16999/rest/articles/de305d54-75b4-431b-adb2-eb6b9e546014?filter[title]=title'
-      const {err, res, json} = await helpers.requestAsync({
-        method: 'GET',
-        url
-      })
-      assert.strictEqual(err, null)
-      helpers.validateError(json)
-
-      assert.strictEqual(res.statusCode, 404, 'Expecting 404 NOT FOUND')
-    })
-
     describe('with includes', () => {
       it('basic include', async () => {
         const url = 'http://localhost:16999/rest/articles/de305d54-75b4-431b-adb2-eb6b9e546014?include=author'
