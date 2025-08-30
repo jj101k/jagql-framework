@@ -18,7 +18,7 @@ interface JsonApiQueryParams {
     /**
      * How many items are in a page
      */
-    limit: number
+    limit?: number
     /**
      * How many items to skip
      */
