@@ -14,7 +14,20 @@ interface JsonApiQueryParams {
   fields?: any
   filter?: FilterSpecByAttrIn
   include?: string | string[]
-  page?: {offset?: number, size: number}
+  page?: {
+    /**
+     * How many items are in a page
+     */
+    limit: number
+    /**
+     * How many items to skip
+     */
+    offset?: number
+    /**
+     * @deprecated Use limit
+     */
+    size?: number
+  }
   sort?: any
 }
 
