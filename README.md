@@ -35,21 +35,21 @@ This also has a built-in OpenAPI (Swagger) endpoint
 
 ## Belongs-to relationships
 
-These occur when you define a relation via belongsTo...(), ie meaning the
+These occur when you define a relationship via belongsTo...(), ie meaning the
 relationship is not expressed on the object itself
 
 * The `<type>/<id>/<name>` route won't be available [1](#fetching-belongs-to-relationships)
 * You won't be able to use `<type>?filter[<name>]=...` even on its own [2](#filtering-by-belongs-to-relationships)
-* You won't be able to define the relation when creating [3](#creating-belongs-to-relationships)
+* You won't be able to define the relationship when creating [3](#creating-belongs-to-relationships)
 
 ### Fetching belongs-to relationships
 
-It's recommended that instead you request `<other type>?filter[<remote relation>]=<id>`.
+It's recommended that instead you request `<other type>?filter[<remote relationship>]=<id>`.
 
 ### Filtering by belongs-to relationships
 
 If you want to just filter on the relationship alone, you should instead use
-`<other type>/<id>/<remote relation>`.
+`<other type>/<id>/<remote relationship>`.
 
 ### Creating belongs-to relationships
 

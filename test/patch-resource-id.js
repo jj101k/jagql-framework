@@ -60,7 +60,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.statusCode, 403, 'Expecting 403')
       })
 
-      it('errors with invalid one relations', async () => {
+      it('errors with invalid one relationships', async () => {
         const data = {
           method: 'patch',
           url: 'http://localhost:16999/rest/articles/d850ea75-4427-4f81-8595-039990aeede5',
@@ -83,7 +83,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.statusCode, 403, 'Expecting 403')
       })
 
-      it('errors with invalid many relations 1', async () => {
+      it('errors with invalid many relationships 1', async () => {
         const data = {
           method: 'patch',
           url: 'http://localhost:16999/rest/articles/d850ea75-4427-4f81-8595-039990aeede5',
@@ -106,7 +106,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(res.statusCode, 403, 'Expecting 403')
       })
 
-      it('errors with invalid many relations 2', async () => {
+      it('errors with invalid many relationships 2', async () => {
         const data = {
           method: 'patch',
           url: 'http://localhost:16999/rest/articles/d850ea75-4427-4f81-8595-039990aeede5',

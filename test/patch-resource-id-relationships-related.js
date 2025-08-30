@@ -5,7 +5,7 @@ const helpers = require('./helpers.js')
 const jsonApiTestServer = require('../example/server.js')
 
 describe('Testing jsonapi-server', () => {
-  describe('Updating a relation', () => {
+  describe('Updating a relationship', () => {
     it('errors with invalid type', async () => {
       const data = {
         method: 'patch',
@@ -34,7 +34,7 @@ describe('Testing jsonapi-server', () => {
       assert.strictEqual(res.statusCode, 404, 'Expecting 404')
     })
 
-    it('errors with a foreign relation', async () => {
+    it('errors with a foreign relationship', async () => {
       const data = {
         method: 'patch',
         url: 'http://localhost:16999/rest/comments/3f1a89c2-eb85-4799-a048-6735db24b7eb/relationships/article',

@@ -6,7 +6,7 @@
 - 2025-08-22 v10.1.0 Fix support for "locals" in the recursive response; add
   basic support for async generators from search(); fix recursive retention of
   includes for heterogenous relationship types
-- 2025-08-19 v10.0.0. Replace reliance on schema for relation metadata, and
+- 2025-08-19 v10.0.0. Replace reliance on schema for relationship metadata, and
   generally reduce the impact of that; drop the last uses of lodash; general
   code modernisation; add completely separate promise-based handler support; add
   knownResources and getToManyRelationsFor for resource introspection. Some
@@ -16,7 +16,7 @@
   handling being called twice via verifyRequest; replace most uses of lodash
   with modern equivalents.
 - 2025-07-21 v8.3.0. Expose the remaining include on recursive include fetches.
-- 2025-07-18 v8.2.1. Highlight when relations are actually missing.
+- 2025-07-18 v8.2.1. Highlight when relationships are actually missing.
 - 2025-07-16 v8.1.2. Fix a broken error message
 - 2025-07-03 v8.1.0. Adds a more stable API for fetching settings, jsonApi.getSchemaSettings(schema)
 - 2025-07-03 v8.0.0. This updates Joi to version 17. COMPATIBILITY: newer Joi accept()/valid() no longer permit an array as an argument, so you will need to change that if you've been using that syntax. Also if you were directly introspecting schema._settings, that won't work any more - use schema.describe().metas?.find(m => (typeof m == "object") && m._jagql) instead.

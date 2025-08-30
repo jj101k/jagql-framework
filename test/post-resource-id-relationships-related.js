@@ -5,7 +5,7 @@ const helpers = require('./helpers.js')
 const jsonApiTestServer = require('../example/server.js')
 
 describe('Testing jsonapi-server', () => {
-  describe('Adding to a relation', () => {
+  describe('Adding to a relationship', () => {
     it('errors with invalid type', async () => {
       const data = {
         method: 'post',

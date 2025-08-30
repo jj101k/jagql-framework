@@ -106,6 +106,17 @@ export function onUncaughtException(err: Error): void
 export function start(callback: Function): void
 export function close(): void
 export function getSchemaSettings(schema: Schema): OurJoi.OurJoiSettings | undefined
+/**
+ * @deprecated See getToManyRelationshipsFor
+ *
+ * @param ResourceConfig
+ * @returns
+ */
 export function getToManyRelationsFor(ResourceConfig: ResourceConfig): Iterable<string>
+/**
+ *
+ * @param ResourceConfig
+ */
+export function getToManyRelationshipsFor(ResourceConfig: ResourceConfig): Iterable<string>
 export const knownResources: string[]
 export * from "./JsonApiRequest"

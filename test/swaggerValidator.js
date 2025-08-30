@@ -89,7 +89,7 @@ module.exports = class swaggerValidator {
   }
 
   static #validateObject(model, payload, urlPath, validationPath) {
-    // added this for relation test 'with two filters on same field against has-many relation', where an array of data was
+    // added this for relationship test 'with two filters on same field against has-many relationship', where an array of data was
     // being returned, and loop of the payload properties below was throwing because it was not finding property '0' in
     // the model.  As a work around, if the payload is an array, we're validating each element in the array separately.
     // todo: not sure this is the right thing to do here... is the error being bypassed here a legitamate swagger validation failure?

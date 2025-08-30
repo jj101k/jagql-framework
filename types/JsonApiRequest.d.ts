@@ -16,10 +16,23 @@ interface JsonApiRequestParams {
 }
 interface JsonApiInternalParams extends JsonApiRequestParams {
   data?: any
-  id?: any
-  relation?: any
+  /**
+   *
+   */
+  id?: string
+  /**
+   * @deprecated Please use relationship
+   */
+  relation?: string
+  /**
+   *
+   */
+  relationship?: string
   relationships?: any
-  type?: any
+  /**
+   *
+   */
+  type?: string
 }
 
 export interface JsonApiRequest {

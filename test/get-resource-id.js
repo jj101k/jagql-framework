@@ -91,7 +91,7 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(people.length, 1, 'Should be 1 included people resource')
       })
 
-      it('including over a null relation', async () => {
+      it('including over a null relationship', async () => {
         const url = 'http://localhost:16999/rest/tags/8d196606-134c-4504-a93a-0d372f78d6c5?include=parent'
         const {err, res, json} = await helpers.requestAsync({
           method: 'GET',

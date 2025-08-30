@@ -4,7 +4,7 @@
  */
 import { AnySchema, FunctionSchema, Schema } from 'joi'
 import BaseJoi = require('joi')
-import Relation from "../lib/Relation"
+import Relationship from "../lib/Relationship"
 
 type UidType = 'uuid' | 'autoincrement'
 
@@ -40,7 +40,7 @@ export interface OurJoiSettings {
   /**
    *
    */
-  relationId?: number
+  relationshipId?: number
 }
 
 export const Joi: OurJoi

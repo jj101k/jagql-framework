@@ -5,7 +5,7 @@ const helpers = require('./helpers.js')
 const jsonApiTestServer = require('../example/server.js')
 
 describe('Testing jsonapi-server', () => {
-  describe('Removing from a relation', () => {
+  describe('Removing from a relationship', () => {
     it('errors with invalid type', async () => {
       const data = {
         method: 'delete',
@@ -139,7 +139,7 @@ describe('Testing jsonapi-server', () => {
         assert.deepEqual(data.data, null)
       })
 
-      it('restore relation', async () => {
+      it('restore relationship', async () => {
         const data = {
           method: 'post',
           url: 'http://localhost:16999/rest/articles/fa2a073f-8c64-4cbb-9158-b8f67a4ab9f5/relationships/author',

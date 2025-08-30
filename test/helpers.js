@@ -93,7 +93,7 @@ testHelpers.validatePagination = data => {
 
 testHelpers.validateRelationship = relationship => {
   assert.ok(relationship.meta instanceof Object, 'Relationships should have a meta block')
-  assert.strictEqual(typeof relationship.meta.relation, 'string', 'Relationships should have a relation type')
+  assert.strictEqual(typeof relationship.meta.relation, 'string', 'Relationships should have a relationship type')
   assert.ok([ 'primary', 'foreign' ].indexOf(relationship.meta.relation) > -1, 'Relationships must be primary or foreign')
   assert.strictEqual(typeof relationship.meta.readOnly, 'boolean', 'Relationships should have a readOnly flag')
 
@@ -127,13 +127,13 @@ testHelpers.validateArticle = resource => {
   assert.strictEqual(typeof resource.attributes.title, 'string', 'An articles title should be a string')
   assert.strictEqual(typeof resource.attributes.content, 'string', 'An articles content should be a string')
   assert.strictEqual(typeof resource.attributes.status, 'string', 'An articles status should default to, and always be, a string')
-  assert.strictEqual(resource.relationships.author.meta.relation, 'primary', 'An articles author is a primary relation')
+  assert.strictEqual(resource.relationships.author.meta.relation, 'primary', 'An articles author is a primary relationship')
   testHelpers.validateRelationship(resource.relationships.author)
-  assert.strictEqual(resource.relationships.tags.meta.relation, 'primary', 'An articles tags are a primary relation')
+  assert.strictEqual(resource.relationships.tags.meta.relation, 'primary', 'An articles tags are a primary relationship')
   testHelpers.validateRelationship(resource.relationships.tags)
-  assert.strictEqual(resource.relationships.photos.meta.relation, 'primary', 'An articles photos are a primary relation')
+  assert.strictEqual(resource.relationships.photos.meta.relation, 'primary', 'An articles photos are a primary relationship')
   testHelpers.validateRelationship(resource.relationships.photos)
-  assert.strictEqual(resource.relationships.comments.meta.relation, 'primary', 'An articles comments are a primary relation')
+  assert.strictEqual(resource.relationships.comments.meta.relation, 'primary', 'An articles comments are a primary relationship')
   testHelpers.validateRelationship(resource.relationships.comments)
 }
 
@@ -144,8 +144,8 @@ testHelpers.validatePhoto = resource => {
   assert.strictEqual(typeof resource.attributes.url, 'string', 'An photos url should be a string')
   assert.strictEqual(typeof resource.attributes.height, 'number', 'An photos height should be a number')
   assert.strictEqual(typeof resource.attributes.width, 'number', 'An photos width should be a number')
-  assert.strictEqual(resource.relationships.photographer.meta.relation, 'primary', 'An photos photographer is a primary relation')
-  assert.strictEqual(resource.relationships.articles.meta.relation, 'foreign', 'An photos articles are a foreign relation')
+  assert.strictEqual(resource.relationships.photographer.meta.relation, 'primary', 'An photos photographer is a primary relationship')
+  assert.strictEqual(resource.relationships.articles.meta.relation, 'foreign', 'An photos articles are a foreign relationship')
 }
 
 /**

@@ -17,7 +17,7 @@ describe('Testing jsonapi-server', () => {
       assert.strictEqual(res.statusCode, 404, 'Expecting 404')
     })
 
-    it('unknown relation should error', async () => {
+    it('unknown relationship should error', async () => {
       const url = 'http://localhost:16999/rest/articles/relationships?title=cc5cca2e-0dd8-4b95-8cfc-a11230e73116'
       const {err, res, json} = await helpers.requestAsyncNoAssert({
         method: 'GET',
