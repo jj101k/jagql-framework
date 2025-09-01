@@ -13,6 +13,8 @@ import OurJoi = require('./ourJoi')
 import ChainCallbackHandlerType = require('./ChainCallbackHandler')
 import MemoryHandlerType = require('./MemoryCallbackHandler')
 
+export * from "./JsonApiRequest"
+
 export import ResourceConfig = RC.ResourceConfig
 
 export type JsonApiProtocols = 'http' | 'https'
@@ -26,28 +28,68 @@ import ChainPromiseHandler from "../lib/handlers/ChainPromiseHandler"
 import MemoryPromiseHandler from "./MemoryPromiseHandler"
 import { JsonApiRequest } from "./JsonApiRequest"
 
-interface ApiConfig {
-  graphiql?: boolean
-  jsonapi?: boolean
-  protocol: JsonApiProtocols
-  urlPrefixAlias?: string
-  hostname: string
-  port: number
-  /**
-   * No leading / required
-   */
-  base: string,
-  meta: any
-  swagger?: any
-  router?: Router
-  bodyParserJsonOpts?: any
+/**
+ *
+ */
+export interface ApiConfig {
+    /**
+     * No leading / required
+     */
+    base: string
+    /**
+     *
+     */
+    bodyParserJsonOpts?: any
+    /**
+     *
+     */
+    graphiql?: boolean
+    /**
+     *
+     */
+    hostname: string
+    /**
+     *
+     */
+    jsonapi?: boolean
+    /**
+     *
+     */
+    meta: any
+    /**
+     *
+     */
+    pathPrefix?: string
+    /**
+     *
+     */
+    port: number
+    /**
+     *
+     */
+    protocol: JsonApiProtocols
+    /**
+     *
+     */
+    router?: Router
+    /**
+     *
+     */
+    swagger?: any
+    /**
+     *
+     */
+    urlPrefixAlias?: string
 }
 
 /**
  *
  */
 export interface DefineOptions {
-  idRequired: boolean
+    /**
+     *
+     */
+    idRequired: boolean
 }
 
 /**
@@ -71,6 +113,10 @@ export function setConfig(apiConfig: ApiConfig): void
  * @param {DefineOptions} [options]
  */
 export function define<T>(resConfig: ResourceConfig<T>, options?: DefineOptions): void
+/**
+ *
+ * @param authenticator
+ */
 export function authenticate(authenticator: (req: JsonApiRequest, cb: () => void) => void): void
 
 /**
@@ -85,26 +131,50 @@ export function authenticate(authenticator: (req: JsonApiRequest, cb: () => void
  * ```
  */
 export const metrics: Metrics
+/**
+ *
+ */
 export function getExpressServer(): Application
 /**
  * @deprecated use CallbackHandlers.Chain
  */
 export const ChainHandler: typeof ChainCallbackHandlerType
+/**
+ *
+ */
 export const CallbackHandlers: {
-  Chain: typeof ChainCallbackHandlerType
-  Memory: typeof MemoryHandlerType
+    Chain: typeof ChainCallbackHandlerType
+    Memory: typeof MemoryHandlerType
 }
+/**
+ *
+ */
 export const PromiseHandlers: {
-  Chain: typeof ChainPromiseHandler
-  Memory: typeof MemoryPromiseHandler
+    Chain: typeof ChainPromiseHandler
+    Memory: typeof MemoryPromiseHandler
 }
 /**
  * @deprecated use CallbackHandlers.Memory
  */
 export const MemoryHandler: typeof MemoryHandlerType
+/**
+ *
+ * @param err
+ */
 export function onUncaughtException(err: Error): void
+/**
+ *
+ * @param callback
+ */
 export function start(callback: Function): void
+/**
+ *
+ */
 export function close(): void
+/**
+ *
+ * @param schema
+ */
 export function getSchemaSettings(schema: Schema): OurJoi.OurJoiSettings | undefined
 /**
  * @deprecated See getToManyRelationshipsFor
@@ -118,5 +188,7 @@ export function getToManyRelationsFor(ResourceConfig: ResourceConfig): Iterable<
  * @param ResourceConfig
  */
 export function getToManyRelationshipsFor(ResourceConfig: ResourceConfig): Iterable<string>
+/**
+ *
+ */
 export const knownResources: string[]
-export * from "./JsonApiRequest"
