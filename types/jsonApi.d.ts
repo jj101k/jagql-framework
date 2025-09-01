@@ -27,6 +27,7 @@ export import BaseType = RC.BaseType
 import ChainPromiseHandler from "../lib/handlers/ChainPromiseHandler"
 import MemoryPromiseHandler from "./MemoryPromiseHandler"
 import { JsonApiRequest } from "./JsonApiRequest"
+import { PromiseHandler } from "./PromiseHandler"
 
 /**
  *
@@ -112,12 +113,22 @@ export function setConfig(apiConfig: ApiConfig): void
  * @param {ResourceConfig<T>} resConfig
  * @param {DefineOptions} [options]
  */
-export function define<T>(resConfig: ResourceConfig<T>, options?: DefineOptions): void
+export function define<T>(resConfig: RC.ResourceConfigIn<T>, options?: DefineOptions): void
+/**
+ * @deprecated use authenticateWithCallback or authenticateWithPromise
+ * @param authenticator
+ */
+export function authenticate(authenticator: (req: JsonApiRequest, cb: () => void) => void): void
 /**
  *
  * @param authenticator
  */
-export function authenticate(authenticator: (req: JsonApiRequest, cb: () => void) => void): void
+export function authenticateWithCallback(authenticator: (req: JsonApiRequest, cb: () => void) => void): void
+/**
+ *
+ * @param authenticator
+ */
+export function authenticateWithPromise(authenticator: (req: JsonApiRequest) => Promise<void>): void
 
 /**
  * Application metrics are generated and exposed via an event emitter interface.
