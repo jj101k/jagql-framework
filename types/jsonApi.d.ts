@@ -68,7 +68,11 @@ export interface ApiConfig {
      */
     protocol: JsonApiProtocols
     /**
+     * This allows you to override the service program in use. In particular,
+     * you may use this to have the server running on a sub-route or run a
+     * testing server.
      *
+     * If you use this you will have to start the server listening yourself.
      */
     router?: Router
     /**
