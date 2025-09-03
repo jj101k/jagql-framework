@@ -175,6 +175,22 @@ export const Relationship: typeof RelationshipType
  */
 export const MemoryHandler: typeof MemoryHandlerType
 /**
+ * This will register all the routes and middleware in use, but if you
+ * supply an injection method you can add your middleware between the routes
+ * being set up and the final middleware (in particular, the 404 handler)
+ * being added.
+ *
+ * @param injectMiddleware
+ */
+export function initialise(injectMiddleware?: () => any): void
+/**
+ * This will (if you did not supply your own router) ask the router to
+ * listen.
+ *
+ * @returns True if a server was started
+ */
+export function listen(): Promise<boolean>
+/**
  *
  * @param err
  */
