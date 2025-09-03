@@ -180,10 +180,29 @@ export const MemoryHandler: typeof MemoryHandlerType
  */
 export function onUncaughtException(err: Error): void
 /**
+ * This will register all the routes and middleware in use, then (if you did
+ * not supply your own router) ask the router to listen.
  *
- * @param callback
+ * If you don't supply a callback, this will return a promise which you can
+ * use for error handling, eg. you can either:
+ *
+ * ```js
+ * jsonApi.start(err => {
+ *  if(err) {
+ *      handleError(err)
+ *  }
+ * })
+ * ```
+ *
+ * Or:
+ * ```js
+ * jsonApi.start().catch(err => handleError(err))
+ * ```
+ *
+ * @param cb
+ * @returns True if a server was started
  */
-export function start(callback: Function): void
+export function start(cb?: (err?: any) => void): Promise<boolean>
 /**
  *
  */
