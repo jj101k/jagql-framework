@@ -12,6 +12,7 @@ import { ResourceConfig } from './ResourceConfig'
 import OurJoi = require('./ourJoi')
 import ChainCallbackHandlerType = require('./ChainCallbackHandler')
 import MemoryHandlerType = require('./MemoryCallbackHandler')
+import RelationshipType from "../lib/Relationship"
 
 export * from "./JsonApiRequest"
 
@@ -164,6 +165,10 @@ export const PromiseHandlers: {
     Chain: typeof ChainPromiseHandler
     Memory: typeof MemoryPromiseHandler
 }
+/**
+ *
+ */
+export const Relationship: typeof RelationshipType
 /**
  * @deprecated use CallbackHandlers.Memory
  */

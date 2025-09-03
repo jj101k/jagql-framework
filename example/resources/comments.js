@@ -1,7 +1,7 @@
 'use strict'
 
 const jsonApi = require('../../.')
-const Relationship = require('../../lib/Relationship.js')
+const {Relationship} = require('../../.')
 const commentHandler = require('../handlers/commentHandler.js')
 
 jsonApi.define({

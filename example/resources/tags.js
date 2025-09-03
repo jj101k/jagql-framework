@@ -1,7 +1,7 @@
 'use strict'
 
 const jsonApi = require('../../.')
-const Relationship = require('../../lib/Relationship.js')
+const {Relationship} = require('../../.')
 const tagHandler = require('../handlers/tagHandler.js')
 
 jsonApi.define({
