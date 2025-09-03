@@ -2,11 +2,11 @@
 /**
  * @module @jagql/framework/lib/ourJoi
  */
-import { AnySchema, FunctionSchema, Schema } from 'joi'
-import BaseJoi = require('joi')
+import { AnySchema, FunctionSchema, Schema } from "joi"
+import BaseJoi from "joi"
 import Relationship from "../lib/Relationship"
 
-type UidType = 'uuid' | 'autoincrement'
+type UidType = "uuid" | "autoincrement"
 
 interface OurJoiSchema extends AnySchema {
   uidType(type: UidType): this

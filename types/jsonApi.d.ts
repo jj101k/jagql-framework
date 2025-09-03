@@ -4,31 +4,28 @@
 
 /// <reference types="express" />
 
-import { Application, Request, Router } from 'express'
-import * as H from './CallbackHandler'
-import { Metrics } from './metrics'
-import * as RC from './ResourceConfig'
-import { ResourceConfig } from './ResourceConfig'
-import OurJoi = require('./ourJoi')
-import ChainCallbackHandlerType = require('./ChainCallbackHandler')
-import MemoryHandlerType = require('./MemoryCallbackHandler')
+import { Application, Router } from "express"
 import RelationshipType from "../lib/Relationship"
+import ChainPromiseHandler from "../lib/handlers/ChainPromiseHandler"
+import * as H from "./CallbackHandler"
+import ChainCallbackHandlerType from "./ChainCallbackHandler"
+import { JsonApiRequest } from "./JsonApiRequest"
+import MemoryHandlerType from "./MemoryCallbackHandler"
+import MemoryPromiseHandler from "./MemoryPromiseHandler"
+import * as RC from "./ResourceConfig"
+import { ResourceConfig } from "./ResourceConfig"
+import { Metrics } from "./metrics"
+import { Joi, OurJoiSettings } from "./ourJoi"
 
 export * from "./JsonApiRequest"
-
 export import ResourceConfig = RC.ResourceConfig
-
-export type JsonApiProtocols = 'http' | 'https'
+export type JsonApiProtocols = "http" | "https"
 export import CallbackHandler = H.CallbackHandler
 /**
  * @deprecated use CallbackHandler
  */
 export import Handler = H.CallbackHandler
 export import BaseType = RC.BaseType
-import ChainPromiseHandler from "../lib/handlers/ChainPromiseHandler"
-import MemoryPromiseHandler from "./MemoryPromiseHandler"
-import { JsonApiRequest } from "./JsonApiRequest"
-import { PromiseHandler } from "./PromiseHandler"
 
 /**
  *
@@ -97,7 +94,7 @@ export interface DefineOptions {
 /**
  * Our modified Joi instance
  */
-export const Joi: typeof OurJoi.Joi
+export const Joi: typeof Joi
 
 /**
  * Configure things like -
@@ -191,7 +188,7 @@ export function close(): void
  *
  * @param schema
  */
-export function getSchemaSettings(schema: Schema): OurJoi.OurJoiSettings | undefined
+export function getSchemaSettings(schema: Schema): OurJoiSettings | undefined
 /**
  * @deprecated See getToManyRelationshipsFor
  *
