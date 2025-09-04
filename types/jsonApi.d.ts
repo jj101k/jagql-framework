@@ -40,6 +40,14 @@ export interface ApiConfig {
      */
     bodyParserJsonOpts?: any
     /**
+     * If true, this will assume that it handles all paths and so apply its
+     * error handlers to all paths. Otherwise it will just apply them to paths
+     * inside the defined base.
+     *
+     * Default is true.
+     */
+    handleAllPaths?: boolean
+    /**
      *
      */
     graphiql?: boolean
