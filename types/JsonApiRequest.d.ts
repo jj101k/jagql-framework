@@ -98,6 +98,11 @@ interface JsonApiAppParams {
     relationships?: Record<string, string>
 }
 
+/**
+ *
+ */
+type JsonApiExtendedQueryParams = JsonApiQueryParams & Record<string, any>
+
 export interface JsonApiRequest {
     /**
      *
@@ -136,7 +141,7 @@ export interface JsonApiRequest {
      * @deprecated Please use routeParams (route components: id, type,
      * relationship); or appParams (relationship lookup details); body; or query
      */
-    params: JsonApiQueryParams & JsonApiBodyParams & JsonApiRouteParams & JsonApiAppParams
+    params: JsonApiExtendedQueryParams & JsonApiBodyParams & JsonApiRouteParams & JsonApiAppParams
     /**
      *
      */
@@ -148,7 +153,7 @@ export interface JsonApiRequest {
     /**
      *
      */
-    query: JsonApiQueryParams
+    query: JsonApiExtendedQueryParams
     /**
      *
      */

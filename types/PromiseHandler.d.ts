@@ -21,6 +21,14 @@ export class PromiseHandler<R = any> {
     /**
      *
      */
+    readonly otherHandler: undefined
+    /**
+     *
+     */
+    ready: boolean
+    /**
+     *
+     */
     close?(): any
     /**
      *
@@ -40,9 +48,10 @@ export class PromiseHandler<R = any> {
     find(request: JsonApiRequest): Promise<R>
     /**
      *
+     * @param {import("../../types/ResourceConfig").ResourceConfig<R>} resourceConfig
      * @returns
      */
-    initialise?: () => any
+    initialise?: (resourceConfig) => any
     /**
      *
      * @param request

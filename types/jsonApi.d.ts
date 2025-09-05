@@ -90,6 +90,10 @@ export interface ApiConfig {
     /**
      *
      */
+    tls?: any,
+    /**
+     *
+     */
     urlPrefixAlias?: string
 }
 

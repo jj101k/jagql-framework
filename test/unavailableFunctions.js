@@ -15,7 +15,7 @@ describe('Testing jsonapi-server', () => {
       assert.strictEqual(err, null)
       const responseBody = helpers.validateError(json)
       assert.strictEqual(res.statusCode, 403, 'Expecting 403')
-      assert.strictEqual(responseBody.errors[0].detail, "The requested resource 'photos' does not support 'delete'")
+      assert.strictEqual(responseBody.errors[0].detail, "The requested resource \"photos\" does not support \"delete\"")
     })
   })
 
