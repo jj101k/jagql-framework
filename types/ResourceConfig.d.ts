@@ -2,10 +2,10 @@
  * @module @jagql/framework
  */
 import { Schema } from "joi"
-import { CallbackHandler as CallbackHandler } from "./CallbackHandler"
+import BaseRelationship from "../lib/BaseRelationship"
+import { CallbackHandler } from "./CallbackHandler"
 import { ActionConfig, OurJoiSettings } from "./ourJoi"
 import { PromiseHandler } from "./PromiseHandler"
-import BaseRelationship from "../lib/BaseRelationship"
 
 /**
  *
@@ -79,7 +79,7 @@ export interface ResourceConfig<Item = any> {
     /**
      *
      */
-    examples: (BaseType & Item)[]
+    examples: (BaseType & Item & {meta?: any})[]
     /**
      *
      */

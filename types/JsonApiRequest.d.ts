@@ -55,24 +55,41 @@ interface JsonApiQueryParams {
 /**
  *
  */
-interface JsonApiRouteParams {
+interface JsonApiRouteParams<R> {
     /**
      *
      */
-    id?: string
+    type: string
+}
+
+/**
+ *
+ */
+interface JsonApiIdRouteParams<R> extends JsonApiRouteParams<R> {
+    /**
+     *
+     */
+    id: string
+}
+
+/**
+ *
+ */
+interface JsonApiRelationshipRouteParams<R> extends JsonApiIdRouteParams<R> {
     /**
      * @deprecated Please use relationship
      */
-    relation?: string
+    relation: string | keyof R
     /**
      *
      */
-    relationship?: string
-    /**
-     *
-     */
-    type?: string
+    relationship: string | keyof R
 }
+
+/**
+ *
+ */
+type JsonApiAnyRouteParams<R> = JsonApiIdRouteParams<R> | JsonApiRouteParams<R> | JsonApiRelationshipRouteParams<R>
 
 /**
  *
@@ -103,7 +120,10 @@ interface JsonApiAppParams {
  */
 type JsonApiExtendedQueryParams = JsonApiQueryParams & Record<string, any>
 
-export interface JsonApiRequest {
+/**
+ *
+ */
+export interface JsonApiRequest<R = any, RP extends JsonApiRouteParams<R> = JsonApiAnyRouteParams<R>> {
     /**
      *
      */
@@ -141,7 +161,7 @@ export interface JsonApiRequest {
      * @deprecated Please use routeParams (route components: id, type,
      * relationship); or appParams (relationship lookup details); body; or query
      */
-    params: JsonApiExtendedQueryParams & JsonApiBodyParams & JsonApiRouteParams & JsonApiAppParams
+    params: JsonApiExtendedQueryParams & JsonApiBodyParams & RP & JsonApiAppParams
     /**
      *
      */
@@ -190,9 +210,30 @@ export interface JsonApiRequest {
     /**
      *
      */
-    routeParams: JsonApiRouteParams
+    routeParams: RP
     /**
      *
      */
     safeHeaders: any
 }
+
+/**
+ *
+ */
+export type JsonApiCreateRequest<R> = JsonApiRequest<R, JsonApiRouteParams<R>>
+/**
+ *
+ */
+export type JsonApiDeleteRequest<R> = JsonApiRequest<R, JsonApiIdRouteParams<R>>
+/**
+ *
+ */
+export type JsonApiFindRequest<R> = JsonApiRequest<R, JsonApiIdRouteParams<R>>
+/**
+ *
+ */
+export type JsonApiSearchRequest<R> = JsonApiRequest<R, JsonApiRouteParams<R>>
+/**
+ *
+ */
+export type JsonApiUpdateRequest<R> = JsonApiRequest<R, JsonApiIdRouteParams<R>>
