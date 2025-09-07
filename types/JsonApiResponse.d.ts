@@ -41,13 +41,34 @@ export interface JsonApiLink {
     data: any | undefined
 }
 
-interface JsonApiResourceObject {
+/**
+ *
+ */
+interface JsonApiResourceObject<R = any> {
+    /**
+     *
+     */
+    attributes?: Partial<{[k in Exclude<keyof R, "id" | "type">]: R[k]}>
+    /**
+     *
+     */
     id: string
-    type: string
-    attributes?: Record<string, any>
-    relationships?: Record<string, JsonApiRelationshipObject>
+    /**
+     *
+     */
     links?: Record<string, JsonApiLink>
+    /**
+     *
+     */
     meta?: any
+    /**
+     *
+     */
+    type: string
+    /**
+     *
+     */
+    relationships?: Partial<{[k in Exclude<keyof R, "id" | "type">]: JsonApiRelationshipObject}>
 }
 
 export type JsonApiPrimaryDataSingle = JsonApiResourceObject | null
