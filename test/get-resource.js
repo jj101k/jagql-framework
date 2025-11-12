@@ -610,17 +610,17 @@ describe('Testing jsonapi-server', () => {
         assert.strictEqual(data.data.length, 2, 'Should be 2 matching resources')
       })
 
-      it('should find resources by many relationships', async () => {
-        const url = 'http://localhost:16999/rest/articles/?filter[photos]=aab14844-97e7-401c-98c8-0bd5ec922d93&filter[photos]=4a8acd65-78bb-4020-b9eb-2d058a86a2a0'
+      it("should find resources by many relationships", async () => {
+        const url = "http://localhost:16999/rest/articles/?filter[photos]=aab14844-97e7-401c-98c8-0bd5ec922d93&filter[photos]=4a8acd65-78bb-4020-b9eb-2d058a86a2a0"
         const {err, res, json} = await helpers.requestAsync({
-          method: 'GET',
+          method: "GET",
           url
         })
         assert.strictEqual(err, null)
         const data = helpers.validateJson(json)
 
-        assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
-        assert.strictEqual(data.data.length, 3, 'Should be 3 matching resources')
+        assert.strictEqual(res.statusCode, 200, "Expecting 200 OK")
+        assert.strictEqual(data.data.length, 3, "Should be 3 matching resources")
       })
 
       it('should error with incorrectly named relationships', async () => {

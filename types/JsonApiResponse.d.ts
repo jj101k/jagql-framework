@@ -83,7 +83,29 @@ export interface JsonApiResponseBody<T extends JsonApiPrimaryData = JsonApiPrima
 }
 
 export interface JsonApiResponseBodyMeta extends JsonApiResponseBodyBase {
-    meta?: any
+    meta?: {
+        filter?: {
+            incompatibleWithPagination: boolean
+        },
+        include?: {
+            dropped: number
+        },
+        page?: {
+            /**
+             * How many entries at most this would produce
+             */
+            limit?: number
+            /**
+             * How far into the set to start
+             */
+            offset?: number
+            /**
+             * How many entries you would have (approximately) if you had an
+             * offset of 0 and no limit
+             */
+            total: number
+        }
+    }
 }
 
 export interface JsonApiLinkObject {

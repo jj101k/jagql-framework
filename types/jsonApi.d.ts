@@ -48,6 +48,11 @@ export interface ApiConfig {
      */
     handleAllPaths?: boolean
     /**
+     * If set, this is the limit to how many items at most will be in the
+     * "include" section in responses.
+     */
+    includeLimit?: number
+    /**
      *
      */
     graphiql?: boolean
