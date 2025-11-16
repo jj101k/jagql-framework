@@ -1,10 +1,9 @@
 {
-  "name": "@ekko/jagql-framework",
+  "name": "@jdframe/jsonapi-server",
   "description": "A config driven NodeJS framework implementing json:api",
   "keywords": [
     "jsonapi",
     "json:api",
-    "jagql",
     "swagger",
     "api"
   ],
