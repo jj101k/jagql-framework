@@ -1,5 +1,5 @@
 /**
- * @module @jagql/framework
+ * @module @jj101k/jsonapi-server
  */
 
 /// <reference types="express" />

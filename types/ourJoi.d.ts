@@ -1,6 +1,6 @@
 /// <reference types="joi" />
 /**
- * @module @jagql/framework/lib/ourJoi
+ * @module @jj101k/jsonapi-server/lib/ourJoi
  */
 import { AnySchema, FunctionSchema, Schema } from "joi"
 import BaseJoi from "joi"

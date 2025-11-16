@@ -1,5 +1,5 @@
 /**
- * @module @jagql/framework
+ * @module @jj101k/jsonapi-server
  */
 import { Schema } from "joi"
 import BaseRelationship from "../lib/BaseRelationship"
