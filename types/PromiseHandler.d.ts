@@ -17,7 +17,7 @@ export class PromiseHandler<R = any> {
     /**
      *
      */
-    readonly jagqlVersion: 1
+    readonly jsonApiServerVersion: 1
     /**
      *
      */

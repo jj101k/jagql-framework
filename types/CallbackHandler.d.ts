@@ -33,7 +33,7 @@ export interface UpdateFunction<R = any> {
  */
 declare class CallbackHandler<R = any> {
     constructor(o?: any)
-    readonly jagqlVersion?: 0
+    readonly jsonApiServerVersion?: 0
     /**
      *
      */
