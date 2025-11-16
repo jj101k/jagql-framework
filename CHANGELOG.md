@@ -1,3 +1,8 @@
+# CHANGELOG (`@jdframe/jsonapi-server`)
+
+- 2025-11-16 v12.0.0 Name change; modified provided filter functionality to
+  apply earlier, to reduce the change of pagination producing unexpected results
+
 # CHANGELOG (`@ekko/jagql-framework`)
 
 - 2025-08-26 v11.0.0 SECURITY UPDATE Fix exception stack trace exposure risk,
