@@ -65,6 +65,21 @@ export interface ApiConfig {
      */
     hostname: string
     /**
+     * This can be used if the service runs through a proxy which makes the
+     * internal view of the URL unlike the external one.
+     */
+    inferProxy?: {
+        /**
+         * A header which contains the URL of the proxy root
+         */
+        headerName: string
+        /**
+         * The path which the proxy is expected to add to the beginning of the
+         * local URL. This must be the first component of "base" if supplied.
+         */
+        proxyBasePath?: string
+    }
+    /**
      *
      */
     jsonapi?: boolean

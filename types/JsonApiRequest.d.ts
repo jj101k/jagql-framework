@@ -156,6 +156,10 @@ export interface JsonApiRequest<R = any, RP extends JsonApiRouteParams<R> = Json
     /**
      *
      */
+    inferredBaseUrl: string | null
+    /**
+     *
+     */
     originalUrl: string
     /**
      * @deprecated Please use routeParams (route components: id, type,

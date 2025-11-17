@@ -5,7 +5,7 @@
     "target": "ES2022",
     "noEmit": true
   },
-  "files": ["types"],
+  "include": ["types"],
   "exclude": [
     "node_modules",
     "lib"
