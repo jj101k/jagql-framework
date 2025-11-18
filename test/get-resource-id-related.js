@@ -151,8 +151,9 @@ describe('Testing jsonapi-server', () => {
         })
 
         describe("Limited includes", () => {
-            before(() => ConfigStore.config.includeLimit = 0)
-            after(() => delete ConfigStore.config.includeLimit)
+            const configStore = ConfigStore.inst
+            before(() => configStore.config.includeLimit = 0)
+            after(() => delete configStore.config.includeLimit)
 
             it("can fetch related entities with limited includes", async () => {
                 const url = "http://localhost:16999/rest/articles/de305d54-75b4-431b-adb2-eb6b9e546014/author?include=articles"
