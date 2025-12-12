@@ -1,8 +1,6 @@
 
 import {CallbackHandler} from './CallbackHandler'
 
-declare class MemoryCallbackHandler extends CallbackHandler {
+export default class MemoryCallbackHandler extends CallbackHandler {
   constructor()
 }
-
-export = MemoryCallbackHandler

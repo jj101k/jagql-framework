@@ -21,7 +21,7 @@ export class PromiseHandler<R = any> {
     /**
      *
      */
-    readonly otherHandler: undefined
+    readonly otherHandler: PromiseHandler<R> | undefined
     /**
      *
      */

@@ -35,7 +35,7 @@ interface AfterUpdateFunction<R=any> {
 /**
  * [[include:chain-handler.md]]
  */
-declare class ChainCallbackHandler<R=any> extends CallbackHandler<R>{
+export default class ChainCallbackHandler<R=any> extends CallbackHandler<R>{
   constructor()
   chain(nextHandler: CallbackHandler<R>): this
   beforeInitialise(...args: any[]): any // TODO
@@ -53,5 +53,3 @@ declare class ChainCallbackHandler<R=any> extends CallbackHandler<R>{
   beforeDelete: BeforeDeleteFunction
   afterDelete: AfterDeleteFunction
 }
-
-export = ChainCallbackHandler

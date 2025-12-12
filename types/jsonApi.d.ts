@@ -15,7 +15,7 @@ import MemoryPromiseHandler from "./MemoryPromiseHandler"
 import * as RC from "./ResourceConfig"
 import { ResourceConfig } from "./ResourceConfig"
 import { Metrics } from "./metrics"
-import { Joi, OurJoiSettings } from "./ourJoi"
+import { Joi as OurJoiIn, OurJoiSettings, OurJoiSchema } from "./ourJoi"
 
 export * from "./JsonApiRequest"
 export import ResourceConfig = RC.ResourceConfig
@@ -139,7 +139,7 @@ export interface DefineOptions {
 /**
  * Our modified Joi instance
  */
-export const Joi: typeof Joi
+export const Joi: typeof OurJoiIn
 
 /**
  * Configure things like -
@@ -157,16 +157,19 @@ export function setConfig(apiConfig: ApiConfig): void
  * @param {DefineOptions} [options]
  */
 export function define<T>(resConfig: RC.ResourceConfigIn<T>, options?: DefineOptions): void
+
 /**
  * @deprecated use authenticateWithCallback or authenticateWithPromise
  * @param authenticator
  */
 export function authenticate(authenticator: (req: JsonApiRequest, cb: () => void) => void): void
+
 /**
  *
  * @param authenticator
  */
 export function authenticateWithCallback(authenticator: (req: JsonApiRequest, cb: () => void) => void): void
+
 /**
  *
  * @param authenticator
@@ -268,7 +271,7 @@ export function close(): void
  *
  * @param schema
  */
-export function getSchemaSettings(schema: Schema): OurJoiSettings | undefined
+export function getSchemaSettings(schema: OurJoiSchema): OurJoiSettings | undefined
 /**
  * @deprecated See getToManyRelationshipsFor
  *

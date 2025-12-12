@@ -8,7 +8,7 @@ import Relationship from "../lib/Relationship"
 
 type UidType = "uuid" | "autoincrement"
 
-interface OurJoiSchema extends AnySchema {
+export interface OurJoiSchema extends AnySchema {
   uidType(type: UidType): this
 }
 interface ActionConfig {

@@ -138,5 +138,5 @@ export interface ResourceConfigIn<T> extends Omit<ResourceConfig<T>, "onCreate">
     /**
      *
      */
-    handlers: CallbackHandlerIn<Item> | PromiseHandlerIn<Item>
+    handlers: CallbackHandlerIn<T> | PromiseHandlerIn<T>
 }

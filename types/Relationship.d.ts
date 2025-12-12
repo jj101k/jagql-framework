@@ -26,7 +26,7 @@ export class Relationship {
      * @param uidType
      * @returns
      */
-    static manyOf(resourceOrResources: string | string[], required = false, uidType?: "string" | "uuid" | "autoincrement"): LocalRelationship
+    static manyOf(resourceOrResources: string | string[], required?: boolean, uidType?: "string" | "uuid" | "autoincrement"): LocalRelationship
     /**
      *
      * @param resourceOrResources
@@ -34,5 +34,5 @@ export class Relationship {
      * @param uidType
      * @returns
      */
-    static oneOf(resourceOrResources: string | string[], required = false, uidType?: "string" | "uuid" | "autoincrement"): LocalRelationship
+    static oneOf(resourceOrResources: string | string[], required?: boolean, uidType?: "string" | "uuid" | "autoincrement"): LocalRelationship
 }
