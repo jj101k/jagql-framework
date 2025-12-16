@@ -5,8 +5,8 @@
 /// <reference types="express" />
 
 import { Application, Router } from "express"
-import RelationshipType from "../lib/Relationship.js"
-import ChainPromiseHandler from "../lib/handlers/ChainPromiseHandler.js"
+import { Relationship as RelationshipType } from "../lib/Relationship.js"
+import { ChainPromiseHandler } from "../lib/handlers/ChainPromiseHandler.js"
 import * as H from "./CallbackHandler.js"
 import { ChainCallbackHandler as ChainCallbackHandlerType } from "./ChainCallbackHandler.js"
 import { JsonApiRequest } from "./JsonApiRequest.js"

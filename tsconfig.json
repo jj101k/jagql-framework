@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "module": "node16",
+    "moduleResolution": "node16",
     "target": "ES2022",
-    "noEmit": true
+    "noEmit": true,
+    "checkJs": true
   },
   "include": ["types"],
   "exclude": [
-    "node_modules",
-    "lib"
+    "node_modules", "lib"
   ]
 }
