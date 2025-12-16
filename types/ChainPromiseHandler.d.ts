@@ -1,12 +1,11 @@
 import {
-    CallbackHandler,
     CreateFunction, DeleteFunction, FindFunction,
     HandlerCallback,
     SearchFunction,
     UpdateFunction
-} from "./CallbackHandler"
-import { JsonApiRequest } from "./JsonApiRequest"
-import { PromiseHandler } from "./PromiseHandler"
+} from "./CallbackHandler.js"
+import { JsonApiRequest } from "./JsonApiRequest.js"
+import { PromiseHandler } from "./PromiseHandler.js"
 
 type BeforeSearchFunction = SearchFunction
 type BeforeFindFunction = FindFunction

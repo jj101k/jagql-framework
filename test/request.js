@@ -1,4 +1,4 @@
-const fetch = require('node-fetch')
+import fetch from "node-fetch"
 
 /**
  *
@@ -26,4 +26,4 @@ async function request (data, cb) {
   cb(null, { statusCode: result.status, headers: Object.fromEntries(result.headers.entries()) }, json)
 }
 
-module.exports = request
+export default request

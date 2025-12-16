@@ -1,4 +1,4 @@
-import { JsonApiRequest } from "./JsonApiRequest"
+import { JsonApiRequest } from "./JsonApiRequest.js"
 
 /**
  *
@@ -48,7 +48,7 @@ export class PromiseHandler<R = any> {
     find(request: JsonApiRequest): Promise<R>
     /**
      *
-     * @param {import("../../types/ResourceConfig").ResourceConfig<R>} resourceConfig
+     * @param {import("../../types/ResourceConfig.js").ResourceConfig<R>} resourceConfig
      * @returns
      */
     initialise?: (resourceConfig) => any

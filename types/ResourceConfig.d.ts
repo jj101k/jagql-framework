@@ -2,10 +2,10 @@
  * @module @jj101k/jsonapi-server
  */
 import { Schema } from "joi"
-import BaseRelationship from "../lib/BaseRelationship"
-import { CallbackHandler } from "./CallbackHandler"
-import { ActionConfig, OurJoiSettings } from "./ourJoi"
-import { PromiseHandler } from "./PromiseHandler"
+import { BaseRelationship } from "../lib/BaseRelationship.js"
+import { CallbackHandler } from "./CallbackHandler.js"
+import { ActionConfig, OurJoiSettings } from "./ourJoi.js"
+import { PromiseHandler } from "./PromiseHandler.js"
 
 /**
  *

@@ -1,8 +1,8 @@
 /**
  * @module @jj101k/jsonapi-server
  */
-import {EventEmitter} from 'events'
-import { HttpVerbs } from "./JsonApiRequest"
+import { EventEmitter } from 'events'
+import { HttpVerbs } from "./JsonApiRequest.js"
 
 export interface MetricsData {
   route: string

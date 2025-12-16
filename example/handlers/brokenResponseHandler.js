@@ -1,6 +1,6 @@
 'use strict'
 
-const jsonApi = require('../..')
+import { jsonApi } from "../../lib/jsonApi.js"
 
 class BrokenResponseHandler extends jsonApi.PromiseHandlers.Chain {
   afterFind(request, result) {
@@ -12,4 +12,4 @@ class BrokenResponseHandler extends jsonApi.PromiseHandlers.Chain {
 
 const brokenResponseHandler = new BrokenResponseHandler()
 
-module.exports = brokenResponseHandler.chain(new jsonApi.PromiseHandlers.Memory())
+export default brokenResponseHandler.chain(new jsonApi.PromiseHandlers.Memory())

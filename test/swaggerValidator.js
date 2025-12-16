@@ -1,13 +1,13 @@
 "use strict"
 
-const ConfigStore = require('../lib/ConfigStore')
-const swagger = require('../lib/swagger')
+import { ConfigStore } from "../lib/ConfigStore.js"
+import { swaggerGenerator } from "../lib/swagger/index.js"
 let swaggerDoc
 
 /**
  * This supports validation against a JSON schema (not a Joi one)
  */
-module.exports = class swaggerValidator {
+export default class swaggerValidator {
     /**
      *
      * @param {string} method
@@ -175,7 +175,7 @@ module.exports = class swaggerValidator {
     }
 
     static assert(params, statusCode, json) {
-        if (!swaggerDoc) swaggerDoc = swagger.generateDocumentation(ConfigStore.inst, null)
+        if (!swaggerDoc) swaggerDoc = swaggerGenerator.generateDocumentation(ConfigStore.inst, null)
         const urlObj = new URL(params.url)
         this.#validateRequest(params.method.toLowerCase(), urlObj.pathname, JSON.parse(params.body || 'null'))
         this.#validatePayload(params.method.toLowerCase(), urlObj.pathname, statusCode, JSON.parse(json))

@@ -1,6 +1,6 @@
 'use strict'
 
-const jsonApi = require('../..')
+import { jsonApi } from "../../lib/jsonApi.js"
 
 class TimestampHandler extends jsonApi.CallbackHandlers.Chain {
   beforeSearch(request, callback) {
@@ -18,4 +18,4 @@ class TimestampHandler extends jsonApi.CallbackHandlers.Chain {
   }
 }
 
-module.exports = new TimestampHandler()
+export default new TimestampHandler()

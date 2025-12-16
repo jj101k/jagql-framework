@@ -5,19 +5,19 @@
 /// <reference types="express" />
 
 import { Application, Router } from "express"
-import RelationshipType from "../lib/Relationship"
-import ChainPromiseHandler from "../lib/handlers/ChainPromiseHandler"
-import * as H from "./CallbackHandler"
-import ChainCallbackHandlerType from "./ChainCallbackHandler"
-import { JsonApiRequest } from "./JsonApiRequest"
-import MemoryHandlerType from "./MemoryCallbackHandler"
-import MemoryPromiseHandler from "./MemoryPromiseHandler"
-import * as RC from "./ResourceConfig"
-import { ResourceConfig } from "./ResourceConfig"
-import { Metrics } from "./metrics"
-import { Joi as OurJoiIn, OurJoiSettings, OurJoiSchema } from "./ourJoi"
+import RelationshipType from "../lib/Relationship.js"
+import ChainPromiseHandler from "../lib/handlers/ChainPromiseHandler.js"
+import * as H from "./CallbackHandler.js"
+import { ChainCallbackHandler as ChainCallbackHandlerType } from "./ChainCallbackHandler.js"
+import { JsonApiRequest } from "./JsonApiRequest.js"
+import { MemoryCallbackHandler as MemoryHandlerType } from "./MemoryCallbackHandler.js"
+import { MemoryPromiseHandler } from "./MemoryPromiseHandler.js"
+import * as RC from "./ResourceConfig.js"
+import { ResourceConfig } from "./ResourceConfig.js"
+import { Metrics } from "./metrics.js"
+import { Joi as OurJoiIn, OurJoiSchema, OurJoiSettings } from "./ourJoi.js"
 
-export * from "./JsonApiRequest"
+export * from "./JsonApiRequest.js"
 export import ResourceConfig = RC.ResourceConfig
 export type JsonApiProtocols = "http" | "https"
 export import CallbackHandler = H.CallbackHandler

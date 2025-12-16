@@ -1,6 +1,6 @@
-import { LocalRelationship } from "./LocalRelationship"
-import { ModelOptions } from "./ourJoi"
-import { RemoteRelationship } from "./RemoteRelationship"
+import { LocalRelationship } from "./LocalRelationship.js"
+import { ModelOptions } from "./ourJoi.js"
+import { RemoteRelationship } from "./RemoteRelationship.js"
 
 /**
  *

@@ -1,8 +1,7 @@
 'use strict'
 
-const jsonApi = require('../../.')
-const {Relationship} = require('../../.')
-const commentHandler = require('../handlers/commentHandler.js')
+import { jsonApi, Relationship } from "../../lib/jsonApi.js"
+import commentHandler from "../handlers/commentHandler.js"
 
 jsonApi.define({
   namespace: 'json:api',

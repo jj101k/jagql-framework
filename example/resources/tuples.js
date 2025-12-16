@@ -1,7 +1,7 @@
 'use strict'
 
-const jsonApi = require('../../.')
-const tupleHandler = require('../handlers/tupleHandler.js')
+import { jsonApi } from "../../lib/jsonApi.js"
+import tupleHandler from "../handlers/tupleHandler.js"
 
 jsonApi.define({
   namespace: 'json:api',

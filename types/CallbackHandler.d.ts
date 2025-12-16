@@ -1,6 +1,6 @@
-import { JsonApiError } from "./JsonApiResponse"
-import { JsonApiRequest } from "./JsonApiRequest"
-import { ResourceConfig } from './ResourceConfig'
+import { JsonApiError } from "./JsonApiResponse.js"
+import { JsonApiRequest } from "./JsonApiRequest.js"
+import { ResourceConfig } from './ResourceConfig.js'
 
 export interface HandlerCallback<R, C = undefined> {
     <R, C>(err?: JsonApiError, result?: R, count?: C): any

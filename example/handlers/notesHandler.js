@@ -1,5 +1,5 @@
 'use strict'
 
-const jsonApi = require('../..')
+import { jsonApi } from "../../lib/jsonApi.js"
 
-module.exports = new jsonApi.CallbackHandlers.Memory()
+export default new jsonApi.CallbackHandlers.Memory()

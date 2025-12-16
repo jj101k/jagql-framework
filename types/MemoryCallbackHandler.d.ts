@@ -1,6 +1,12 @@
 
-import {CallbackHandler} from './CallbackHandler'
+import { CallbackHandler } from "./CallbackHandler.js"
 
-export default class MemoryCallbackHandler extends CallbackHandler {
+/**
+ *
+ */
+export class MemoryCallbackHandler extends CallbackHandler {
+  /**
+   *
+   */
   constructor()
 }

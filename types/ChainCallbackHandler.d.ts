@@ -4,8 +4,8 @@ import {
   HandlerCallback,
   SearchFunction,
   UpdateFunction
-} from './CallbackHandler'
-import { JsonApiRequest } from "./JsonApiRequest"
+} from "./CallbackHandler.js"
+import { JsonApiRequest } from "./JsonApiRequest.js"
 
 type BeforeSearchFunction = SearchFunction
 type BeforeFindFunction = FindFunction
@@ -35,7 +35,7 @@ interface AfterUpdateFunction<R=any> {
 /**
  * [[include:chain-handler.md]]
  */
-export default class ChainCallbackHandler<R=any> extends CallbackHandler<R>{
+export class ChainCallbackHandler<R=any> extends CallbackHandler<R>{
   constructor()
   chain(nextHandler: CallbackHandler<R>): this
   beforeInitialise(...args: any[]): any // TODO

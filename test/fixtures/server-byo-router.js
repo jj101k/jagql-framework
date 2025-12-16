@@ -1,11 +1,12 @@
 'use strict'
 
-const fs = require('fs')
-const path = require('path')
+import fs from "fs"
+import path from "path"
 
-const express = require('express')
+import express from "express"
 
-const jsonApi = require('../../.')
+import { fileURLToPath } from "url"
+import { jsonApi } from "../../lib/jsonApi.js"
 
 const app = express()
 
@@ -14,13 +15,11 @@ jsonApi.setConfig({
   router: app
 })
 
-const resourcesPath = path.join(__dirname, '..', '..', 'example', 'resources')
+const resourcesPath = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..', 'example', 'resources')
 const resourcePaths = fs.readdirSync(resourcesPath).filter(filename => /^[a-z].*\.js$/.test(filename))
   .map(filename => path.join(resourcesPath, filename))
 
-for(const path of resourcePaths) {
-  require(path)
-}
+await Promise.all(resourcePaths.map(path => import(path)))
 
 jsonApi.start()
 const server = app.listen(0)

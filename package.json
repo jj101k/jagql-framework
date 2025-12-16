@@ -7,8 +7,9 @@
     "swagger",
     "api"
   ],
+  "type": "module",
   "version": "12.1.0",
-  "main": "lib/jsonApi.js",
+  "main": "lib/index.js",
   "types": "types/jsonApi.d.ts",
   "author": "",
   "license": "MIT",

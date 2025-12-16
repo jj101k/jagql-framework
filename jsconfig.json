@@ -4,7 +4,7 @@
         "strict": true,
         "target": "es2024",
         "moduleResolution": "node16",
-        "module": "node16"
+        "module": "node16",
     },
-    "include": ["lib/"]
+    "include": ["lib/"],
 }

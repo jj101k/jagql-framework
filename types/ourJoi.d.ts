@@ -2,9 +2,7 @@
 /**
  * @module @jj101k/jsonapi-server/lib/ourJoi
  */
-import { AnySchema, FunctionSchema, Schema } from "joi"
-import BaseJoi from "joi"
-import Relationship from "../lib/Relationship"
+import BaseJoi, { AnySchema, Schema } from "joi"
 
 type UidType = "uuid" | "autoincrement"
 

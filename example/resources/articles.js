@@ -1,9 +1,9 @@
 'use strict'
 
-const jsonApi = require('../../.')
-const articleHandler = require('../handlers/articleHandler.js')
-const timestampHandler = require('../handlers/timestampHandler.js')
-const authenticationHandler = require('../handlers/authenticationHandler.js')
+import { jsonApi } from "../../lib/jsonApi.js"
+import articleHandler from "../handlers/articleHandler.js"
+import authenticationHandler from "../handlers/authenticationHandler.js"
+import timestampHandler from "../handlers/timestampHandler.js"
 
 jsonApi.define({
   namespace: 'json:api',

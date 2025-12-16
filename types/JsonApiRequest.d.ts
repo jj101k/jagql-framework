@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
-import { FilterSpec, FilterSpecByAttrIn } from "./Filter"
-import { ResourceConfig } from "./ResourceConfig"
+import { FilterSpec, FilterSpecByAttrIn } from "./Filter.js"
+import { ResourceConfig } from "./ResourceConfig.js"
 
 /**
  *

@@ -1,8 +1,8 @@
 'use strict'
 
-const assert = require('assert')
-const jsonApiTestServer = require('../example/server.js')
-const helpers = require('./helpers.js')
+import assert from "assert"
+import jsonApiTestServer from "../example/server.js"
+import helpers from "./helpers.js"
 
 describe('Testing jsonapi-server', () => {
   describe('authentication', () => {

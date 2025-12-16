@@ -1,11 +1,12 @@
 'use strict'
 
-const server = module.exports = { }
+const server = { }
 
-const jsonApi = require('../lib/jsonApi')
-const fs = require('fs')
-const path = require('path')
-const debug = require('debug')
+import debug from "debug"
+import fs from "fs"
+import path from "path"
+import { fileURLToPath } from "url"
+import { jsonApi } from "../lib/jsonApi.js"
 
 jsonApi.setConfig({
   graphiql: true,
@@ -55,13 +56,12 @@ jsonApi.authenticate((request, callback) => {
   return callback()
 })
 
-const resourcePaths = fs.readdirSync(path.join(__dirname, '/resources'))
+const dirname = path.dirname(fileURLToPath(import.meta.url))
+const resourcePaths = fs.readdirSync(path.join(dirname, '/resources'))
   .filter(filename => /^[a-z].*\.js$/.test(filename))
-  .map(filename => path.join(__dirname, '/resources/', filename))
+  .map(filename => path.join(dirname, '/resources/', filename))
 
-for(const path of resourcePaths) {
-  require(path)
-}
+await Promise.all(resourcePaths.map(path => import(path)))
 
 jsonApi.onUncaughtException((request, error) => {
   const errorDetails = error.stack.split('\n')
@@ -87,3 +87,5 @@ if (typeof describe === 'undefined') {
 server.start = jsonApi.start
 server.close = jsonApi.close
 server.getExpressServer = jsonApi.getExpressServer
+
+export default server

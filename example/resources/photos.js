@@ -1,8 +1,7 @@
 'use strict'
 
-const jsonApi = require('../../.')
-const {Relationship} = require('../../.')
-const photoHandler = require('../handlers/photoHandler.js')
+import { jsonApi, Relationship } from "../../lib/jsonApi.js"
+import photoHandler from "../handlers/photoHandler.js"
 
 jsonApi.define({
   namespace: 'json:api',

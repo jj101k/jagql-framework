@@ -1,6 +1,6 @@
 'use strict'
 
-const jsonApi = require('../..')
+import { jsonApi } from "../../lib/jsonApi.js"
 
 class ChainHandler extends jsonApi.CallbackHandlers.Chain {
   // 1 is used by the example in resources/autoincrement.js
@@ -16,4 +16,4 @@ class ChainHandler extends jsonApi.CallbackHandlers.Chain {
 
 const chainHandler = new ChainHandler()
 
-module.exports = chainHandler.chain(new jsonApi.CallbackHandlers.Memory())
+export default chainHandler.chain(new jsonApi.CallbackHandlers.Memory())

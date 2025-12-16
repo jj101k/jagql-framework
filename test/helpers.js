@@ -1,10 +1,10 @@
 'use strict'
 
-const testHelpers = module.exports = { }
+const testHelpers = { }
 
-const assert = require('assert')
-const request = require('./request')
-const swaggerValidator = require('./swaggerValidator.js')
+import assert from "assert"
+import request from "./request.js"
+import swaggerValidator from "./swaggerValidator.js"
 
 /**
  *
@@ -176,3 +176,5 @@ testHelpers.requestAsyncNoAssert = (params) => {
   return new Promise((resolve) => request(params, (err, res, json) => {
     resolve({err, res, json})}))
 }
+
+export default testHelpers

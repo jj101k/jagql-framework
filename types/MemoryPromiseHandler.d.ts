@@ -1,5 +1,11 @@
-import { PromiseHandler } from "./PromiseHandler"
+import { PromiseHandler } from "./PromiseHandler.js"
 
-export default class MemoryPromiseHandler<R> extends PromiseHandler<R> {
+/**
+ *
+ */
+export class MemoryPromiseHandler<R> extends PromiseHandler<R> {
+  /**
+   *
+   */
   constructor()
 }

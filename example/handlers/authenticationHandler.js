@@ -1,6 +1,6 @@
 'use strict'
 
-const jsonApi = require('../..')
+import { jsonApi } from "../../lib/jsonApi.js"
 class AuthenticationHandler extends jsonApi.ChainHandler {
   beforeSearch(request, callback) {
     console.log('Before Search 1')
@@ -16,4 +16,4 @@ class AuthenticationHandler extends jsonApi.ChainHandler {
     console.log('Before Initialise 1', resourceConfig.resource)
   }
 }
-module.exports = new AuthenticationHandler()
+export default new AuthenticationHandler()

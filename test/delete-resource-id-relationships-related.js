@@ -1,8 +1,8 @@
 'use strict'
 
-const assert = require('assert')
-const helpers = require('./helpers.js')
-const jsonApiTestServer = require('../example/server.js')
+import assert from "assert"
+import helpers from "./helpers.js"
+import jsonApiTestServer from "../example/server.js"
 
 describe('Testing jsonapi-server', () => {
   describe('Removing from a relationship', () => {

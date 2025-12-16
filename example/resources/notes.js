@@ -1,8 +1,8 @@
 "use strict"
 
-const jsonApi = require("../../lib/jsonApi.js")
-const notesHandler = require("../handlers/notesHandler.js")
-const uuid = require('uuid')
+import * as uuid from "uuid"
+import { jsonApi } from "../../lib/jsonApi.js"
+import notesHandler from "../handlers/notesHandler.js"
 
 jsonApi.define({
   namespace: "json:api",

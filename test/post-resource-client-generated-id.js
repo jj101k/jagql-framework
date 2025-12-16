@@ -1,9 +1,9 @@
 'use strict'
 
-const assert = require('assert')
+import assert from "assert"
 
-const helpers = require('./helpers.js')
-const jsonApiTestServer = require('../example/server.js')
+import helpers from "./helpers.js"
+import jsonApiTestServer from "../example/server.js"
 
 describe('Testing jsonapi-server', () => {
   describe('Creating a new resource with client-generated ID', () => {

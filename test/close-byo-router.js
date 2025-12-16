@@ -1,11 +1,12 @@
 'use strict'
 
-const assert = require('assert')
-const childProcess = require('child_process')
-const path = require('path')
+import assert from "assert"
+import childProcess from "child_process"
+import path from "path"
+import { fileURLToPath } from "url"
 
 describe('Testing jsonapi-server with bring-your-own router', () => {
-  const serverPath = path.join(__dirname, 'fixtures', 'server-byo-router.js')
+  const serverPath = path.join(path.dirname(fileURLToPath(import.meta.url)), 'fixtures', 'server-byo-router.js')
 
   let child
   let isErrorEmitted

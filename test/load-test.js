@@ -1,12 +1,12 @@
 'use strict'
 
-const assert = require('assert')
-const helpers = require('./helpers.js')
-const jsonApiTestServer = require('../example/server.js')
+import assert from "assert"
+import helpers from "./helpers.js"
+import jsonApiTestServer from "../example/server.js"
 
 describe("Load test", () => {
   it("can load 100k objects in acceptable time", async () => {
-    const { expect } = await import('chai')
+    const { expect } = await import("chai")
     const start = new Date()
     const {err, res, json} = await helpers.requestAsync({
       method: "GET",
