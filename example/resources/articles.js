@@ -1,6 +1,6 @@
 'use strict'
 
-import { jsonApi } from "../../lib/jsonApi.js"
+import { jsonApi } from "../../lib/index.js"
 import articleHandler from "../handlers/articleHandler.js"
 import authenticationHandler from "../handlers/authenticationHandler.js"
 import timestampHandler from "../handlers/timestampHandler.js"

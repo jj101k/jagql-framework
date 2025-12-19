@@ -1,6 +1,6 @@
 'use strict'
 
-import { jsonApi } from "../../lib/jsonApi.js"
+import { jsonApi } from "../../lib/index.js"
 
 class ChainHandler extends jsonApi.CallbackHandlers.Chain {
   // 1 is used by the example in resources/autoincrement.js

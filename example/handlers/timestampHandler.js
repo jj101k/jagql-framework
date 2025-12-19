@@ -1,6 +1,6 @@
 'use strict'
 
-import { jsonApi } from "../../lib/jsonApi.js"
+import { jsonApi } from "../../lib/index.js"
 
 class TimestampHandler extends jsonApi.CallbackHandlers.Chain {
   beforeSearch(request, callback) {

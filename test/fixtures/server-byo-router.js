@@ -6,7 +6,7 @@ import path from "path"
 import express from "express"
 
 import { fileURLToPath } from "url"
-import { jsonApi } from "../../lib/jsonApi.js"
+import { jsonApi } from "../../lib/index.js"
 
 const app = express()
 

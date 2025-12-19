@@ -1,6 +1,6 @@
 'use strict'
 
-import { jsonApi } from "../../lib/jsonApi.js"
+import { jsonApi } from "../../lib/index.js"
 import autoincrementHandler from "../handlers/autoincrementHandler.js"
 
 jsonApi.define({

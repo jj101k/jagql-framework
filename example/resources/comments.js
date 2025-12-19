@@ -1,6 +1,6 @@
 'use strict'
 
-import { jsonApi, Relationship } from "../../lib/jsonApi.js"
+import { jsonApi, Relationship } from "../../lib/index.js"
 import commentHandler from "../handlers/commentHandler.js"
 
 jsonApi.define({

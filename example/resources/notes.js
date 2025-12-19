@@ -1,7 +1,7 @@
 "use strict"
 
 import * as uuid from "uuid"
-import { jsonApi } from "../../lib/jsonApi.js"
+import { jsonApi } from "../../lib/index.js"
 import notesHandler from "../handlers/notesHandler.js"
 
 jsonApi.define({

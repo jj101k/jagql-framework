@@ -6,7 +6,7 @@ import debug from "debug"
 import fs from "fs"
 import path from "path"
 import { fileURLToPath } from "url"
-import { jsonApi } from "../lib/jsonApi.js"
+import { jsonApi } from "../lib/index.js"
 
 jsonApi.setConfig({
   graphiql: true,

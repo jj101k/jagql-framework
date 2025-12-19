@@ -1,6 +1,6 @@
 'use strict'
 
-import { jsonApi } from "../../lib/jsonApi.js"
+import { jsonApi } from "../../lib/index.js"
 import tupleHandler from "../handlers/tupleHandler.js"
 
 jsonApi.define({

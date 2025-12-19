@@ -1,6 +1,6 @@
 'use strict'
 
-import { jsonApi } from "../../lib/jsonApi.js"
+import { jsonApi } from "../../lib/index.js"
 class AuthenticationHandler extends jsonApi.ChainHandler {
   beforeSearch(request, callback) {
     console.log('Before Search 1')

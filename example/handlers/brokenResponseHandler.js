@@ -1,6 +1,6 @@
 'use strict'
 
-import { jsonApi } from "../../lib/jsonApi.js"
+import { jsonApi } from "../../lib/index.js"
 
 class BrokenResponseHandler extends jsonApi.PromiseHandlers.Chain {
   afterFind(request, result) {
