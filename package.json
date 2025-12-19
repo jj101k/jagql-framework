@@ -10,7 +10,7 @@
   "type": "module",
   "version": "12.1.0",
   "main": "lib/index.js",
-  "types": "types/jsonApi.d.ts",
+  "types": "types/index.d.ts",
   "author": "",
   "license": "MIT",
   "repository": {
