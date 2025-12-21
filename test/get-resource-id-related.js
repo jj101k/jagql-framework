@@ -2,7 +2,7 @@
 
 import assert from "assert"
 import jsonApiTestServer from "../example/server.js"
-import { ConfigStore } from "../lib/ConfigStore.js"
+import { jsonApi } from "../lib/jsonApi.js"
 import helpers from "./helpers.js"
 
 describe('Testing jsonapi-server', () => {
@@ -151,9 +151,8 @@ describe('Testing jsonapi-server', () => {
         })
 
         describe("Limited includes", () => {
-            const configStore = ConfigStore.inst
-            before(() => configStore.config.includeLimit = 0)
-            after(() => delete configStore.config.includeLimit)
+            before(() => jsonApi.config.includeLimit = 0)
+            after(() => delete jsonApi.config.includeLimit)
 
             it("can fetch related entities with limited includes", async () => {
                 const url = "http://localhost:16999/rest/articles/de305d54-75b4-431b-adb2-eb6b9e546014/author?include=articles"

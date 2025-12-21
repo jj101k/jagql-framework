@@ -1,6 +1,6 @@
 "use strict"
 
-import { ConfigStore } from "../lib/ConfigStore.js"
+import { jsonApi } from "../lib/index.js"
 import { swaggerGenerator } from "../lib/swagger/index.js"
 let swaggerDoc
 
@@ -175,7 +175,7 @@ export default class swaggerValidator {
     }
 
     static assert(params, statusCode, json) {
-        if (!swaggerDoc) swaggerDoc = swaggerGenerator.generateDocumentation(ConfigStore.inst, null)
+        swaggerDoc ??= swaggerGenerator.generateDocumentation({config: jsonApi.config}, null, jsonApi.resources)
         const urlObj = new URL(params.url)
         this.#validateRequest(params.method.toLowerCase(), urlObj.pathname, JSON.parse(params.body || 'null'))
         this.#validatePayload(params.method.toLowerCase(), urlObj.pathname, statusCode, JSON.parse(json))

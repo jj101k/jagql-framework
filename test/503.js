@@ -1,8 +1,8 @@
 'use strict'
 
 import assert from "assert"
+import articleHandler from "../example/handlers/articleHandler.js"
 import jsonApiTestServer from "../example/server.js"
-import { jsonApiResources } from "../lib/jsonApiResources.js"
 import helpers from "./helpers.js"
 
 describe('Testing jsonapi-server', () => {
@@ -18,9 +18,9 @@ describe('Testing jsonapi-server', () => {
     })
 
     it('returns 503 if resource is NOT ready', async () => {
-      const handlers = jsonApiResources.articles.handlers
-      const savedHandlersReady = handlers.ready
-      handlers.ready = false
+      const savedHandlersReady = articleHandler.ready
+      articleHandler.ready = false
+      assert(!articleHandler.ready)
       const url = 'http://localhost:16999/rest/articles/de305d54-75b4-431b-adb2-eb6b9e546014'
       const {err, res} = await helpers.requestAsync({
         method: 'GET',
@@ -28,7 +28,7 @@ describe('Testing jsonapi-server', () => {
       })
       assert(!err)
       assert.strictEqual(res.statusCode, 503, 'Expecting 503 SERVICE UNAVAILABLE')
-      handlers.ready = savedHandlersReady
+      articleHandler.ready = savedHandlersReady
     })
   })
 
