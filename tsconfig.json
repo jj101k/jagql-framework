@@ -1,13 +1,13 @@
 {
-  "compilerOptions": {
-    "module": "node16",
-    "moduleResolution": "node16",
-    "target": "ES2022",
-    "noEmit": true,
-    "checkJs": true
-  },
-  "include": ["types"],
-  "exclude": [
-    "node_modules", "lib"
-  ]
+    "compilerOptions": {
+        "module": "node16",
+        "moduleResolution": "node16",
+        "target": "ES2022",
+        "noEmit": true,
+        "checkJs": true
+    },
+    "include": ["lib"],
+    "exclude": [
+        "node_modules"
+    ]
 }

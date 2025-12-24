@@ -4,7 +4,6 @@ import { JsonApiProtocols } from "./JsonApiProtocols.js"
 /**
  *
  */
-
 export interface ApiConfig {
     /**
      * No leading / required. This is the base path for the service. Used for

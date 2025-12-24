@@ -79,11 +79,11 @@ interface JsonApiRelationshipRouteParams<R> extends JsonApiIdRouteParams<R> {
     /**
      * @deprecated Please use relationship
      */
-    relation: string | keyof R
+    relation: string & keyof R
     /**
      *
      */
-    relationship: string | keyof R
+    relationship: string & keyof R
 }
 
 /**

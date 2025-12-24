@@ -48,7 +48,7 @@ interface JsonApiResourceObject<R = any> {
     /**
      *
      */
-    attributes?: Partial<{[k in Exclude<keyof R, "id" | "type">]: R[k]}>
+    attributes?: Partial<{ [k in Exclude<keyof R, "id" | "type">]: R[k] }>
     /**
      *
      */
@@ -56,7 +56,7 @@ interface JsonApiResourceObject<R = any> {
     /**
      *
      */
-    links?: Record<string, JsonApiLink>
+    links?: Record<string, JsonApiLink | string>
     /**
      *
      */
@@ -68,7 +68,7 @@ interface JsonApiResourceObject<R = any> {
     /**
      *
      */
-    relationships?: Partial<{[k in Exclude<keyof R, "id" | "type">]: JsonApiRelationshipObject}>
+    relationships?: Partial<{ [k in Exclude<keyof R, "id" | "type">]: JsonApiRelationshipObject }>
 }
 
 export type JsonApiPrimaryDataSingle = JsonApiResourceObject | null
@@ -153,8 +153,8 @@ export type JsonApiResponseBodyWithMeta<T extends JsonApiPrimaryData = JsonApiPr
  *
  */
 export interface JsonApiError {
-  status: string
-  code: string
-  title: string
-  detail: string
+    status: string
+    code: string
+    title: string
+    detail: string
 }

@@ -3,9 +3,9 @@
  */
 import { Schema } from "joi"
 import { BaseRelationship } from "../lib/BaseRelationship.js"
-import { CallbackHandler } from "./CallbackHandler.js"
+import type { CallbackHandler } from "./handlers/CallbackHandler.d.ts"
+import type { PromiseHandler } from "./handlers/PromiseHandler.d.ts"
 import { ActionConfig, OurJoiSettings } from "./ourJoi.js"
-import { PromiseHandler } from "./PromiseHandler.js"
 
 /**
  *
@@ -114,21 +114,21 @@ export interface ResourceConfig<Item = any> {
 /**
  *
  */
-interface PromiseHandlerIn<T> extends PromiseHandler<T> {
+type PromiseHandlerIn<T> = PromiseHandler<T> & {
     /**
      * @deprecated use initialise
      */
-    initialize: PromiseHandler<T>["initialise"]
+    initialize?: PromiseHandler<T>["initialise"]
 }
 
 /**
  *
  */
-interface CallbackHandlerIn<T> extends CallbackHandler<T> {
+type CallbackHandlerIn<T> = CallbackHandler<T> & {
     /**
      * @deprecated use initialise
      */
-    initialize: CallbackHandler<T>["initialise"]
+    initialize?: CallbackHandler<T>["initialise"]
 }
 
 /**
