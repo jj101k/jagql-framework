@@ -175,7 +175,8 @@ export default class swaggerValidator {
     }
 
     static assert(params, statusCode, json) {
-        swaggerDoc ??= swaggerGenerator.generateDocumentation({config: jsonApi.config}, null, jsonApi.resources, jsonApi.relationshipStore, jsonApi.Joi)
+        const jsonApiStatic = jsonApi.Static
+        swaggerDoc ??= swaggerGenerator.generateDocumentation({config: jsonApiStatic.config}, null, jsonApiStatic.resources, jsonApiStatic.relationshipStore, jsonApiStatic.Joi)
         const urlObj = new URL(params.url)
         this.#validateRequest(params.method.toLowerCase(), urlObj.pathname, JSON.parse(params.body || 'null'))
         this.#validatePayload(params.method.toLowerCase(), urlObj.pathname, statusCode, JSON.parse(json))
